@@ -1,16 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BMI</title>
-  <link rel="stylesheet" href="./style/css/reset.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BMI</title>
+	<link rel="stylesheet" href="./style/css/reset.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="./style/css/BMI.css">
+	<link rel="stylesheet" href="./css/reset.css">
+	<link rel="stylesheet" href="./css/BMI.css">
 </head>
 <body>
-  
-  <script src="js/BMI.js"></script>
+	<div class="l-container">
+		<div class="l-header">
+			<h1><div class="c-logo c-logo--primary"></div></h1>
+			<div class="c-inputtool">
+				<div class="c-input">
+					<div class="c-height">
+						<label class="c-label">身高cm
+							<input type="text" class="c-text" placeholder="請輸入身高">
+						</label>
+					</div>
+					<div class="c-weight">
+						<label class="c-label">體重kg
+							<input type="text" class="c-text" placeholder="請輸入體重">
+						</label>
+					</div>
+				</div>
+				<div class="c-btn c-btn--primary">看結果</div>
+				<div class="c-condition-success"></div>
+				<div class="c-condition-heavy"></div>
+				<div class="c-condition-light"></div>
+				<div class="c-condition-mildobesity"></div>
+				<div class="c-condition-moderateobesity"></div>
+				<div class="c-condition-moderateobesity"></div>
+			</div>
+		</div>
+		<div class="l-content">
+			<h2><div class="c-title">BMI紀錄</div></h2>
+			<div class="c-list-group">
+				<div class="c-list-group-item c-list-group-item--success">
+					<div class="c-condition">
+						<div class="c-condition-text"><span class="o-text-value">理想</span></div>
+						<div class="c-condition-bmi">BMI<span class="o-bmi-value">20.90</span></div>
+						<div class="c-condition-weight">weight<span class="o-weight-value">70kg</span></div>
+						<div class="c-condition-height">height<span class="o-height-value">180cm</span></div>
+						<div class="c-condition-data"><span class="o-data-value">06-19-2017</span></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="l-footer">
+			<div class="c-logo c-logo--secondary"></div>
+		</div>
+	</div>
+	<script src="js/BMI.js"></script>
 </body>
 </html>

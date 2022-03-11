@@ -1,0 +1,196 @@
+$color-white: #fff;
+$color-grey: #424242;
+$opacity29: 0.29;
+
+$color-primary: #FFD366;
+$color-success:#86D73F;
+$color-heavy:#31BAF9;
+$color-light:#FF982D;
+$color-mild:#FF6C03;
+$color-besity:#FF1200;
+
+$font-12:12px;
+$font-18:18px;
+$font-20:20px;
+$font-24:24px;
+$border-radius: 10px;
+
+* {
+	box-sizing: border-box;
+}
+
+body {
+	color: $color-grey;
+	font: 12px/1.4 Arial, sans-serif, "Microsoft JhengHei";
+}
+
+.l {
+	&-container {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		height: 100vh;
+	}
+
+	&-header {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: $color-primary;
+		width: 100%;
+		background: $color-grey;
+	}
+
+	&-content {
+		display: flex;
+		flex-direction: column;
+		margin: 48px 0 91px;
+		padding: 0 200px;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+
+		h2 {
+			font-size: $font-24;
+			margin-bottom: 36px;
+		}
+	}
+
+	&-footer {
+		display: flex;
+		justify-content: center;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background: $color-primary;
+
+		.c-logo {
+			width: 55px;
+			height: 55px;
+			margin: 18px;
+		}
+	}
+}
+
+
+.c-inputtool {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	padding: 74px 0;
+
+	.c-btn {
+		margin-left: 53px;
+	}
+}
+
+.c-input {
+	>div+div {
+		margin-top: 24px;
+	}
+
+	.c-label {
+		display: flex;
+		flex-direction: column;
+		font-size: $font-18;
+
+	}
+
+	.c-text {
+		width: 250px;
+		height: 40px;
+		margin-top: 7px;
+		padding: 8px;
+		font-size: $font-24;
+		border-radius: $border-radius;
+		border: 2px solid $color-primary;
+		background: rgba($color-white, .5);
+		outline: none;
+	}
+}
+
+.c-btn {
+	display: inline-flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+	font-size: $font-24;
+
+	&--primary {
+		color: $color-grey;
+		background: $color-primary;
+	}
+}
+
+.c-logo {
+	width: 173px;
+	height: 173px;
+	background: url('https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png') no-repeat;
+	background-size: contain;
+	&--primary {
+		background: url('../images/BMICLogo.png') no-repeat;
+		background-size: contain;
+	}
+}
+
+.c-list-group-item {
+	border-left: 7px solid transparent;
+	background: $color-white;
+
+	&--success {
+		border-left-color: $color-success;
+		box-shadow: 2px 0 3px 0 rgba($color-success, $opacity29);
+	}
+
+	&--heavy {
+		border-left-color: $color-heavy;
+		box-shadow: 2px 0 3px 0 rgba($color-heavy, $opacity29);
+	}
+
+	&--light {
+		border-left-color: $color-light;
+		box-shadow: 2px 0 3px 0 rgba($color-light, $opacity29);
+	}
+
+	&--mildobesity {
+		border-left-color: $color-mild;
+		box-shadow: 2px 0 3px 0 rgba($color-mild, $opacity29);
+	}
+
+	&--moderateobesity {
+		border-left-color: $color-mild;
+		box-shadow: 2px 0 3px 0 rgba($color-mild, $opacity29);
+	}
+
+	&--moderateobesity {
+		border-left-color: $color-besity;
+		box-shadow: 2px 0 3px 0 rgba($color-besity, $opacity29);
+	}
+
+}
+
+.c-condition {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	>div {
+		padding: 21px 12px;
+
+		>span {
+			margin-left: 7px;
+			font-size: $font-20;
+		}
+	}
+
+	.o-data-value {
+		font-size: $font-12;
+	}
+}

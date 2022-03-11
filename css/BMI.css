@@ -1,0 +1,154 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  color: #424242;
+  font: 12px/1.4 Arial, sans-serif, "Microsoft JhengHei";
+}
+
+.l-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+.l-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFD366;
+  width: 100%;
+  background: #424242;
+}
+.l-content {
+  display: flex;
+  flex-direction: column;
+  margin: 48px 0 91px;
+  padding: 0 200px;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.l-content h2 {
+  font-size: 24px;
+  margin-bottom: 36px;
+}
+.l-footer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #FFD366;
+}
+.l-footer .c-logo {
+  width: 55px;
+  height: 55px;
+  margin: 18px;
+}
+
+.c-inputtool {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 74px 0;
+}
+.c-inputtool .c-btn {
+  margin-left: 53px;
+}
+
+.c-input > div + div {
+  margin-top: 24px;
+}
+.c-input .c-label {
+  display: flex;
+  flex-direction: column;
+  font-size: 18px;
+}
+.c-input .c-text {
+  width: 250px;
+  height: 40px;
+  margin-top: 7px;
+  padding: 8px;
+  font-size: 24px;
+  border-radius: 10px;
+  border: 2px solid #FFD366;
+  background: rgba(255, 255, 255, 0.5);
+  outline: none;
+}
+
+.c-btn {
+  display: inline-flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  font-size: 24px;
+}
+.c-btn--primary {
+  color: #424242;
+  background: #FFD366;
+}
+
+.c-logo {
+  width: 173px;
+  height: 173px;
+  background: url("https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png") no-repeat;
+  background-size: contain;
+}
+.c-logo--primary {
+  background: url("../images/BMICLogo.png") no-repeat;
+  background-size: contain;
+}
+
+.c-list-group-item {
+  border-left: 7px solid transparent;
+  background: #fff;
+}
+.c-list-group-item--success {
+  border-left-color: #86D73F;
+  box-shadow: 2px 0 3px 0 rgba(134, 215, 63, 0.29);
+}
+.c-list-group-item--heavy {
+  border-left-color: #31BAF9;
+  box-shadow: 2px 0 3px 0 rgba(49, 186, 249, 0.29);
+}
+.c-list-group-item--light {
+  border-left-color: #FF982D;
+  box-shadow: 2px 0 3px 0 rgba(255, 152, 45, 0.29);
+}
+.c-list-group-item--mildobesity {
+  border-left-color: #FF6C03;
+  box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
+}
+.c-list-group-item--moderateobesity {
+  border-left-color: #FF6C03;
+  box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
+}
+.c-list-group-item--moderateobesity {
+  border-left-color: #FF1200;
+  box-shadow: 2px 0 3px 0 rgba(255, 18, 0, 0.29);
+}
+
+.c-condition {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.c-condition > div {
+  padding: 21px 12px;
+}
+.c-condition > div > span {
+  margin-left: 7px;
+  font-size: 20px;
+}
+.c-condition .o-data-value {
+  font-size: 12px;
+}/*# sourceMappingURL=BMI.css.map */
