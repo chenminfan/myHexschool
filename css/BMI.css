@@ -2,40 +2,57 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
+  height: 100%;
   color: #424242;
-  font: 12px/1.4 Arial, sans-serif, "Microsoft JhengHei";
+  font: 16px/1.4 Arial, sans-serif, "Microsoft JhengHei";
+  background: #f5f5f5;
 }
 
-.l-container {
+.container {
+  position: relative;
+  min-height: 100%;
+}
+
+.c-card {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-  height: 100vh;
+  flex: 1;
+  padding-bottom: 91px;
 }
-.l-header {
+.c-card__header {
+  width: 100%;
+  background: #424242;
+}
+.c-card__inner {
   display: flex;
   align-items: center;
   justify-content: center;
   color: #FFD366;
-  width: 100%;
-  background: #424242;
+  max-width: 1024px;
+  padding: 0 174px;
+  margin: auto;
 }
-.l-content {
+.c-card__content {
   display: flex;
   flex-direction: column;
-  margin: 48px 0 91px;
+  margin: 48px auto;
+  max-width: 1024px;
   padding: 0 200px;
   width: 100%;
   height: 100%;
   text-align: center;
 }
-.l-content h2 {
-  font-size: 24px;
-  margin-bottom: 36px;
+.c-card__content::after {
+  content: "";
+  display: block;
 }
-.l-footer {
+.c-card__content h2 {
+  font-size: 1.5rem;
+  margin-bottom: 28px;
+}
+.c-card__footer {
   display: flex;
   justify-content: center;
   position: absolute;
@@ -44,7 +61,7 @@ body {
   right: 0;
   background: #FFD366;
 }
-.l-footer .c-logo {
+.c-card__footer .c-logo {
   width: 55px;
   height: 55px;
   margin: 18px;
@@ -54,46 +71,217 @@ body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  padding: 74px 0;
+  width: 100%;
+  padding: 74px 40px 74px 0;
 }
 .c-inputtool .c-btn {
   margin-left: 53px;
 }
 
-.c-input > div + div {
+.c-input__item + .c-input__item {
   margin-top: 24px;
 }
 .c-input .c-label {
   display: flex;
   flex-direction: column;
-  font-size: 18px;
+  font-size: 1.33rem;
 }
-.c-input .c-text {
+.c-input__text {
   width: 250px;
   height: 40px;
   margin-top: 7px;
   padding: 8px;
-  font-size: 24px;
+  font-size: 1.5rem;
   border-radius: 10px;
   border: 2px solid #FFD366;
   background: rgba(255, 255, 255, 0.5);
   outline: none;
 }
 
-.c-btn {
-  display: inline-flex;
+.o-btn, .o-result__item__average {
+  display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  margin-left: 53px;
   width: 120px;
   height: 120px;
   border-radius: 100%;
-  font-size: 24px;
+  cursor: pointer;
 }
-.c-btn--primary {
+.o-btn--primary {
   color: #424242;
+  font-size: 1.5rem;
   background: #FFD366;
+}
+.o-btn--primary:hover {
+  box-shadow: 0 1px 6px 3px rgba(255, 196, 50, 0.64);
+}
+.o-btn--primary:active {
+  background: #DEA821;
+}
+
+.o-result__item {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+}
+.o-result__item__average {
+  position: relative;
+  width: 123px;
+  height: 123px;
+  background: transparent;
+  border: 6px solid transparent;
+}
+.o-result__item__average::after {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  background: url("../images/icons_loop.png") no-repeat;
+  background-position: 8px;
+  border: 3px solid #424242;
+}
+.o-result__item__average--value {
+  font-size: 2rem;
+}
+.o-result__item__text {
+  min-width: 128px;
+  margin-left: 18px;
+  font-size: 2rem;
+}
+.o-result__item--underweight {
+  display: flex;
+  color: #31BAF9;
+}
+.o-result__item--underweight .o-result__item__average {
+  border-color: #31BAF9;
+}
+.o-result__item--underweight .o-result__item__average::after {
+  background-color: #31BAF9;
+}
+.o-result__item--normalweight {
+  display: flex;
+  color: #86D73F;
+}
+.o-result__item--normalweight .o-result__item__average {
+  border-color: #86D73F;
+}
+.o-result__item--normalweight .o-result__item__average::after {
+  background-color: #86D73F;
+}
+.o-result__item--overweight {
+  display: flex;
+  color: #FF982D;
+}
+.o-result__item--overweight .o-result__item__average {
+  border-color: #FF982D;
+}
+.o-result__item--overweight .o-result__item__average::after {
+  background-color: #FF982D;
+}
+.o-result__item--mildobesity {
+  display: flex;
+  color: #FF6C03;
+}
+.o-result__item--mildobesity .o-result__item__average {
+  border-color: #FF6C03;
+}
+.o-result__item--mildobesity .o-result__item__average::after {
+  background-color: #FF6C03;
+}
+.o-result__item--moderateobesity {
+  display: flex;
+  color: #FF6C03;
+}
+.o-result__item--moderateobesity .o-result__item__average {
+  border-color: #FF6C03;
+}
+.o-result__item--moderateobesity .o-result__item__average::after {
+  background-color: #FF6C03;
+}
+.o-result__item--morbidobesity {
+  display: flex;
+  color: #FF1200;
+}
+.o-result__item--morbidobesity .o-result__item__average {
+  border-color: #FF1200;
+}
+.o-result__item--morbidobesity .o-result__item__average::after {
+  background-color: #FF1200;
+}
+
+.o-list-group__item {
+  display: flex;
+  align-items: center;
+  margin: 8px 0;
+  background: #fff;
+}
+.o-list-group__item::before {
+  content: "";
+  width: 7px;
+  height: 62px;
+  display: inline-block;
+  background: #424242;
+}
+.o-list-group__item--underweight::before {
+  background: #31BAF9;
+  box-shadow: 2px 0 3px 0 rgba(49, 186, 249, 0.29);
+}
+.o-list-group__item--normalweight::before {
+  background: #86D73F;
+  box-shadow: 2px 0 3px 0 rgba(134, 215, 63, 0.29);
+}
+.o-list-group__item--overweight::before {
+  background: #FF982D;
+  box-shadow: 2px 0 3px 0 rgba(255, 152, 45, 0.29);
+}
+.o-list-group__item--mildobesity::before {
+  background: #FF6C03;
+  box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
+}
+.o-list-group__item--moderateobesity::before, .o-list-group__item--moderateobesity::before {
+  background: #FF6C03;
+  box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
+}
+.o-list-group__item--morbidobesity::before {
+  background: #FF1200;
+  box-shadow: 2px 0 3px 0 rgba(255, 18, 0, 0.29);
+}
+
+.o-condition {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+}
+.o-condition .o-condition__item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 17px 12px;
+  font-size: 0.75rem;
+}
+.o-condition .o-condition__item > span {
+  display: inline-block;
+  margin-left: 7px;
+  font-size: 1.2rem;
+}
+.o-condition .o-condition__item--text > span {
+  width: 80px;
+  text-align: left;
+}
+.o-condition .o-condition__item--data > span {
+  display: inline-block;
+  margin: 3px 0 3px 7px;
+  font-size: 0.75rem;
+  line-height: 22px;
 }
 
 .c-logo {
@@ -101,54 +289,17 @@ body {
   height: 173px;
   background: url("https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png") no-repeat;
   background-size: contain;
+  text-indent: 100%;
+  overflow: hidden;
+}
+.c-logo::after {
+  content: "";
+  visibility: hidden;
+  display: inline-block;
+  height: 0;
 }
 .c-logo--primary {
+  margin-right: 97px;
   background: url("../images/BMICLogo.png") no-repeat;
   background-size: contain;
-}
-
-.c-list-group-item {
-  border-left: 7px solid transparent;
-  background: #fff;
-}
-.c-list-group-item--success {
-  border-left-color: #86D73F;
-  box-shadow: 2px 0 3px 0 rgba(134, 215, 63, 0.29);
-}
-.c-list-group-item--heavy {
-  border-left-color: #31BAF9;
-  box-shadow: 2px 0 3px 0 rgba(49, 186, 249, 0.29);
-}
-.c-list-group-item--light {
-  border-left-color: #FF982D;
-  box-shadow: 2px 0 3px 0 rgba(255, 152, 45, 0.29);
-}
-.c-list-group-item--mildobesity {
-  border-left-color: #FF6C03;
-  box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
-}
-.c-list-group-item--moderateobesity {
-  border-left-color: #FF6C03;
-  box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
-}
-.c-list-group-item--moderateobesity {
-  border-left-color: #FF1200;
-  box-shadow: 2px 0 3px 0 rgba(255, 18, 0, 0.29);
-}
-
-.c-condition {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-}
-.c-condition > div {
-  padding: 21px 12px;
-}
-.c-condition > div > span {
-  margin-left: 7px;
-  font-size: 20px;
-}
-.c-condition .o-data-value {
-  font-size: 12px;
 }/*# sourceMappingURL=BMI.css.map */
