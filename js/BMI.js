@@ -7,6 +7,7 @@ var resultItem = document.querySelector('.o-result__item')
 var resultItemValue = document.querySelector('.o-result__item__average--value')
 var resultItemText = document.querySelector('.o-result__item__text')
 var noteJson = JSON.parse(localStorage.getItem("BMInote") ) || [];
+var conditionDelete = document.querySelector('.o-condition__item--del .o-btn');
 updateNote(noteJson)
 
 resultSubmit.addEventListener('click',calculateBEM)
@@ -108,7 +109,7 @@ function updateNote(noteJson){
 	}else{
 		for(var i = 0;i<noteJsonLen;i++){
 			print +=`
-			<div class="o-list-group__item o-list-group__item--${noteJson[i].class}">
+			<div class="o-list-group__item o-list-group__item--${noteJson[i].class}" data-num="${i}">
 				<div class="o-condition">
 					<div class="o-condition__item o-condition__item--text">
 						<span class="o-condition__item--value">${noteJson[i].title}</span>
@@ -126,9 +127,22 @@ function updateNote(noteJson){
 						<span class="o-condition__item--value">${noteJson[i].data}</span>
 					</div>
 				</div>
+				<span class="o-btn o-btn--primary">delete</span>
 			</div>
 			`
 		}
 		resultGroup.innerHTML = print
 	}
 }
+
+function deleteNote(e){
+	e.preventDefault();
+	if(e.target.nodeName !== 'SPAN'){
+		return;
+	}
+	var num = e.target.parentNode.parentNode.parentNode.dataset.num;
+	noteJson.splice(num,1);
+	localStorage.setItem("BMInote",JSON.stringify(noteJson));
+	updateNote(noteJson)
+}
+resultGroup.addEventListener('click',deleteNote)
