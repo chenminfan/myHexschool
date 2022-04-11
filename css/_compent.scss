@@ -1,0 +1,114 @@
+.c {
+  &-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    padding-bottom: 91px;
+    &__header {
+      width: 100%;
+      background: $color-grey;
+    }
+    &__inner {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: $color-primary;
+      max-width: 1024px;
+      margin: auto;
+    }
+    &__content {
+      display: flex;
+      flex-direction: column;
+      margin: 48px auto;
+      max-width: 1024px;
+      flex: 0 0 100%;
+      height: 100%;
+      text-align: center;
+      &::after {
+        content: "";
+        display: block;
+      }
+      .c-title {
+        font-size: $font-24;
+        margin-bottom: 28px;
+      }
+    }
+
+    .c-logo {
+      display: inline-flex;
+      width: 117px;
+      height: 117px;
+      background: url("https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png")
+        no-repeat;
+      background-size: contain;
+      text-indent: -999px;
+      overflow: hidden;
+      &--primary {
+        margin-right: 97px;
+        background: url("../images/BMICLogo.png") no-repeat;
+        background-size: contain;
+      }
+    }
+    &__footer {
+      display: flex;
+      justify-content: center;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: $color-primary;
+
+      .c-logo {
+        width: 55px;
+        height: 55px;
+        margin: 18px;
+      }
+    }
+  }
+}
+
+.c-input {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 74px 0 74px 0;
+
+  .c-btn {
+    margin-left: 53px;
+  }
+  &__item + &__item {
+    margin-top: 23px;
+  }
+  &__panel {
+    &__item + &__item {
+      margin-top: 24px;
+    }
+
+    .c-label {
+      display: flex;
+      flex-direction: column;
+      font-size: $font-18;
+    }
+  }
+  &__text {
+    width: 250px;
+    height: 40px;
+    margin-top: 7px;
+    padding: 8px;
+    color: $color-white;
+    font-size: $font-24;
+    border-radius: $border-radius;
+    border: 2px solid $color-primary;
+    background: rgba($color-white, 0.5);
+    outline: none;
+  }
+}
+@media screen and (max-width: 768px) {
+  .c-input {
+    padding: 20px 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+}

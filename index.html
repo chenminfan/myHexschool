@@ -6,8 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title>BMI</title>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-	<link rel="stylesheet" href="./css/reset.css" />
-	<link rel="stylesheet" href="./css/BMI.css" />
+	<link rel="stylesheet" href="./css/all.css" />
 </head>
 <body>
 	<div class="container">
@@ -15,17 +14,19 @@
 			<div class="c-card l-bem__c-card">
 				<div class="c-card__header">
 					<div class="c-card__inner">
-						<h1><div class="c-logo c-logo--primary">BEM</div></h1>
+						<!-- TODO:區塊元素調整 -->
+						<!-- TODO:input類型建議使用 type="number” -->
+						<h1><a class="c-logo c-logo--primary">BEN</a></h1>
 						<div class="c-input">
 							<div class="c-input__panel">
 								<div class="c-input__item c-input__item--height">
 									<label class="c-label">身高cm
-										<input type="text" class="c-input__text c-input__text--height" placeholder="請輸入身高" onkeyup="value=value.replace(/[^\0-9\.]/g,'')" onpaste="value=value.replace(/[^\0-9\.]/g,'')" oncontextmenu = "value=value.replace(/[^\0-9\.]/g,'')" />
+										<input type="number" class="c-input__text c-input__text--height" placeholder="請輸入身高" onkeyup="value=value.replace(/[^\0-9\.]/g,'')" onpaste="value=value.replace(/[^\0-9\.]/g,'')" oncontextmenu = "value=value.replace(/[^\0-9\.]/g,'')" />
 									</label>
 								</div>
 								<div class="c-input__item c-input__item--weight">
 									<label class="c-label">體重kg
-										<input type="text" class="c-input__text c-input__text--weight" placeholder="請輸入體重" onkeyup="value=value.replace(/[^\0-9\.]/g,'')" onpaste="value=value.replace(/[^\0-9\.]/g,'')" oncontextmenu = "value=value.replace(/[^\0-9\.]/g,'')" />
+										<input type="number" class="c-input__text c-input__text--weight" placeholder="請輸入體重" onkeyup="value=value.replace(/[^\0-9\.]/g,'')" onpaste="value=value.replace(/[^\0-9\.]/g,'')" oncontextmenu = "value=value.replace(/[^\0-9\.]/g,'')" />
 									</label>
 								</div>
 							</div>
@@ -91,7 +92,7 @@
 					</div>
 				</div>
 				<div class="c-card__content">
-					<h2><div class="c-title">BMI紀錄</div></h2>
+					<div class="c-title">BMI紀錄</div>
 					<div class="o-list-group">
 						<!-- <div class="o-list-group__item o-list-group__item--normalweight">
 							<div class="o-condition">

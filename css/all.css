@@ -1,8 +1,63 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
 * {
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   color: #424242;
   font: 16px/1.4 Arial, sans-serif, "Microsoft JhengHei";
@@ -27,11 +82,10 @@ html, body {
 }
 .c-card__inner {
   display: flex;
-  align-items: center;
   justify-content: center;
-  color: #FFD366;
+  align-items: center;
+  color: #ffd366;
   max-width: 1024px;
-  padding: 0 174px;
   margin: auto;
 }
 .c-card__content {
@@ -39,8 +93,7 @@ html, body {
   flex-direction: column;
   margin: 48px auto;
   max-width: 1024px;
-  padding: 0 200px;
-  width: 100%;
+  flex: 0 0 100%;
   height: 100%;
   text-align: center;
 }
@@ -48,9 +101,23 @@ html, body {
   content: "";
   display: block;
 }
-.c-card__content h2 {
+.c-card__content .c-title {
   font-size: 1.5rem;
   margin-bottom: 28px;
+}
+.c-card .c-logo {
+  display: inline-flex;
+  width: 117px;
+  height: 117px;
+  background: url("https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png") no-repeat;
+  background-size: contain;
+  text-indent: -999px;
+  overflow: hidden;
+}
+.c-card .c-logo--primary {
+  margin-right: 97px;
+  background: url("../images/BMICLogo.png") no-repeat;
+  background-size: contain;
 }
 .c-card__footer {
   display: flex;
@@ -59,7 +126,7 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
-  background: #FFD366;
+  background: #ffd366;
 }
 .c-card__footer .c-logo {
   width: 55px;
@@ -71,8 +138,7 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: center;
-  width: 100%;
-  padding: 74px 40px 74px 0;
+  padding: 74px 0 74px 0;
 }
 .c-input .c-btn {
   margin-left: 53px;
@@ -86,7 +152,7 @@ html, body {
 .c-input__panel .c-label {
   display: flex;
   flex-direction: column;
-  font-size: 1.33rem;
+  font-size: 1.125rem;
 }
 .c-input__text {
   width: 250px;
@@ -96,42 +162,19 @@ html, body {
   color: #fff;
   font-size: 1.5rem;
   border-radius: 10px;
-  border: 2px solid #FFD366;
+  border: 2px solid #ffd366;
   background: rgba(255, 255, 255, 0.5);
   outline: none;
 }
 
-.o-btn, .o-result__item__average {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 5px;
-  padding: 0.2rem 0.5rem;
-  cursor: pointer;
+@media screen and (max-width: 768px) {
+  .c-input {
+    padding: 20px 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
 }
-.o-btn--primary {
-  color: #424242;
-  font-size: 0.75rem;
-  margin-left: 20px;
-  background: #FFD366;
-}
-.o-btn--primary:hover {
-  box-shadow: 0 1px 1px 1px rgba(255, 196, 50, 0.64);
-}
-.o-btn--primary:active {
-  background: #DEA821;
-}
-.o-btn--submit, .o-result__item__average {
-  width: 120px;
-  height: 120px;
-  font-size: 1.5rem;
-  border-radius: 100%;
-}
-.o-btn--submit:hover, .o-result__item__average:hover {
-  box-shadow: 0 1px 6px 3px rgba(255, 196, 50, 0.64);
-}
-
 .o-result__item {
   display: none;
   flex-direction: row;
@@ -161,69 +204,69 @@ html, body {
   font-size: 2rem;
 }
 .o-result__item__text {
-  min-width: 128px;
+  display: inline-flex;
   margin-left: 18px;
   font-size: 2rem;
 }
 .o-result__item--underweight {
   display: flex;
-  color: #31BAF9;
+  color: #31baf9;
 }
 .o-result__item--underweight .o-result__item__average {
-  border-color: #31BAF9;
+  border-color: #31baf9;
 }
 .o-result__item--underweight .o-result__item__average::after {
-  background-color: #31BAF9;
+  background-color: #31baf9;
 }
 .o-result__item--normalweight {
   display: flex;
-  color: #86D73F;
+  color: #86d73f;
 }
 .o-result__item--normalweight .o-result__item__average {
-  border-color: #86D73F;
+  border-color: #86d73f;
 }
 .o-result__item--normalweight .o-result__item__average::after {
-  background-color: #86D73F;
+  background-color: #86d73f;
 }
 .o-result__item--overweight {
   display: flex;
-  color: #FF982D;
+  color: #ff982d;
 }
 .o-result__item--overweight .o-result__item__average {
-  border-color: #FF982D;
+  border-color: #ff982d;
 }
 .o-result__item--overweight .o-result__item__average::after {
-  background-color: #FF982D;
+  background-color: #ff982d;
 }
 .o-result__item--mildobesity {
   display: flex;
-  color: #FF6C03;
+  color: #ff6c03;
 }
 .o-result__item--mildobesity .o-result__item__average {
-  border-color: #FF6C03;
+  border-color: #ff6c03;
 }
 .o-result__item--mildobesity .o-result__item__average::after {
-  background-color: #FF6C03;
+  background-color: #ff6c03;
 }
 .o-result__item--moderateobesity {
   display: flex;
-  color: #FF6C03;
+  color: #ff6c03;
 }
 .o-result__item--moderateobesity .o-result__item__average {
-  border-color: #FF6C03;
+  border-color: #ff6c03;
 }
 .o-result__item--moderateobesity .o-result__item__average::after {
-  background-color: #FF6C03;
+  background-color: #ff6c03;
 }
 .o-result__item--morbidobesity {
   display: flex;
-  color: #FF1200;
+  color: #ff1200;
 }
 .o-result__item--morbidobesity .o-result__item__average {
-  border-color: #FF1200;
+  border-color: #ff1200;
 }
 .o-result__item--morbidobesity .o-result__item__average::after {
-  background-color: #FF1200;
+  background-color: #ff1200;
 }
 
 .o-list-group__item {
@@ -231,36 +274,37 @@ html, body {
   display: flex;
   align-items: center;
   margin: 8px 0;
+  width: 624px;
 }
 .o-list-group__item::before {
   content: "";
   width: 7px;
   height: 62px;
-  display: inline-block;
+  display: inline-flex;
   background: #424242;
 }
 .o-list-group__item--underweight::before {
-  background: #31BAF9;
+  background: #31baf9;
   box-shadow: 2px 0 3px 0 rgba(49, 186, 249, 0.29);
 }
 .o-list-group__item--normalweight::before {
-  background: #86D73F;
+  background: #86d73f;
   box-shadow: 2px 0 3px 0 rgba(134, 215, 63, 0.29);
 }
 .o-list-group__item--overweight::before {
-  background: #FF982D;
+  background: #ff982d;
   box-shadow: 2px 0 3px 0 rgba(255, 152, 45, 0.29);
 }
 .o-list-group__item--mildobesity::before {
-  background: #FF6C03;
+  background: #ff6c03;
   box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
 }
 .o-list-group__item--moderateobesity::before, .o-list-group__item--moderateobesity::before {
-  background: #FF6C03;
+  background: #ff6c03;
   box-shadow: 2px 0 3px 0 rgba(255, 108, 3, 0.29);
 }
 .o-list-group__item--morbidobesity::before {
-  background: #FF1200;
+  background: #ff1200;
   box-shadow: 2px 0 3px 0 rgba(255, 18, 0, 0.29);
 }
 .o-list-group .o-btn--primary {
@@ -287,7 +331,7 @@ html, body {
 .o-condition .o-condition__item > span {
   display: inline-block;
   margin-left: 7px;
-  font-size: 1.2rem;
+  font-size: 1.25rem;
 }
 .o-condition .o-condition__item--text > span {
   width: 80px;
@@ -300,22 +344,50 @@ html, body {
   line-height: 22px;
 }
 
-.c-logo {
-  width: 173px;
-  height: 173px;
-  background: url("https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png") no-repeat;
-  background-size: contain;
-  text-indent: 100%;
-  overflow: hidden;
+.o-btn, .o-result__item__average {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+  padding: 0.2rem 0.5rem;
+  cursor: pointer;
 }
-.c-logo::after {
-  content: "";
-  visibility: hidden;
-  display: inline-block;
-  height: 0;
+.o-btn--primary {
+  color: #424242;
+  font-size: 0.75rem;
+  margin-left: 20px;
+  background: #ffd366;
 }
-.c-logo--primary {
-  margin-right: 97px;
-  background: url("../images/BMICLogo.png") no-repeat;
-  background-size: contain;
-}/*# sourceMappingURL=BMI.css.map */
+.o-btn--primary:hover {
+  box-shadow: 0 1px 1px 1px rgba(255, 196, 50, 0.64);
+}
+.o-btn--primary:active {
+  background: #dea821;
+}
+.o-btn--submit, .o-result__item__average {
+  width: 120px;
+  height: 120px;
+  font-size: 1.5rem;
+  border-radius: 100%;
+}
+.o-btn--submit:hover, .o-result__item__average:hover {
+  box-shadow: 0 1px 6px 3px rgba(255, 196, 50, 0.64);
+}
+
+@media screen and (max-width: 1023px) {
+  .o-list-group__item {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  .o-condition .o-condition__item {
+    padding: 17px 5px;
+  }
+
+  .o-btn,
+.o-result__item__average {
+    display: inline-flex;
+    margin: 20px auto;
+  }
+}/*# sourceMappingURL=all.css.map */

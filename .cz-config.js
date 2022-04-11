@@ -37,48 +37,6 @@ module.exports = {
             name: '⏪  revert: 撤銷、復原一次 git commit。'
         }
     ],
-    scopes: [{
-            value: "Proj-Shopping",
-            name: '▋Proj-Shopping▋ '
-        },
-        {
-            value: "Proj-Fulfillment",
-            name: '▋Proj-Fulfillment▋'
-        },
-        {
-            value: "Proj-NewFulfillment",
-            name: '▋Proj-NewFulfillment▋'
-        },
-        {
-            value: "Proj-Pi",
-            name: '▋Proj-Pi▋'
-        },
-        {
-            value: "Proj-Shopping-Angular",
-            name: '▋Proj-Shopping-Angular▋'
-        },
-        {
-            value: "Proj-Shopping",
-            name: '▋Proj-Shopping▋'
-        },
-        {
-            value: "Proj-Swagger",
-            name: '▋Proj-Swagger▋'
-        },
-        {
-            value: "Proj-other",
-            name: '▋Proj-其他▋'
-        },
-        {
-            value: "showlog updata",
-            name: 'showlog 調整/更新'
-        },
-        {
-            value: "package",
-            name: 'package 調整/更新'
-        }
-        
-    ],
     // 訊息步驟
     // messages: {
     //     type: '請選擇提交型別:',

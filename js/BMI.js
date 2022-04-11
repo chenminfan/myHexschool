@@ -1,68 +1,66 @@
-var inputItemHeight = document.querySelector('.c-input__text--height')
-var inputItemWeight = document.querySelector('.c-input__text--weight')
-var resultSubmit = document.querySelector('.o-btn--submit')
+let inputItemHeight = document.querySelector('.c-input__text--height')
+let inputItemWeight = document.querySelector('.c-input__text--weight')
+let resultSubmit = document.querySelector('.o-btn--submit')
 // BMI-result
-var resultGroup = document.querySelector('.o-list-group')
-var resultItem = document.querySelector('.o-result__item')
-var resultItemValue = document.querySelector('.o-result__item__average--value')
-var resultItemText = document.querySelector('.o-result__item__text')
-var noteJson = JSON.parse(localStorage.getItem("BMInote") ) || [];
-var conditionDelete = document.querySelector('.o-condition__item--del .o-btn');
+let resultGroup = document.querySelector('.o-list-group')
+let resultItem = document.querySelector('.o-result__item')
+let resultItemValue = document.querySelector('.o-result__item__average--value')
+let resultItemText = document.querySelector('.o-result__item__text')
+let noteJson = JSON.parse(localStorage.getItem("BMInote") ) || [];
+let conditionDelete = document.querySelector('.o-condition__item--del .o-btn');
 updateNote(noteJson)
 
 resultSubmit.addEventListener('click',calculateBEM)
 resultItem.addEventListener('click',calculateBEM)
 function calculateBEM(){
-	var inputHeight = inputItemHeight.value;
-	var inputWeight = inputItemWeight.value;
+	let inputHeight = inputItemHeight.value;
+	let inputWeight = inputItemWeight.value;
 	// 轉成整數
-	var Height = parseInt(inputHeight);
-	var Weight = parseInt(inputWeight);
-	var HeightConvert = (Height/100);
+	// TODO:變數重複
+	let Height = parseInt(inputHeight);
+	let Weight = parseInt(inputWeight);
+	let HeightConvert = (Height/100);
 	// 換算單位
-	var BMIaverage = ((Weight / (HeightConvert * HeightConvert) ))
+	let BMIaverage = ((Weight / (HeightConvert * HeightConvert) ))
 	// 平均值
-	var BMIAG = resultItemValue.innerHTML = BMIaverage.toFixed(2);
+	let BMIAG = resultItemValue.innerHTML = BMIaverage.toFixed(2);
 	// 判斷輸入是否為空值
 	if(inputHeight == "" || inputWeight == ""){
 		alert("請輸入資料！");
 	}else{
-		var HeightConvert = (Height/100);
-		var BMIaverage = ((Weight / (HeightConvert * HeightConvert) ))
-		var BMIAG = resultItemValue.innerHTML = BMIaverage.toFixed(2);
+		let BMIAG = resultItemValue.innerHTML = BMIaverage.toFixed(2);
 		// console.log(calculateBEM)
 		if(BMIaverage >= 35){
 			resultItem.classList.add('o-result__item--morbidobesity');
-			var BMIClass = 'morbidobesity';
-			var BMItext = resultItemText.innerHTML ="重度肥胖";
+			let BMIClass = 'morbidobesity';
+			let BMItext = resultItemText.innerHTML ="重度肥胖";
 
 		}else if(30 <= BMIAG && BMIAG < 35){
 			resultItem.classList.add('o-result__item--moderateobesity');
-			var BMIClass = 'moderateobesity';
-			var BMItext = resultItemText.innerHTML ="中度肥胖";
+			let BMIClass = 'moderateobesity';
+			let BMItext = resultItemText.innerHTML ="中度肥胖";
 
 		}else if(27 <= BMIAG && BMIAG< 30 ){
 			resultItem.classList.add('o-result__item--mildobesity');
-			var BMIClass = 'mildobesity';
-			var BMItext = resultItemText.innerHTML ="輕度肥胖";
+			let BMIClass = 'mildobesity';
+			let BMItext = resultItemText.innerHTML ="輕度肥胖";
 
 		}else if(24 <= BMIAG && BMIAG < 27){
 			resultItem.classList.add('o-result__item--overweight');
-			var BMIClass = 'overweight';
-			var BMItext = resultItemText.innerHTML ="過重";
+			let BMIClass = 'overweight';
+			let BMItext = resultItemText.innerHTML ="過重";
 
 		}else if(18.5 <= BMIAG && BMIAG < 24){
 			resultItem.classList.add('o-result__item--normalweight');
-			var BMIClass = 'normalweight';
-			var BMItext = resultItemText.innerHTML ="理想";
+			let BMIClass = 'normalweight';
+			let BMItext = resultItemText.innerHTML ="理想";
 		}
 		else if(BMIAG < 18.5){
 			resultItem.classList.add('o-result__item--underweight');
-			var BMIClass = 'underweight';
-			var BMItext = resultItemText.innerHTML ="過輕";
-		}else{
-		
+			let BMIClass = 'underweight';
+			let BMItext = resultItemText.innerHTML ="過輕";
 		}
+		// TODO:拿掉沒有使用到的程式碼
 		addNote(BMIClass,BMItext,BMIAG,Weight,Height)
 	}
 	
@@ -72,11 +70,11 @@ function calculateBEM(){
 
 function addNote(BMIClass,BMItext,BMIAG,Height,Weight){
 	// console.log(BMIClass,BMItext,BMIAG,Height,Weight)
-	var time = new Date();
-	var BMItimeYYYY = time.getFullYear();
-	var BMItimeMM = time.getMonth();
-	var BMItimedd = time.getDate();
-	var BMInoteArray = {
+	let time = new Date();
+	let BMItimeYYYY = time.getFullYear();
+	let BMItimeMM = time.getMonth();
+	let BMItimedd = time.getDate();
+	let BMInoteArray = {
 		class:BMIClass,
 		title:BMItext,
 		avg:BMIAG,
@@ -94,8 +92,8 @@ function addNote(BMIClass,BMItext,BMIAG,Height,Weight){
 	updateNote(noteJson)
 }
 function updateNote(noteJson){
-	var noteJsonLen = noteJson.length;
-	var print ="";
+	let noteJsonLen = noteJson.length;
+	let print ="";
 	if(noteJsonLen == 0){
 		resultGroup.innerHTML=`
 		<div class="o-list-group__item">
@@ -107,7 +105,7 @@ function updateNote(noteJson){
 			</div>
 		`
 	}else{
-		for(var i = 0;i<noteJsonLen;i++){
+		for(let i = 0;i<noteJsonLen;i++){
 			print +=`
 			<div class="o-list-group__item o-list-group__item--${noteJson[i].class}" data-num="${i}">
 				<div class="o-condition">
@@ -127,7 +125,7 @@ function updateNote(noteJson){
 						<span class="o-condition__item--value">${noteJson[i].data}</span>
 					</div>
 				</div>
-				<span class="o-btn o-btn--primary">delete</span>
+				<button  class="o-btn o-btn--primary">delete</button>
 			</div>
 			`
 		}
@@ -137,10 +135,11 @@ function updateNote(noteJson){
 
 function deleteNote(e){
 	e.preventDefault();
-	if(e.target.nodeName !== 'SPAN'){
+	// TODO:標籤調整
+	if(e.target.nodeName !== 'BUTTON'){
 		return;
 	}
-	var num = e.target.parentNode.parentNode.parentNode.dataset.num;
+	let num = e.target.parentNode.parentNode.parentNode.dataset.num;
 	noteJson.splice(num,1);
 	localStorage.setItem("BMInote",JSON.stringify(noteJson));
 	updateNote(noteJson)

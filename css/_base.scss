@@ -1,0 +1,15 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+  color: $color-grey;
+  font: 16px/1.4 Arial, sans-serif, "Microsoft JhengHei";
+  background: $bg-color;
+}
+
+.container {
+  position: relative;
+  min-height: 100%;
+}
