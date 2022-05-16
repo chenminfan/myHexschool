@@ -3,86 +3,77 @@ let inputItemWeight = document.querySelector('.c-input__text--weight')
 let resultSubmit = document.querySelector('.o-btn--submit')
 // BMI-result
 let resultGroup = document.querySelector('.o-list-group')
-let resultItem = document.querySelector('.o-result__item')
-let resultItemValue = document.querySelector('.o-result__item__average--value')
-let resultItemText = document.querySelector('.o-result__item__text')
+let resultReset = document.querySelector('.o-result')
 let noteJson = JSON.parse(localStorage.getItem("BMInote") ) || [];
 let conditionDelete = document.querySelector('.o-condition__item--del .o-btn');
 updateNote(noteJson)
 
 resultSubmit.addEventListener('click',calculateBEM)
-resultItem.addEventListener('click',calculateBEM)
+resultReset.addEventListener('click',calculateBEM)
 function calculateBEM(){
 	let inputHeight = inputItemHeight.value;
 	let inputWeight = inputItemWeight.value;
 	// 轉成整數
-	// TODO:變數重複
-	let Height = parseInt(inputHeight);
-	let Weight = parseInt(inputWeight);
-	let HeightConvert = (Height/100);
+	let BMIHeight = parseInt(inputHeight);
+	let BMIWeight = parseInt(inputWeight);
+	let HeightConvert = (BMIHeight/100);
 	// 換算單位
-	let BMIaverage = ((Weight / (HeightConvert * HeightConvert) ))
+	let BMIAverage = ((BMIWeight / (HeightConvert * HeightConvert) ))
 	// 平均值
-	let BMIAG = resultItemValue.innerHTML = BMIaverage.toFixed(2);
+	let BMIAvg = BMIAverage.toFixed(2);
 	// 判斷輸入是否為空值
+
+	// TODO:0516條件回傳及變數重複
 	if(inputHeight == "" || inputWeight == ""){
 		alert("請輸入資料！");
-	}else{
-		let BMIAG = resultItemValue.innerHTML = BMIaverage.toFixed(2);
-		// console.log(calculateBEM)
-		if(BMIaverage >= 35){
-			resultItem.classList.add('o-result__item--morbidobesity');
-			let BMIClass = 'morbidobesity';
-			let BMItext = resultItemText.innerHTML ="重度肥胖";
-
-		}else if(30 <= BMIAG && BMIAG < 35){
-			resultItem.classList.add('o-result__item--moderateobesity');
-			let BMIClass = 'moderateobesity';
-			let BMItext = resultItemText.innerHTML ="中度肥胖";
-
-		}else if(27 <= BMIAG && BMIAG< 30 ){
-			resultItem.classList.add('o-result__item--mildobesity');
-			let BMIClass = 'mildobesity';
-			let BMItext = resultItemText.innerHTML ="輕度肥胖";
-
-		}else if(24 <= BMIAG && BMIAG < 27){
-			resultItem.classList.add('o-result__item--overweight');
-			let BMIClass = 'overweight';
-			let BMItext = resultItemText.innerHTML ="過重";
-
-		}else if(18.5 <= BMIAG && BMIAG < 24){
-			resultItem.classList.add('o-result__item--normalweight');
-			let BMIClass = 'normalweight';
-			let BMItext = resultItemText.innerHTML ="理想";
-		}
-		else if(BMIAG < 18.5){
-			resultItem.classList.add('o-result__item--underweight');
-			let BMIClass = 'underweight';
-			let BMItext = resultItemText.innerHTML ="過輕";
-		}
-		// TODO:拿掉沒有使用到的程式碼
-		addNote(BMIClass,BMItext,BMIAG,Weight,Height)
+	}else if(BMIAverage >= 35){
+		let BMIClass = 'morbidobesity';
+		let BMIText = "重度肥胖";
+		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
+	}else if(30 <= BMIAvg && BMIAvg < 35){
+		let BMIClass = 'moderateobesity';
+		let BMIText = "中度肥胖";
+		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
+	}else if(27 <= BMIAvg && BMIAvg< 30 ){
+		let BMIClass = 'mildobesity';
+		let BMIText = "輕度肥胖";
+		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
+	}else if(24 <= BMIAvg && BMIAvg < 27){
+		let BMIClass = 'overweight';
+		let BMIText = "過重";
+		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
+	}else if(18.5 <= BMIAvg && BMIAvg < 24){
+		let BMIClass = 'normalweight';
+		let BMIText = "理想";
+		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
+	}else if(BMIAvg < 18.5){
+		let BMIClass = 'underweight';
+		let BMIText = "過輕";
+		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
 	}
-	
-	
-
 }
-
-function addNote(BMIClass,BMItext,BMIAG,Height,Weight){
-	// console.log(BMIClass,BMItext,BMIAG,Height,Weight)
+function addNote(BMIClass,BMIText,BMIAvg,BMIHeight,BMIWeight){
+	// console.log(BMIClass,BMIText,BMIAvg,Height,Weight)
 	let time = new Date();
 	let BMItimeYYYY = time.getFullYear();
 	let BMItimeMM = time.getMonth();
-	let BMItimedd = time.getDate();
+	let BMItimeDD = time.getDate();
 	let BMInoteArray = {
 		class:BMIClass,
-		title:BMItext,
-		avg:BMIAG,
-		h:Height,
-		w:Weight,
-		data:BMItimedd + '-' + (BMItimeMM+1) + '-' + BMItimeYYYY
-
+		title:BMIText,
+		avg:BMIAvg,
+		h:BMIHeight,
+		w:BMIWeight,
+		data:BMItimeDD + '-' + (BMItimeMM+1) + '-' + BMItimeYYYY
 	}
+	resultReset.innerHTML = `
+		<div class="o-result__item o-result__item--${BMIClass}">
+			<div class="o-btn o-btn--submit o-btn--${BMIClass}">
+				<span class="o-result__item__average">${BMIAvg}</span>
+					BMI
+			</div>
+			<span class="o-result__item__text">${BMIText}</span>
+		</div>`
 	resultSubmit.remove();
 	noteJson.push(BMInoteArray);
 	// 字串轉陣列
@@ -125,7 +116,7 @@ function updateNote(noteJson){
 						<span class="o-condition__item--value">${noteJson[i].data}</span>
 					</div>
 				</div>
-				<button  class="o-btn o-btn--primary">delete</button>
+				<button  class="o-btn o-btn--primary o-btn--del">delete</button>
 			</div>
 			`
 		}
@@ -135,7 +126,6 @@ function updateNote(noteJson){
 
 function deleteNote(e){
 	e.preventDefault();
-	// TODO:標籤調整
 	if(e.target.nodeName !== 'BUTTON'){
 		return;
 	}

@@ -46,7 +46,7 @@
       overflow: hidden;
       &--primary {
         margin-right: 97px;
-        background: url("../images/BMICLogo.png") no-repeat;
+        background: url("../images/BMILogo.png") no-repeat;
         background-size: contain;
       }
     }
@@ -73,16 +73,19 @@
   flex-direction: row;
   align-items: center;
   padding: 74px 0 74px 0;
-
-  .c-btn {
-    margin-left: 53px;
+  &__panel {
+    margin-right: 50px;
   }
-  &__item + &__item {
-    margin-top: 23px;
+  &__item {
+    & + & {
+      margin-top: 23px;
+    }
   }
   &__panel {
-    &__item + &__item {
-      margin-top: 24px;
+    &__item {
+      & + & {
+        margin-top: 24px;
+      }
     }
 
     .c-label {

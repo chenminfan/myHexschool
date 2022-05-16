@@ -1,15 +1,45 @@
+.o-btn {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  &--primary {
+    color: $color-grey;
+    font-size: $font-12;
+    background: $color-primary;
+    &:hover {
+      box-shadow: 0 1px 1px 1px rgba(255, 196, 50, 0.64);
+    }
+    &:active {
+      background: $color-primary--active;
+    }
+  }
+  &--submit {
+    width: 123px;
+    height: 123px;
+    font-size: $font-24;
+    border-radius: 100%;
+    border: 3px solid transparent;
+    &:hover {
+      box-shadow: 0 1px 6px 3px rgba(255, 196, 50, 0.64);
+    }
+  }
+  &--del {
+    position: absolute;
+    right: -70px;
+    padding: 0.2rem 0.5rem;
+  }
+}
 .o-result {
   &__item {
     display: none;
     flex-direction: row;
     align-items: center;
     &__average {
-      @extend .o-btn, .o-btn--submit;
-      position: relative;
-      width: 123px;
-      height: 123px;
-      background: transparent;
-      border: 6px solid transparent;
       &::after {
         content: "";
         display: inline-block;
@@ -35,60 +65,66 @@
     &--underweight {
       display: flex;
       color: $color-underweight;
-      .o-result__item__average {
+      .o-btn--submit {
+        border-width: 6px;
         border-color: $color-underweight;
-        &::after {
-          background-color: $color-underweight;
+        &:hover {
+          box-shadow: 0 1px 6px 3px rgba($color-underweight, $opacity29);
         }
       }
     }
     &--normalweight {
       display: flex;
       color: $color-normalweight;
-      .o-result__item__average {
+      .o-btn--submit {
+        border-width: 6px;
         border-color: $color-normalweight;
-        &::after {
-          background-color: $color-normalweight;
+        &:hover {
+          box-shadow: 0 1px 6px 3px rgba($color-normalweight, $opacity29);
         }
       }
     }
     &--overweight {
       display: flex;
       color: $color-overweight;
-      .o-result__item__average {
+      .o-btn--submit {
+        border-width: 6px;
         border-color: $color-overweight;
-        &::after {
-          background-color: $color-overweight;
+        &:hover {
+          box-shadow: 0 1px 6px 3px rgba($color-overweight, $opacity29);
         }
       }
     }
     &--mildobesity {
       display: flex;
       color: $color-mildobesity;
-      .o-result__item__average {
+      .o-btn--submit {
+        border-width: 6px;
         border-color: $color-mildobesity;
-        &::after {
-          background-color: $color-mildobesity;
+        &:hover {
+          box-shadow: 0 1px 6px 3px rgba($color-mildobesity, $opacity29);
         }
       }
     }
     &--moderateobesity {
       display: flex;
       color: $color-moderateobesity;
-      .o-result__item__average {
+      .o-btn--submit {
+        border-width: 6px;
         border-color: $color-moderateobesity;
-        &::after {
-          background-color: $color-moderateobesity;
+        &:hover {
+          box-shadow: 0 1px 6px 3px rgba($color-moderateobesity, $opacity29);
         }
       }
     }
     &--morbidobesity {
       display: flex;
       color: $color-morbidobesity;
-      .o-result__item__average {
+      .o-btn--submit {
+        border-width: 6px;
         border-color: $color-morbidobesity;
-        &::after {
-          background-color: $color-morbidobesity;
+        &:hover {
+          box-shadow: 0 1px 6px 3px rgba($color-morbidobesity, $opacity29);
         }
       }
     }
@@ -140,10 +176,6 @@
       box-shadow: 2px 0 3px 0 rgba($color-morbidobesity, $opacity29);
     }
   }
-  .o-btn--primary {
-    position: absolute;
-    right: -70px;
-  }
 }
 .o-condition {
   display: flex;
@@ -181,37 +213,6 @@
   }
 }
 
-.o-btn {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 5px;
-  padding: 0.2rem 0.5rem;
-  cursor: pointer;
-
-  &--primary {
-    color: $color-grey;
-    font-size: $font-12;
-    margin-left: 20px;
-    background: $color-primary;
-    &:hover {
-      box-shadow: 0 1px 1px 1px rgba(255, 196, 50, 0.64);
-    }
-    &:active {
-      background: $color-primary--active;
-    }
-  }
-  &--submit {
-    width: 120px;
-    height: 120px;
-    font-size: $font-24;
-    border-radius: 100%;
-    &:hover {
-      box-shadow: 0 1px 6px 3px rgba(255, 196, 50, 0.64);
-    }
-  }
-}
 @media screen and (max-width: 1023px) {
   .o-list-group__item {
     width: 100%;
