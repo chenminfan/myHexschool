@@ -5,7 +5,6 @@ let resultSubmit = document.querySelector('.o-btn--submit')
 let resultGroup = document.querySelector('.o-list-group')
 let resultReset = document.querySelector('.o-result')
 let noteJson = JSON.parse(localStorage.getItem("BMInote") ) || [];
-let conditionDelete = document.querySelector('.o-condition__item--del .o-btn');
 updateNote(noteJson)
 
 resultSubmit.addEventListener('click',calculateBEM)
@@ -24,7 +23,7 @@ function calculateBEM(){
 	// 判斷輸入是否為空值
 
 	// TODO:0516條件回傳及變數重複
-	if(inputHeight == "" || inputWeight == ""){
+	if(inputHeight === "" || inputWeight === ""){
 		alert("請輸入資料！");
 	}else if(BMIAverage >= 35){
 		let BMIClass = 'morbidobesity';
@@ -78,14 +77,14 @@ function addNote(BMIClass,BMIText,BMIAvg,BMIHeight,BMIWeight){
 	noteJson.push(BMInoteArray);
 	// 字串轉陣列
 	localStorage.setItem("BMInote", JSON.stringify(noteJson))
-	
-	
+
+
 	updateNote(noteJson)
 }
 function updateNote(noteJson){
 	let noteJsonLen = noteJson.length;
 	let print ="";
-	if(noteJsonLen == 0){
+	if(noteJsonLen === 0){
 		resultGroup.innerHTML=`
 		<div class="o-list-group__item">
 				<div class="o-condition">
