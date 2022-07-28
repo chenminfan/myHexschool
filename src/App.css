@@ -1,0 +1,22 @@
+.container {
+  max-width: 1024px;
+  margin: 8px auto;
+  padding: 0 12px;
+}
+.nav-link {
+  display: flex;
+}
+.nav-link a {
+  display: inline-block;
+  width: 120px;
+  margin-right: 12px;
+  text-align: center;
+  background-color: #396c96;
+  color: white;
+}
+.nav-link a.active {
+  background-color:#4f94cc;
+}
+.nav-link a:hover, .nav-link a:focus, .nav-link a:active {
+  background-color:#4682b4;
+}
