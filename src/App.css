@@ -6,13 +6,20 @@
 .nav-link {
   display: flex;
 }
-.nav-link a {
+.nav-link a,button.nav-link {
   display: inline-block;
   width: 120px;
   margin-right: 12px;
   text-align: center;
   background-color: #396c96;
   color: white;
+}
+button.nav-link {
+  outline: none;
+  border: none;
+  margin: 0;
+  padding: 8px;
+  border-radius: 4px;
 }
 .nav-link a.active {
   background-color:#4f94cc;
