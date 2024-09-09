@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>useEffect 移除監聽</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="UTF-8"><script src="/javascripts/vendor.js"></script><script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js" integrity="sha512-1/8Tj23BRrWnKZXeBruk6wTnsMJbi/lJsk9bsRgVwb6j5q39n0A00gFjbCTaDo5l5XrPVv4DZXftrJExhRF/Ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!DOCTYPE html><html><head><title>useEffect 移除監聽</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="UTF-8"><script src="../javascripts/vendor.js"></script><script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js" integrity="sha512-1/8Tj23BRrWnKZXeBruk6wTnsMJbi/lJsk9bsRgVwb6j5q39n0A00gFjbCTaDo5l5XrPVv4DZXftrJExhRF/Ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head><body class="bg-lighter">
 <div class="container main my-5"><div class="row"><main class="col post">
 <!-- 章節標題 --><div class="mb-4"><h1 class="mt-0 text-muted">useEffect 移除監聽</h1><small>檔名：<code>useEffectRemoveListener.html</code></small></div>
@@ -9,7 +9,7 @@
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 const api = 'https://api.unsplash.com/search/photos/';
-const accessKey = 'GAvxZ9VesndxTx_9NftqgOtZffnTB0YhfGiWGDJA-bs';
+const accessKey = 'LU_jp761_hGCtC244P_nDzJLNFDK6eG19loRZ2_6UHU';
 
 const Card = ({item}) => {
   return <div className="card">
@@ -22,36 +22,83 @@ const SearchBox = ({onSearchHandler, filterString}) => {
   return <div>
     <label htmlFor="filter">搜尋</label>
     <input type="text" id="filter" className="form-control"
-      value={filterString}
-      onChange={onSearchHandler}
+      defaultValue={filterString}
+      onKeyPress={onSearchHandler}
     />
   </div>
 }
 
-let currentPage = 1;
+// let currentPage = 1;
 const App = () => {
   const [filterString, setFilterString] = useState('animal');
   const [jsonData, setJsonData] = useState([]);
+  const currentPage = useRef(1);
+  // const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useRef(false)
   const onSearchHandler = (e) => {
-    setFilterString(e.target.value);
+    if(e.key === 'Enter'){
+      setFilterString(e.target.value);
+    }
   }
 
-  useEffect(() => {
-    (async () => {
-      try {
+  // #1 搜尋會做調整 keyPress(Enter)
+  // #2 把getPhoto 轉成獨立函示，取得特定貢獻
+  // #3 加入滾動事件，滾動到列表下方時，取得一筆新的
+  // #4 修正過度觸發的問題，加入讀取
+
+  // 取得新資料，在第二頁！？
+  // 新取得的ajax，還是舊的animal
+
+  // #5 輸入文字，資料狀態要正確
+  // #6 確保監聽事件是正確
+
+  const getPhotos = async(page = 1, isNew = true) => {
+    try {
         // 搜尋特定需要加入 query
-        const result = await axios.get(`${api}?client_id=${accessKey}&query=${filterString}`);
+        isLoading.current = true;
+        const result = await axios.get(`${api}?client_id=${accessKey}&query=${filterString}&page=${page}`);
         console.log(result);
-        setJsonData(result.data.results);
+        setJsonData((preData) => {
+          console.log('更新資料觸發');
+          if(isNew) {
+            return [ ...result.data.results];
+          }
+          return [...preData, ...result.data.results];
+        });
+        currentPage.current = page; //每次都需要確認當前頁
+        setTimeout(() =>{
+          // setIsLoading(true);
+          isLoading.current = false;
+        }, 1000)
       } catch (error) {
         console.log(error);
       }
-    })();
-  }, [])
+  }
+
+  const listRef = useRef(null);
+
+  useEffect(() => {
+    getPhotos(1, true);
+
+    const scrollEvent = () =>{
+       // console.log('scroll', window.scrollY)
+        // console.dir(listRef.current)
+        const height = (listRef.current.offsetHeight + listRef.current.offsetTop) - window.innerHeight;
+        // console.log(height)
+        if(!isLoading.current && window.scrollY > height) { 
+          currentPage.current++;
+          getPhotos(currentPage.current, false); //應該是頁數增加1
+        }
+    }
+
+    // 滾動式監聽
+    window.addEventListener('scroll' ,scrollEvent);
+    return () => window.removeEventListener('scroll' ,scrollEvent)
+  }, [filterString])
   
   return (<div>
     <SearchBox onSearchHandler={onSearchHandler} filterString={filterString} />
-    <div className='row row-cols-2 g-3'>
+    <div className='row row-cols-2 g-3' ref={listRef}>
       { jsonData.map((item) => 
         <div className="col" key={item.id}>
           <Card item={item} />
@@ -80,98 +127,98 @@ ReactDOM.createRoot(document.querySelector('#root'))
   
   <div class="list-group">
   
-    <a href="/hooks/startHooks.html"
+    <a href="../hooks/startHooks.html"
       class="list-group-item list-group-item-action
         
         ">
       開始使用 Hook
     </a>
   
-    <a href="/hooks/inputUseState.html"
+    <a href="../hooks/inputUseState.html"
       class="list-group-item list-group-item-action
         
         ">
       input 綁定 useState
     </a>
   
-    <a href="/hooks/aboutUseState.html"
+    <a href="../hooks/aboutUseState.html"
       class="list-group-item list-group-item-action
         
         ">
       關於 useState
     </a>
   
-    <a href="/hooks/aboutUseState2.html"
+    <a href="../hooks/aboutUseState2.html"
       class="list-group-item list-group-item-action
         
         ">
       關於 useState 2
     </a>
   
-    <a href="/hooks/inputComponent.html"
+    <a href="../hooks/inputComponent.html"
       class="list-group-item list-group-item-action
         
         ">
       input 元件化
     </a>
   
-    <a href="/hooks/useEffectIntro.html"
+    <a href="../hooks/useEffectIntro.html"
       class="list-group-item list-group-item-action
         
         ">
       useEffect 基礎介紹
     </a>
   
-    <a href="/hooks/useEffectLifeCycle.html"
+    <a href="../hooks/useEffectLifeCycle.html"
       class="list-group-item list-group-item-action
         
         ">
       useEffect 生命週期及非同步
     </a>
   
-    <a href="/hooks/asyncList.html"
+    <a href="../hooks/asyncList.html"
       class="list-group-item list-group-item-action
         
         ">
       非同步的列表呈現
     </a>
   
-    <a href="/hooks/useStateCallback.html"
+    <a href="../hooks/useStateCallback.html"
       class="list-group-item list-group-item-action
         
         ">
       useState 的前一個狀態
     </a>
   
-    <a href="/hooks/bootstrapComponent.html"
+    <a href="../hooks/bootstrapComponent.html"
       class="list-group-item list-group-item-action
         
         ">
       Bootstrap 元件與 React
     </a>
   
-    <a href="/hooks/useRef.html"
+    <a href="../hooks/useRef.html"
       class="list-group-item list-group-item-action
         
         ">
       useRef
     </a>
   
-    <a href="/hooks/useEffectRemoveListener.html"
+    <a href="../hooks/useEffectRemoveListener.html"
       class="list-group-item list-group-item-action
         
         active">
       useEffect 移除監聽
     </a>
   
-    <a href="/hooks/unsplashApi.html"
+    <a href="../hooks/unsplashApi.html"
       class="list-group-item list-group-item-action
         
         ">
       Unsplash API 挑戰
     </a>
   
-    <a href="/hooks/unsplashApiComplete.html"
+    <a href="../hooks/unsplashApiComplete.html"
       class="list-group-item list-group-item-action
         
         ">
@@ -195,22 +242,22 @@ ReactDOM.createRoot(document.querySelector('#root'))
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link " href="/intro/createApp.html">認識 React</a>
+          <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/components/intro.html">元件基礎</a>
+          <a class="nav-link " href="../components/intro.html">元件基礎</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/hooks/startHooks.html">Hooks</a>
+          <a class="nav-link active" href="../hooks/startHooks.html">Hooks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/form/basicForm.html">表單</a>
+          <a class="nav-link " href="../form/basicForm.html">表單</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/hooksAdv/lifeCycle.html">Hooks 進階</a>
+          <a class="nav-link " href="../hooksAdv/lifeCycle.html">Hooks 進階</a>
         </li>
       </ul>
     </div>
@@ -222,7 +269,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
     <small class="text-black-50 fw-light mb-0">六角學院 React 課程專屬文件</small>
   </div>
 </footer>
-<link rel="stylesheet" href="/stylesheets/all.css">
+<link rel="stylesheet" href="../stylesheets/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </body>
 </html>
