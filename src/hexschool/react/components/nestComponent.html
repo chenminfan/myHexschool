@@ -1,4 +1,4 @@
-<!DOCTYPE html><html><head><title>巢狀元件</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="UTF-8"><script src="/javascripts/vendor.js"></script><script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js" integrity="sha512-1/8Tj23BRrWnKZXeBruk6wTnsMJbi/lJsk9bsRgVwb6j5q39n0A00gFjbCTaDo5l5XrPVv4DZXftrJExhRF/Ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!DOCTYPE html><html><head><title>巢狀元件</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="UTF-8"><script src="../javascripts/vendor.js"></script><script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js" integrity="sha512-1/8Tj23BRrWnKZXeBruk6wTnsMJbi/lJsk9bsRgVwb6j5q39n0A00gFjbCTaDo5l5XrPVv4DZXftrJExhRF/Ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </head><body class="bg-lighter">
 <div class="container main my-5"><div class="row"><main class="col post">
 <!-- 章節標題 --><div class="mb-4"><h1 class="mt-0 text-muted">巢狀元件</h1><small>檔名：<code>nestComponent.html</code></small></div>
@@ -11,11 +11,18 @@
         <h4 className="my-0">{title}</h4>
       </div>
       <div className="card-body">
-        <h1 className="card-title">{typeof price === 'number' ? `$${price}` : price }</h1>
+        <h1 className="card-title">{typeof price === 'number' ? <>${price}<small>/月</small></> : price }</h1>
         <p>{content}</p>
-        <button type="button" className="btn btn-outline-primary">{callToAction}</button>
+        <Button className={title === '企業版' ? 'btn-primary' : 'btn-outline-primary'} >
+          <i className="bi bi-gem"></i> {callToAction} <i className="bi bi-gem"></i>
+          </Button>
       </div>
     </div>)
+  }
+  const Button = ({className, children}) =>{
+    return (
+      <button type="button" className={`btn ${className}`}>{children}</button>
+    )
   }
 
 
@@ -68,56 +75,56 @@
   
   <div class="list-group">
   
-    <a href="/components/intro.html"
+    <a href="../components/intro.html"
       class="list-group-item list-group-item-action
         
         ">
       為什麼要用元件
     </a>
   
-    <a href="/components/createLayout.html"
+    <a href="../components/createLayout.html"
       class="list-group-item list-group-item-action
         
         ">
       版型建立
     </a>
   
-    <a href="/components/createComponent.html"
+    <a href="../components/createComponent.html"
       class="list-group-item list-group-item-action
         
         ">
       建立元件
     </a>
   
-    <a href="/components/propsDestructuring.html"
+    <a href="../components/propsDestructuring.html"
       class="list-group-item list-group-item-action
         
         ">
       資料解構
     </a>
   
-    <a href="/components/dataMap.html"
+    <a href="../components/dataMap.html"
       class="list-group-item list-group-item-action
         
         ">
       使用資料驅動元件
     </a>
   
-    <a href="/components/mapKey.html"
+    <a href="../components/mapKey.html"
       class="list-group-item list-group-item-action
         
         ">
       為什麼要使用 key 值
     </a>
   
-    <a href="/components/nestComponent.html"
+    <a href="../components/nestComponent.html"
       class="list-group-item list-group-item-action
         
         active">
       巢狀元件
     </a>
   
-    <a href="/components/componentFinal.html"
+    <a href="../components/componentFinal.html"
       class="list-group-item list-group-item-action
         
         ">
@@ -141,22 +148,22 @@
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link " href="/intro/createApp.html">認識 React</a>
+          <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" href="/components/intro.html">元件基礎</a>
+          <a class="nav-link active" href="../components/intro.html">元件基礎</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/hooks/startHooks.html">Hooks</a>
+          <a class="nav-link " href="../hooks/startHooks.html">Hooks</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/form/basicForm.html">表單</a>
+          <a class="nav-link " href="../form/basicForm.html">表單</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/hooksAdv/lifeCycle.html">Hooks 進階</a>
+          <a class="nav-link " href="../hooksAdv/lifeCycle.html">Hooks 進階</a>
         </li>
       </ul>
     </div>
@@ -168,7 +175,7 @@
     <small class="text-black-50 fw-light mb-0">六角學院 React 課程專屬文件</small>
   </div>
 </footer>
-<link rel="stylesheet" href="/stylesheets/all.css">
+<link rel="stylesheet" href="../stylesheets/all.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </body>
 </html>
