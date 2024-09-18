@@ -5,21 +5,26 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 
 <!-- https://jsonplaceholder.typicode.com/users -->
-<form>
+<form action="https://jsonplaceholder.typicode.com/users" method="POST">
   <div class="mb-3">
     <label for="username" class="form-label">使用者名稱</label
-    ><input id="username" type="text" class="form-control" name="username" />
+    ><input id="username" type="email" class="form-control" name="username" />
   </div>
   <div class="mb-3">
     <label for="password" class="form-label">密碼</label>
+    <input type="password" class="form-control" name="password" id="password" />
   </div>
   <div class="mb-3">
     <label for="tel">電話</label>
+    <input type="tel" class="form-control" name="tel" id="tel" />
   </div>
   <div class="row mb-3 g-3">
     <div class="col-6">
-      <label for="city" class="form-label">縣市</label
-      >
+      <label for="city" class="form-label">縣市</label>
+      <select name="city" id="city" class="form-select">
+        <option value="台北市">台北市</option>
+        <option value="高雄市">高雄市</option>
+      </select>
     </div>
     <div class="col-6">
       <label for="district" class="form-label">鄉鎮市區</label
@@ -38,9 +43,11 @@
   <div class="mb-3">
     <div class="form-label">素食者</div>
     <div class="form-check">
+      <input type="radio" class="form-check-input" id="vegetarian" name="vegetarian" value="true" />
       <label class="form-check-label" for="vegetarian">是</label>
     </div>
     <div class="form-check">
+      <input type="radio" class="form-check-input" id="non-vegetarian" name="vegetarian" value="false" />
       <label class="form-check-label" for="non-vegetarian">否</label>
     </div>
   </div>
@@ -50,14 +57,14 @@
   </div>
   <div class="mb-3">
     <div class="form-check">
-      <input class="form-check-input" type="checkbox" id="checkbox" /><label
+      <input class="form-check-input" type="checkbox" id="checkbox" required /><label
         class="form-check-label"
         for="checkbox"
         >確認同意本文件</label
       >
     </div>
   </div>
-  <button type="button" class="btn btn-primary">註冊</button>
+  <button type="submit" class="btn btn-primary">註冊</button>
 </form>
 
 <!-- 🙇🙇練習結束🙇🙇 -->
@@ -172,7 +179,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
