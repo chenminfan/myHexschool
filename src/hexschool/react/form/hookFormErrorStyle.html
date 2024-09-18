@@ -17,15 +17,19 @@
       watch,
       getValues,
       control,
+      formState:{ errors}
     } = useForm({
       defaultValues: {
         username: '卡斯伯',
         like: []
       },
+      mode: 'onTouched'
     });
     const onSubmit = (data) => {
       console.log(data);
     };
+
+    console.log('err:', errors)
 
     return (
       <div>
@@ -37,9 +41,10 @@
             <input
               id='username'
               type='text'
-              {...register('username')}
-              className="form-control"
+              {...register('username', {required: true})}
+              className={`form-control ${errors.username ? 'is-invalid' : ''}`}
               />
+              {errors.username && <div class="invalid-feedback">必填的</div>}
             {/*
               `errors.username && "is-invalid"`
               也可改寫成 `errors.username ? "is-invalid" : ""`
@@ -49,21 +54,24 @@
           <div className="mb-3"> 
             <div className="form-check">
               <input id="checkList1" type="checkbox"
-              className="form-check-input"
-              {...register('like')} name="like" value='炒麵' />
+              className={`form-check-input ${errors.like ? 'is-invalid' : ''}`}
+              {...register('like', {required: true})} name="like" value='炒麵' />
               <label className='form-check-label' htmlFor="checkList1">炒麵</label>
+              {errors.like && <div class="invalid-feedback">必填的</div>}
             </div>
             <div className="form-check">
               <input id="checkList2" type="checkbox"
-              className="form-check-input"
-              {...register('like')} name="like" value='鍋燒意麵' />
+              className={`form-check-input ${errors.like ? 'is-invalid' : ''}`}
+              {...register('like', {required: true})} name="like" value='鍋燒意麵' />
               <label className='form-check-label' htmlFor="checkList2">鍋燒意麵</label>
+              {errors.like && <div class="invalid-feedback">必填的</div>}
             </div>
             <div className="form-check">
               <input id="checkList3" type="checkbox"
-              className="form-check-input"
-              {...register('like')} name="like" value='炸薯條' />
+              className={`form-check-input ${errors.like ? 'is-invalid' : ''}`}
+              {...register('like', {required: true})} name="like" value='炸薯條' />
               <label className='form-check-label' htmlFor="checkList3">炸薯條</label>
+              {errors.like && <div class="invalid-feedback">必填的</div>}
             </div>
           </div>
           <button type='submit' className='btn btn-primary'>

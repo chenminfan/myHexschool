@@ -1,0 +1,371 @@
+<!DOCTYPE html><html><head><title>表單最終</title><meta name="viewport" content="width=device-width, initial-scale=1"><meta charset="UTF-8"><script src="../javascripts/vendor.js"></script><script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script><script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script><script src="https://unpkg.com/@babel/standalone/babel.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.0/redux.min.js" integrity="sha512-1/8Tj23BRrWnKZXeBruk6wTnsMJbi/lJsk9bsRgVwb6j5q39n0A00gFjbCTaDo5l5XrPVv4DZXftrJExhRF/Ug==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head><body class="bg-lighter">
+<div class="container main my-5"><div class="row"><main class="col post">
+<!-- 章節標題 --><div class="mb-4"><h1 class="mt-0 text-muted">表單最終</h1><small>檔名：<code>final.html</code></small></div>
+<!-- 🔥🔥練習開始🔥🔥 -->
+
+<div id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/react-hook-form@7.33.1/dist/index.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js"></script>
+<script type="text/babel">
+  const { useState, useEffect } = React;
+  const { useForm, useWatch } = ReactHookForm;
+
+  const Input = ({ id, register, errors, placeholder, labelText, type, rules, checkTitle}) =>{
+    return(
+      <div className='mb-3'>
+        <label htmlFor={id} className='form-label'>
+          {labelText}
+        </label>
+        <input
+          id={id}
+          type={type}
+          {...register(id, rules)}
+          className={`form-control ${errors[id] && 'is-invalid'}`}
+          name={id}
+          placeholder={placeholder}
+        />
+        {errors[id] && (
+          <div className='invalid-feedback'>{errors?.[id]?.message}</div>
+        )}
+      </div>
+    )
+  }
+
+  const Checkbox = ({id ,type, name, register, errors, rules, checkboxText, handleClick}) =>{
+    return(
+      <div className='form-check'>
+        <input
+          className={`form-check-input ${errors[name] && 'is-invalid'}`}
+          type={type}
+          name={name}
+          {...register(name, rules)}
+          id={id}
+          value='true'
+          onClick={handleClick}
+        />
+        <label className='form-check-label' htmlFor={id}>
+          {checkboxText}
+        </label>
+        {errors[name] && (
+          <div className='invalid-feedback'>{errors?.[name]?.message}</div>
+        )}
+      </div>
+    )
+  }
+
+  const Select =({id ,selectText, register, errors, rules, defaultText="Choose..." ,handleChang, value, data ,children}) =>{
+    console.log(errors)
+    return(
+        <div className='col-6'>
+          <label htmlFor={id} className='form-label'>{selectText}</label>
+          <select {...register(id , rules)} id={id} className={`form-select ${errors[id] && 'is-invalid'}`} onChange={handleChang} value={value}>
+            <option value="" disabled={value.length !== 0 && data}>{defaultText}</option>
+            {children}
+          </select>
+          {errors[id] && (
+            <div className='invalid-feedback'>{errors?.[id]?.message}</div>
+          )}
+        </div>
+    )
+  }
+  
+  const Textarea = ({textareaTitle, id, rows, placeholder, rules, register, errors}) =>{
+    return(
+      <div className='mb-3'>
+        <label htmlFor={id}>{textareaTitle}</label>
+        <textarea {...register(id , rules)} id={id} rows={rows} className={`form-control ${errors[id] && 'is-invalid'}`} placeholder={placeholder} />
+        {errors[id] && (
+            <div className='invalid-feedback'>{errors?.[id]?.message}</div>
+          )}
+      </div>
+    )
+  }
+
+  const Button =({buttonText,handleClick}) =>{
+    return(
+      <button type='submit' onClick={handleClick} className='btn btn-primary'>
+        {buttonText}
+      </button>
+    )
+  }
+  const App = () => {
+    const {
+      register,
+      handleSubmit,
+      watch,
+      getValues,
+      control,
+      formState: { errors },
+    } = useForm({
+      mode: 'onTouched',
+    });
+    const onSubmit = (data) => {
+      console.log(data);
+    };
+
+    const [data,setData] = useState([])
+    const [city, setCity] = useState('')
+    const [area, setArea] = useState('')
+    const handleCity =(e) =>{
+      setCity(e.target.value)
+    }
+    const handleArea =(e) =>{
+      setArea(e.target.value)
+    }
+    const areaData = data.filter((data) => data.CityName === city);
+    const getTaiwanAdd = async () => {
+        try {
+          const result= await axios.get('./assets/taiwan.json')
+          return setData(result.data)
+        } catch (error) {
+          
+        }
+      }
+
+    useEffect (()=>{
+      getTaiwanAdd()
+    }, [])
+
+
+
+    const [isVegetarian, setIsVegetarian] = useState(true)
+    const radioList = [{id:'vegetarian', text:'是' },{ id:'non-vegetarian',text:'否'}]
+    const [radioCheck, setRadioCheck] = useState([]);
+    const handleRadioList = (e) =>{
+      if(e.target.checked){
+        setRadioCheck([...radioCheck, e.target.value])
+    } else {
+      setRadioCheck(radioCheck.filter((item) => item !== e.target.value))
+    }
+  }
+  const [check, setCheck] = useState('');
+    return (
+      <div>
+        <form action='' onSubmit={handleSubmit(onSubmit)}>
+          <Input register={register} errors={errors} id="username" labelText="使用者名稱" type="text" placeholder="請輸入使用者名稱" rules={{required: {value: true,message: '使用者名稱為必填'}}} />
+
+          <Input register={register} errors={errors} id="password" labelText="密碼" type="password" placeholder="請輸入密碼" rules={{
+            required: {
+              value: true,
+              message: '密碼為必填'
+            },
+            minLength: {
+              value: 6,
+              message: '密碼不少於 6 碼',
+            },
+            maxLength: {
+              value: 12,
+              message: '密碼不大於 12 碼',
+            } 
+          }} />
+
+          <Input register={register} errors={errors} id="tel" labelText="電話" type="tel" placeholder="請輸入電話號碼" rules={{
+            required: {
+              value: true,
+              message: '電話為必填'
+            },
+            minLength: {
+              value: 6,
+              message: '電話不少於 6 碼',
+            },
+            maxLength: {
+              value: 12,
+              message: '電話不大於 12 碼',
+            } 
+          }} />
+          
+          <div className='row mb-3 g-3'>
+            <Select id="city" register={register} errors={errors} selectText="縣市" defaultText="請選擇縣市" handleChang={handleCity} value={city} rules={{
+              required: {
+                value: true,
+                message: '請選擇縣市'
+              }
+            }} >
+              {data.map((city) => {
+                return <option value={city.CityName} key={city.CityName} >{city.CityName}</option>
+              })}
+            </Select>
+
+            <Select id="district" register={register} errors={errors} handleChang={handleArea} selectText="鄉鎮市區" defaultText="請選擇鄉鎮市區" value={area} rules={{
+              required: {
+                value: true,
+                message: '鄉鎮市區'
+              },
+            }}>
+              {city.length !== 0 && areaData[0]?.AreaList.map((area) => {
+                return <option value={area.AreaName} key={area.AreaName} >{area.AreaName}</option>
+              })}
+            </Select>
+
+            <Input register={register} errors={errors} id="address" labelText="地址" type="text"  placeholder="請輸入地址" rules={{required: {value: true,message: '地址請輸入完整資訊'}}} />
+          </div>
+          
+          <div className='mb-3'>
+            <div className='form-label'>素食者</div>
+            
+              {radioList.map((item) =>{ 
+              return(
+                  <Checkbox id={item.id} checkboxText={item.text} name="isVegetarian" type='radio' value={isVegetarian} register={register} errors={errors} handleClick={handleRadioList} key={item.id} rules={{required: {value: true,message: '請選擇一個選項'}}} />
+              )
+            })}
+            
+            </div>
+            
+          
+          
+          <Textarea textareaTitle="註解" id ="comment" rows="5" placeholder="餐點很不錯喔" register={register} errors={errors} rules={{required: {value: true,message: '請同意本文件'}}} />
+          
+          <div className='mb-3'>
+            <Checkbox id="checkbox" name="checkbox" checkboxText="確認同意本文件" type='checkbox' rules={{required: {value: true,message: '請同意本文件'}}} register={register} errors={errors} handleClick={e=>setCheck(e.target.value)} value={check} />
+            
+          </div>
+          <Button buttonText="註冊" handleClick={e=>{          }} />
+        </form>
+      </div>
+    );
+  };
+
+  ReactDOM.createRoot(document.querySelector('#app')).render(<App />);
+</script>
+
+<!-- 🙇🙇練習結束🙇🙇 -->
+</main>
+  
+    <aside
+      class="col-md-3"><div class="sticky-top" style="top: 76px">
+  
+  <div class="list-group">
+  
+    <a href="../form/basicForm.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      基礎表單觀念
+    </a>
+  
+    <a href="../form/reactForm.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      React 與表單元素
+    </a>
+  
+    <a href="../form/reactForm2.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      React 與表單元素 2
+    </a>
+  
+    <a href="../form/submitForm.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      表單送出
+    </a>
+  
+    <a href="../form/formEvent.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      表單方法
+    </a>
+  
+    <a href="../form/basicHookForm.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      React Hook Form 基礎
+    </a>
+  
+    <a href="../form/hookFormDefaultValue.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      React Hook Form 控制值
+    </a>
+  
+    <a href="../form/hookFormErrorStyle.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      React Hook Form 錯誤樣式
+    </a>
+  
+    <a href="../form/hookFormValidation.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      React Hook Form 驗證方法
+    </a>
+  
+    <a href="../form/hookFormComponent.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      React Hook Form 元件化
+    </a>
+  
+    <a href="../form/final.html"
+      class="list-group-item list-group-item-action
+        
+        active">
+      表單最終
+    </a>
+  
+    <a href="../form/finalAnswer.html"
+      class="list-group-item list-group-item-action
+        
+        ">
+      表單最終 解答
+    </a>
+  
+  </div>
+  <div class="mt-3 text-end p-2 bg-light rounded">
+    <small class="text-black-50 fw-light mb-0">文件版本：2022/10/31</small>
+  </div>
+</div>
+
+</aside>
+    
+  </div>
+</div>
+
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">React 練習手冊</a>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link " href="../intro/createApp.html">認識 React</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="../components/intro.html">元件基礎</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="../hooks/startHooks.html">Hooks</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="../form/basicForm.html">表單</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link " href="../hooksAdv/lifeCycle.html">Hooks 進階</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<footer class="footer py-2 bg-light">
+  <div class="container text-center">
+    <small class="text-black-50 fw-light mb-0">六角學院 React 課程專屬文件</small>
+  </div>
+</footer>
+<link rel="stylesheet" href="../stylesheets/all.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+</body>
+</html>
