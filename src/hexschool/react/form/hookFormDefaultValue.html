@@ -8,20 +8,50 @@
 <script src="https://cdn.jsdelivr.net/npm/react-hook-form@7.33.1/dist/index.umd.min.js"></script>
 <script type="text/babel">
   const { useState, useEffect } = React;
-  const { useForm } = ReactHookForm;
+  const { useForm, useWatch } = ReactHookForm;
 
   const App = () => {
     const {
       register,
       handleSubmit,
-    } = useForm();
+      watch,
+      setValue,
+      control,
+    } = useForm({
+      defaultValues:{
+        username: 'min~'
+      }
+    });
     const onSubmit = (data) => {
       console.log(data);
     };
 
     // #watch 當有值寫入時，可以透過 watch 觸發
+    // console.log(watch('username'));
+    // useEffect(() =>{
+    //   const subscript = watch((value, {name}) =>{
+    //     console.log(value, name)
+    //     if(name === 'like') {
+    //       setValue('username', 'min min')
+    //     }
+    //   });
+    //   console.log(subscript)
+    //   return () => subscript.unsubscribe()
+    //   // watch((value, attr) =>{
+    //   //   console.log(value, attr)
+
+    //   // });
+    // }, [watch])
 
     // #useWatch 使用 hook 實作監聽
+    const watchForm = useWatch({
+      control
+    })
+
+    useEffect(()=>{
+      console.log(watchForm)
+    }, [watchForm])
+
 
 
     return (
@@ -40,11 +70,11 @@
           </div>
           <div className="mb-3"> 
           <label htmlFor="checkList1">炒麵</label>
-            <input id="checkList1" type="checkbox" name="like" value='炒麵' />
+            <input id="checkList1" type="checkbox" name="like" {...register('like')} value='炒麵' />
             <label htmlFor="checkList2">鍋燒意麵</label>
-            <input id="checkList2" type="checkbox" name="like" value='鍋燒意麵' />
+            <input id="checkList2" type="checkbox" name="like" {...register('like')} value='鍋燒意麵' />
             <label htmlFor="checkList3">炸薯條</label>
-            <input id="checkList3" type="checkbox" name="like" value='炸薯條' />
+            <input id="checkList3" type="checkbox" name="like" {...register('like')} value='炸薯條' />
           </div>
           <button type='submit' className='btn btn-primary'>
             註冊
@@ -169,7 +199,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
