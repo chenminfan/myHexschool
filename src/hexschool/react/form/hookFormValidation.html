@@ -40,12 +40,17 @@
             <input
               id='username'
               type='text'
-              {...register('username', { required: true })}
+              {...register('username', { 
+                required: {
+                value: true,
+                message: '必填'
+              } })}
               className={`form-control ${errors.username && 'is-invalid'}`}
             />
             {errors.username && (
-              <div className='invalid-feedback'>使用者名稱為必填</div>
+              <div className='invalid-feedback'>{errors.username.message}</div>
             )}
+            {/*當沒有判斷的時候可用？可選串連 <div className='invalid-feedback'>{errors?.username?.message}</div>*/}
           </div>
           <div className='mb-3'>
             <label htmlFor='email' className='form-label'>
@@ -54,9 +59,21 @@
             <input
               id='email'
               type='text'
-              {...register('email')}
+              {...register('email', {
+              required: {
+                value: true,
+                message: '必填'
+              },
+              pattern: {
+                value: /^\S+@\S+$/i,
+                message: '格式有誤'
+              }
+            })}
               className={`form-control ${errors.email && 'is-invalid'}`}
             />
+            {errors.email && (
+              <div className='invalid-feedback'>{errors.email.message}</div>
+            )}
           </div>
           <div className='mb-3'>
             <label htmlFor='tel' className='form-label'>
@@ -65,9 +82,25 @@
             <input
               id='tel'
               type='tel'
-              {...register('tel')}
+              {...register('tel', { 
+              required: {
+                value: true,
+                message: '必填'
+              },
+              minLength: {
+                value: 6,
+                message: '不少於6碼'
+              },
+              maxLength:{
+                value: 12,
+                message: '太長了'
+              }
+            })}
               className={`form-control ${errors.tel && 'is-invalid'}`}
             />
+            {errors.tel && (
+              <div className='invalid-feedback'>{errors.tel.message}</div>
+            )}
           </div>
           <div className="mb-3"> 
             <div className="form-check">

@@ -10,6 +10,38 @@
   const { useState, useEffect } = React;
   const { useForm, useWatch } = ReactHookForm;
 
+  const Input = ({ id, register, errors, labelText, type, rules}) => {
+    return(
+      <div className='mb-3'>
+        <label htmlFor={id} className='form-label'>
+          {labelText}
+        </label>
+        <input
+          id={id}
+          type={type}
+          {...register(id, rules)}
+          className={`form-control ${errors[id] && 'is-invalid'}`}
+        />
+        {errors[id] && (
+          <div className='invalid-feedback'>{errors?.[id]?.message}</div>
+        )}
+      </div>
+    )
+  }
+
+  const Checkbox =({id, type, name, register, errors, rules, checkboxText})=>{
+    return(
+      <div className="form-check">
+        <input id={id} type={type}
+        className={`form-check-input ${errors[id] && 'is-invalid'}`}
+        {...register(name, rules)} name={name} value={checkboxText} />
+        <label className='form-check-label' htmlFor={name}>{checkboxText}</label>
+        {errors[name] && (
+        <div className='invalid-feedback'>請選擇喜愛的食物</div>
+      )}
+      </div>
+    )
+  }
   const App = () => {
     const {
       register,
@@ -29,11 +61,70 @@
     const onSubmit = (data) => {
       console.log(data);
     };
-
+    const list = ['炒麵','鍋燒意麵','炸薯條']
     return (
       <div>
         <form action='' onSubmit={handleSubmit(onSubmit)}>
-          <div className='mb-3'>
+          <Input register={register} errors={errors} id="username" labelText="使用者名稱" type="text" >
+          </Input>
+          <Input register={register} errors={errors} id="email" labelText="Email" type="text" rules={{
+                required: {
+                  value: true,
+                  message: 'Email 為必填'
+                },
+                pattern: {
+                  value: /^\S+@\S+$/i,
+                  message: 'Email 格式不正確'
+                }
+              }}>
+          </Input>
+          <Input register={register} errors={errors} id="tel" labelText="電話" type="tel" rules={{
+            required: {
+              value: true,
+              message: '電話為必填'
+            },
+            minLength: {
+              value: 6,
+              message: '電話不少於 6 碼',
+            },
+            maxLength: {
+              value: 12,
+              message: '電話不大於 12 碼',
+            } 
+          }}>
+          </Input>
+          
+          <div className="mb-3">
+            {list.map((item,index) =>{
+              return (
+                <Checkbox id={`checkList${index}`} type="checkbox" name="like" rules={{required: true}} register={register} errors={errors} checkboxText={item} key={item} />
+              )
+            })}
+            {/*<div className="form-check">
+              <input id="checkList1" type="checkbox"
+              className={`form-check-input ${errors.like && 'is-invalid'}`}
+              {...register('like', {required: true})} name="like" value='炒麵' />
+              <label className='form-check-label' htmlFor="checkList1">炒麵</label>
+            </div>
+            <div className="form-check">
+              <input id="checkList2" type="checkbox"
+              className={`form-check-input ${errors.like && 'is-invalid'}`}
+              {...register('like', {required: true})} name="like" value='鍋燒意麵' />
+              <label className='form-check-label' htmlFor="checkList2">鍋燒意麵</label>
+            </div>
+            <div className="form-check">
+              <input id="checkList3" type="checkbox"
+              className={`form-check-input ${errors.like && 'is-invalid'}`}
+              {...register('like', {required: true})} name="like" value='炸薯條' />
+              <label className='form-check-label' htmlFor="checkList3">炸薯條</label>
+            </div>
+            {errors.like && (
+              <div className='invalid-feedback'>請選擇喜愛的食物</div>
+              )}
+            */}
+            
+          </div>
+          {/*<div className='mb-3'>
             <label htmlFor='username' className='form-label'>
               使用者名稱
             </label>
@@ -100,29 +191,7 @@
               <div className='invalid-feedback'>{errors?.tel?.message}</div>
             )}
           </div>
-          <div className="mb-3"> 
-            <div className="form-check">
-              <input id="checkList1" type="checkbox"
-              className={`form-check-input ${errors.like && 'is-invalid'}`}
-              {...register('like', {required: true})} name="like" value='炒麵' />
-              <label className='form-check-label' htmlFor="checkList1">炒麵</label>
-            </div>
-            <div className="form-check">
-              <input id="checkList2" type="checkbox"
-              className={`form-check-input ${errors.like && 'is-invalid'}`}
-              {...register('like', {required: true})} name="like" value='鍋燒意麵' />
-              <label className='form-check-label' htmlFor="checkList2">鍋燒意麵</label>
-            </div>
-            <div className="form-check">
-              <input id="checkList3" type="checkbox"
-              className={`form-check-input ${errors.like && 'is-invalid'}`}
-              {...register('like', {required: true})} name="like" value='炸薯條' />
-              <label className='form-check-label' htmlFor="checkList3">炸薯條</label>
-            </div>
-            {errors.like && (
-              <div className='invalid-feedback'>請選擇喜愛的食物</div>
-            )}
-          </div>
+          */}
           <button type='submit' className='btn btn-primary'>
             註冊
           </button>

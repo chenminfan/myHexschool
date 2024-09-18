@@ -10,11 +10,14 @@ const { useState, useEffect, useRef } = React;
 const api = 'https://api.unsplash.com/search/photos/';
 const accessKey = 'LU_jp761_hGCtC244P_nDzJLNFDK6eG19loRZ2_6UHU';
 
-const Card = ({item}) => {
-  return <div className="card">
+const Card = ({item, getSinglePhoto}) => {
+  return <a href='#' onClick={(e)=> {
+    e.preventDefault();
+    getSinglePhoto(item.id);
+  }} className="card">
     <img className="card-img img-cover" width="100%" height="400"
     src={`${item.urls.raw}&w=600&q=80`} alt="" />
-  </div>
+  </a>
 }
 
 const SearchBox = ({onSearchHandler, filterString}) => {
@@ -26,24 +29,55 @@ const SearchBox = ({onSearchHandler, filterString}) => {
     />
   </div>
 }
+// #1 剩餘次數
+// #2 讀取效果
+//  製作畫面的讀取效果
+    // 套用狀態
+// #3 取得單張照片，並顯示在畫面上
+    // 打開modal（畫面）
+    // 重新發出請求
 
+const Loading = ({isLoading}) =>{
+  return (
+    <div className="loading" style={{'display': isLoading ? 'flex' : 'none'}}>
+      <div className="spinner-border" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  )
+}
 const App = () => {
   const [filterString, setFilterString] = useState('animal');
   const [jsonData, setJsonData] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  const isLoading = useRef(false)
+  const [isLoading, setIsLoading] = useState(false);
+  const [photoUrl,setPhotoUrl] = useState('')
+  const isLoadingRef = useRef(false)
   const [ratelimitRemaining, setRatelimitRemaining] = useState(50);
   const currentPage = useRef(1);
+  const modalRef = useRef(null)
+  const myModal = useRef(null)
   const onSearchHandler = (e) => {
     if (e.key === 'Enter') {
       setFilterString(e.target.value);
     }
   }
 
+  const getSinglePhoto = async(id) => {
+    const api = 'https://api.unsplash.com/photos/';
+    try {
+      const result = await axios(`${api}${id}?client_id=${accessKey}`)
+      setPhotoUrl(result.data.urls.regular)
+      myModal.current.show();
+    } catch (error) {
+      
+    }
+  }
+
   const getPhotos = async (page = 1, isNew = true) => {
     try {
         // 搜尋特定需要加入 query
-        isLoading.current = true;
+        isLoadingRef.current = true;
+        setIsLoading(true);
         const result = await axios.get(`${api}?client_id=${accessKey}&query=${filterString}&page=${page}`);
         console.log(result);
         setJsonData((preData) => {
@@ -53,10 +87,11 @@ const App = () => {
           }
           return [...preData, ...result.data.results];
         });
+        setRatelimitRemaining(result.headers['x-ratelimit-remaining']);
         currentPage.current = page; // 每次都需要確認當前頁
-        setRemaining(result.headers['x-ratelimit-remaining']);
         setTimeout(() => {
-          isLoading.current = false;
+          isLoadingRef.current = false;
+          setIsLoading(false)
         }, 500);
       } catch (error) {
         console.log(error);
@@ -81,16 +116,39 @@ const App = () => {
     return () => window.removeEventListener('scroll', scrollEvent);
   }, [filterString]);
   
+  useEffect(() =>{
+    const body = document.querySelector('body');
+    if(isLoading){
+      body.style.overflow = 'hidden';
+    } else{
+      body.style.overflow = 'auto';
+    }
+  })
+  
+  useEffect(() =>{
+    myModal.current = new bootstrap.Modal(modalRef.current);
+    
+    // myModal.current.show();
+  }, [])
+
   return (<div>
+    <Loading isLoading={isLoading} />
     <SearchBox onSearchHandler={onSearchHandler} filterString={filterString} />
-    <p>剩餘請求次數：{remaining}</p>
+    <p>剩餘請求次數：{ratelimitRemaining}</p>
     <div className='row row-cols-2 g-3' ref={listRef}>
       { jsonData.map((item) => 
         <div className="col" key={item.id}>
-          <Card item={item} />
+          <Card item={item} getSinglePhoto={getSinglePhoto} />
         </div>
       )}
     </div>
+    <div className="modal fade" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" ref={modalRef}>
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <img src={photoUrl} alt="" />
+    </div>
+  </div>
+</div>
   </div>)
 }
 
@@ -103,6 +161,18 @@ ReactDOM.createRoot(document.querySelector('#root'))
   /* CSS 樣式，可以確保圖片不要變形 */
   .img-cover {
     object-fit: cover;
+  }
+  .loading{
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(9px);
+    z-index: 999;
   }
 </style>
 <!-- 🙇🙇練習結束🙇🙇 -->
