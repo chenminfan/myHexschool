@@ -7,25 +7,56 @@
 <script type="text/babel">
   const { useState } = React
   const App = () => {
+    // const [userName, setUserName] = useState();
+    // const handleChange = (e) => {
+    //   setUserName(e.target.value)
+    // }
+
+    const [formData, setFormData] = useState({
+      username: 'min',
+      password: '12345',
+      isCheck: false,
+    })
+
+    const handleInputChange = (e) =>{
+      console.log(e.target.value);
+      console.log(e.target.name)
+      const name = e.target.name;
+      const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+      setFormData({...formData, 
+        [name]: value,//變數的方式帶入屬性
+      })
+    }
+
+    const handleSubmit = (e) =>{
+      e.preventDefault();
+      console.log(
+        // {userName}
+        {formData}
+      )
+    }
   
     return (<div>
-      <form >
+      <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="username" className="form-label">使用者名稱</label
-          ><input id="username" type="text" className="form-control" name="username"
+          ><input id="username" type="text" className="form-control" name="username" onChange={handleInputChange} value={formData.userName}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="password" className="form-label">密碼</label
-          ><input id="password" type="password" className="form-control" name="password"
+          ><input id="password" type="password" className="form-control" name="password" onChange={handleInputChange} value={formData.password}
           />
         </div>
         <div className="mb-3">
           <label htmlFor="isCheck">確認狀態</label>
           <input id="isCheck" type="checkbox" name="isCheck"
+          onChange={handleInputChange} value={formData.isCheck}
           />
         </div>
         <button type="submit" className="btn btn-primary">送出</button>
+        { /*button無法使用 <button type="button" className="btn btn-primary">送出</button>*/}
       </form>
     </div>)
   }
@@ -145,7 +176,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
