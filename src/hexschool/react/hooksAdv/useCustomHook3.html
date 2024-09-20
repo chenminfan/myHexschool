@@ -10,8 +10,30 @@ const { useState, useEffect, useRef } = React;
 // https://usehooks.com/
 // https://usehooks.com/useDebounce/
 
+function useDebounce(value, delay) {
+  const [debouncedValue, setDebouncedValue] = React.useState(value);
+
+  React.useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedValue(value);
+    }, delay);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [value, delay]);
+
+  return debouncedValue;
+}
+
 const App = () => {
   const [text, setText] = useState('')
+
+  const debounceText = useDebounce(text, 500);
+
+  useEffect (() => {
+    console.log('假設要發出非同步請求')
+  },[debounceText])
 
   return (<>
     <input type="text" onChange={e => setText(e.target.value)}
@@ -157,7 +179,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>

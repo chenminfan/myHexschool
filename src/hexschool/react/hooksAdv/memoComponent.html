@@ -6,7 +6,7 @@
 
 <div id="root"></div>
 <script type="text/babel">
-  const { useState, useEffect, useMemo } = React;
+  const { useState, useEffect, useMemo, memo } = React;
   const sampleData = [
     {
       id: 1,
@@ -45,11 +45,31 @@
     },
   ];
 
+  // 被改為成 props 更新時，才重新渲染元件
+  const DataTable = memo(({data}) =>{
+    console.log('dataTable')
+    return(
+      <table className='table'>
+          <tbody>
+            {data.map((product) => {
+              return (
+                <tr key={product.id}>
+                  <td>{product.title}</td>
+                  <td>{product.price}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+    )
+  })
+
   let num = 0;
   const App = () => {
     const [products, setProducts] = useState(sampleData);
     const [ascending, setAscending] = useState(true);
     const [search, setSearch] = useState('');
+    const [text, setText] = useState('')
 
     const filterProducts = useMemo(() => {
       return [...products]
@@ -63,13 +83,21 @@
 
     return (
       <>
-        升降冪：
         <input
+          type='text'
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+        />
+        升降冪：
+        <label htmlFor="checkbox">
+          <input
+          id="checkbox"
           type='checkbox'
           checked={ascending}
           onChange={(e) => setAscending(e.target.checked)}
-        />{' '}
-        {ascending.toString()}
+        /> 
+          {ascending.toString()}
+        </label>
         <br />
         搜尋：
         <input
@@ -77,18 +105,7 @@
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
-        <table className='table'>
-          <tbody>
-            {filterProducts.map((product) => {
-              return (
-                <tr key={product.id}>
-                  <td>{product.title}</td>
-                  <td>{product.price}</td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <DataTable data={filterProducts} />
       </>
     );
   };
@@ -229,7 +246,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>

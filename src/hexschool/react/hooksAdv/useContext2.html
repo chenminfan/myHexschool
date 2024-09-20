@@ -23,20 +23,35 @@ const LoginForm = () => {
 }
 
 const Greeting = () => {
-  const { username } = useContext(UserContext);
+  const { username, setIsLogin } = useContext(UserContext);
   return <>
     { username } 你好, 歡迎登入
+    <button type="button" onClick={()=> setIsLogin(false)}>登出</button>
   </>
 }
 
-const App = () => {
-  const [username, setUsername] = useState('卡斯伯');
+const UserProvider = ({children}) =>{
+  const [username, setUsername] = useState('XXX');
   const [isLogin, setIsLogin] = useState(false);
 
-  return (<>
-    <UserContext.Provider value={{ username, setUsername, setIsLogin }}>
-      { isLogin ? <Greeting /> : <LoginForm /> }
+  return(
+    <UserContext.Provider value={{ username, setUsername, setIsLogin, isLogin }}>
+      {children}
     </UserContext.Provider>
+  )
+}
+
+const Dashboard = ()=>{
+  const {isLogin} = useContext(UserContext)
+  return(<>
+  { isLogin ? <Greeting /> : <LoginForm /> }
+  </>)
+}
+const App = () => {
+  return (<>
+    <UserProvider>
+      <Dashboard />
+    </UserProvider>
   </>)
 }
 
@@ -177,7 +192,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
