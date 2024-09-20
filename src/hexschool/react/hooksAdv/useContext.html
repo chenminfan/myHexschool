@@ -5,10 +5,15 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 <div id="root"></div>
 <script type="text/babel">
-const { useState, useEffect } = React;
+const { useState, useEffect, useContext, createContext } = React;
+
+// 建立共用環境
+const UserContext = createContext({
+
+})
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('卡斯伯');
+  const {username, setUsername, setIsLogin} = useContext(UserContext);
   
   return (<>
     <label htmlFor="username">使用者名稱</label>
@@ -16,22 +21,32 @@ const LoginForm = () => {
       value={username}
       onChange={e => setUsername(e.target.value)}
       placeholder="請輸入使用者名稱" />
-    <button type="button">登入</button>
+    <button type="button" onClick={(e) => setIsLogin(true)}>登入</button>
   </>)
 }
 
+const DeepComponent =()=>{
+  const {username, setIsLogin} = useContext(UserContext);
+  return <div>子孫層{username}</div>
+}
 const Greeting = () => {
+  const {username, setIsLogin} = useContext(UserContext);
+
   return <>
-    xxx 你好, 歡迎登入
+    {username} 你好, 歡迎登入
+    <DeepComponent />
+    <button type="button" onClick={(e) => setIsLogin(false)}>登出</button>
   </>
 }
 
 const App = () => {
+  const [username, setUsername] = useState('卡斯伯');
+  const [isLogin, setIsLogin] = useState(false)
   return (<>
-    <LoginForm />
-      <hr />
-    <Greeting />
-  </>)
+  <UserContext.Provider value={{setUsername, username, setIsLogin}} >
+    {isLogin ? <Greeting />: <LoginForm />}
+  </UserContext.Provider>
+</>)
 }
 
 
@@ -171,7 +186,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>

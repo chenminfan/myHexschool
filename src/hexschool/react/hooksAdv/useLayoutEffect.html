@@ -6,7 +6,7 @@
 
 <div id="root"></div>
 <script type="text/babel">
-  const { useState, useEffect, useMemo, memo, useCallback } = React;
+  const { useState, useEffect, useMemo, memo, useCallback, useLayoutEffect } = React;
   const sampleData = [
     {
       id: 1,
@@ -48,7 +48,7 @@
   // 使用 memo
   const DataTable = memo(({products, handleSelectCheck}) => {
     console.log(`元件更新觸發`);
-    return (<table className='table'>
+    return (<table className='table table-dark'>
       <thead>
         <tr>
           <td>品項</td>
@@ -80,6 +80,26 @@
     const [items, setItems] = useState([]);
 
     const [text, setText] = useState('');
+
+    // 元件初始化的生命週期
+    // 1.function 元件（由上而下）
+    // 2.建立 virtual DOM
+    // 3.useLayoutEffect
+    // 4.畫面渲染
+    // 5.呼叫 useEffect
+
+    console.time('useEffect')
+    console.time('useLayoutEffect')
+
+    useLayoutEffect(()=>{
+      console.log('useLayoutEffect 被觸發了')
+      console.timeEnd('useLayoutEffect')
+    },[])
+
+    useEffect(()=>{
+      console.log('useEffect 被觸發了')
+      console.timeEnd('useEffect')
+    },[])
     
     // ======
     const handleSelectCheck = useCallback((e) => {
@@ -259,7 +279,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>

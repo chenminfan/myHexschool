@@ -7,14 +7,21 @@
 <script type="text/babel">
   const { useState, useEffect } = React;
   
+  let num = 0;
   const App = () => {
     const [price, setPrice] = useState(100);
     const [qty, setQty] = useState(1);
+
+    num++;
+    console.log(`元件已經更新 ${num} 次`);
+    const total = price * qty;
   
     return (<>
       {price} {qty}
       <input type="number" value={price} onChange={(e) => setPrice(parseInt(e.target.value))} />
       <input type="number" value={qty} onChange={(e) => setQty(parseInt(e.target.value))} />
+
+      <p>總價：{total}</p>
     </>)
   }
   
@@ -154,7 +161,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
