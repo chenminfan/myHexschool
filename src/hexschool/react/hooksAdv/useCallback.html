@@ -5,7 +5,7 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 <div id="root"></div>
 <script type="text/babel">
-  const { useState, useEffect, useMemo, memo } = React;
+  const { useState, useEffect, useMemo, memo, useCallback } = React;
   const sampleData = [
     {
       id: 1,
@@ -45,7 +45,7 @@
   ];
 
   // 使用 memo
-  const DataTable = memo(({filterProducts}) => {
+  const DataTable = memo(({filterProducts, handleChang}) => {
     console.log(`元件更新觸發`);
     return (<table className='table'>
       <tbody>
@@ -54,6 +54,9 @@
             <tr key={product.id}>
               <td>{product.title}</td>
               <td>{product.price}</td>
+              <td>
+              <input type="checkbox" onChange={handleChang} value={product.title} />
+              </td>
             </tr>
           );
         })}
@@ -67,6 +70,7 @@
     const [ascending, setAscending] = useState(true);
     const [search, setSearch] = useState('');
     const [text, setText] = useState('')
+    const [items, setItems] = useState([]);
 
     const filterProducts = useMemo(() => {
       return [...products]
@@ -78,14 +82,32 @@
         });
     }, [ascending, search]);
 
+    // 傳入一個方法
+    const handleCheck = useCallback((e) =>{
+      // 是否有被選取
+      if(e.target.checked){
+        setItems([...items, e.target.value])
+      } else{
+        setItems([items.filter((item)=> item !== e.target.value)])
+      }
+    }, [items])
+    //初始值
+
+
     return (
       <>
-        <input type="text"
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="額外新增的字串" />
+        <div className="input-group">
+          <input
+          className="form-control" 
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="額外新增的字串" />
+        </div>
+        
         <br/>
         升降冪：
+        
         <input
           type='checkbox'
           checked={ascending}
@@ -94,12 +116,18 @@
         {ascending.toString()}
         <br />
         搜尋：
-        <input
-          type='search'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        <DataTable filterProducts={filterProducts}></DataTable>
+        <div className="input-group">
+          <input
+            className="form-control" 
+            type='search'
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
+        </div>
+        
+        <DataTable filterProducts={filterProducts} handleChang={handleCheck}></DataTable>
+
+        <p>我被選取囉： {items}</p>
       </>
     );
   };
@@ -240,7 +268,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>

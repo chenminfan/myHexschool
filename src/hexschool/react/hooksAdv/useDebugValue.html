@@ -5,10 +5,12 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 <div id="root"></div>
 <script type="text/babel">
-const { useState, useEffect } = React;
+const { useState, useEffect, useDebugValue } = React;
 
 function useMousePosition() {
   const [mouse, setMouse] = useState({});
+
+  useDebugValue('這素！？${getMouseEvent}')
 
   useEffect(() => {
     const getMouseEvent = (e) => {
@@ -187,7 +189,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
