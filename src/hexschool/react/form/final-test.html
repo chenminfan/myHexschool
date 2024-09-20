@@ -54,12 +54,12 @@
     )
   }
 
-  const Select =({id ,selectText, register, errors, rules, defaultText="Choose..." ,handleChang, value, data ,children}) =>{
+  const Select =({id ,selectText, register, errors, rules, defaultText="Choose..." ,handleChang, value, data ,children, disabled = false}) =>{
     console.log(errors)
     return(
         <div className='col-6'>
           <label htmlFor={id} className='form-label'>{selectText}</label>
-          <select {...register(id , rules)} id={id} className={`form-select ${errors[id] && 'is-invalid'}`} onChange={handleChang} value={value}>
+          <select {...register(id , rules)} id={id} className={`form-select ${errors[id] && 'is-invalid'}`} onChange={handleChang} value={value} disabled={disabled}>
             <option value="" disabled={value.length !== 0 && data}>{defaultText}</option>
             {children}
           </select>
@@ -70,6 +70,11 @@
     )
   }
   
+  const Option = ({optionText}) =>{
+    return(
+      <option value={optionText} key={optionText} >{optionText}</option>
+    )
+  }
   const Textarea = ({textareaTitle, id, rows, placeholder, rules, register, errors}) =>{
     return(
       <div className='mb-3'>
@@ -183,7 +188,7 @@
               }
             }} >
               {data.map((city) => {
-                return <option value={city.CityName} key={city.CityName} >{city.CityName}</option>
+                return <Option optionText={city.CityName} />
               })}
             </Select>
 
@@ -192,9 +197,9 @@
                 value: true,
                 message: '鄉鎮市區'
               },
-            }}>
+            }} disabled={!areaData[0]?.AreaList}>
               {city.length !== 0 && areaData[0]?.AreaList.map((area) => {
-                return <option value={area.AreaName} key={area.AreaName} >{area.AreaName}</option>
+                return <Option optionText={area.AreaName} />
               })}
             </Select>
 
@@ -341,7 +346,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
