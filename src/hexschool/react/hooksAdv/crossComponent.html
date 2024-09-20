@@ -7,9 +7,30 @@
 <script type="text/babel">
 const { useState, useEffect } = React;
 
+const LoginFrom = () =>{
+  const [userName, setUserName] = useState('');
+
+  return(
+    <>
+      <input type="text" value={userName} onChange={(e)=> setUserName(e.target.value)} />
+      {userName}
+    </>
+  )
+}
+
+const Greeting = ({userName}) =>{
+  return(
+    <div>
+      {userName}
+    </div>
+  )
+}
+
 const App = () => {
   return (<>
-      <hr />
+    <LoginFrom />
+    <hr />
+    <Greeting />
   </>)
 }
 
@@ -150,7 +171,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
