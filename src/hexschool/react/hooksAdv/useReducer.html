@@ -6,7 +6,7 @@
 
 <div id="root"></div>
 <script type="text/babel">
-  const { useState, useEffect, useMemo, memo, useCallback } = React;
+  const { useState, useEffect, useMemo, memo, useCallback, useReducer } = React;
   const sampleData = [
     {
       id: 1,
@@ -73,36 +73,95 @@
   })
 
   let num = 0;
+  function reducer(state, action){
+        switch (action.type) {
+          case "UPDATE_ASCENDING":
+            return {
+              ...state, //包含預設狀態
+              ascending: action.payload
+            };
+
+          case "UPDATE_SEARCH":
+            return {
+              ...state,
+              search: action.payload
+            }
+          case "UPDATE_ITEMS":
+            return {
+              ...state,
+              items: action.payload
+            }
+        
+          default:
+            return;
+        }
+
+      }
   const App = () => {
-    const [products, setProducts] = useState(sampleData);
-    const [ascending, setAscending] = useState(true);
-    const [search, setSearch] = useState('');
-    const [items, setItems] = useState([]);
+    // const [products, setProducts] = useState(sampleData);
+    // const [ascending, setAscending] = useState(true);
+    // const [search, setSearch] = useState('');
+    // const [items, setItems] = useState([]);
+
+    const [state, dispatch] = useReducer(reducer
+      ,{
+        products: sampleData,
+        ascending: true,
+        search: '',
+        items: [],
+      }
+    )
+
+    function handleAscending(value){
+      dispatch({
+        type: 'UPDATE_ASCENDING',
+        payload: value,
+      })
+    }
+    function handleSearch(value){
+      dispatch({
+        type: 'UPDATE_SEARCH',
+        payload: value,
+      })
+    }
+    const handleSelectCheck = useCallback(function (e) {
+      let array =[];
+      if (e.target.checked) { // 如果有選擇，就加入本次的選項
+        array = [...state.items, e.target.value];
+      } else {
+        // 沒有，就移除該項目
+        array = state.items.filter((item) => item !== event.target.value);
+      }
+      dispatch({
+        type: 'UPDATE_ITEMS',
+        payload: array,
+      })
+    }, [state])
 
     const [text, setText] = useState('')
 
     const filterProducts = useMemo(() => {
-      return [...products]
+      return [...state.products]
         .filter((product) => {
-          return product.title.match(search);
+          return product.title.match(state.search);
         })
         .sort((a, b) => {
-          return ascending ? a.price - b.price : b.price - a.price;
+          return state.ascending ? a.price - b.price : b.price - a.price;
         });
-    }, [ascending, search]);
+    }, [state]);
 
 
     // 因為當 text 更新時，handleSelectCheck 函式的參考會被改變
     // 因為 handleSelectCheck 參考被改變，連帶影響了 memo 的運作
-    const handleSelectCheck = useCallback((e) => {
-      console.log('handleSelectCheck 已被觸發');
-      if (e.target.checked) { // 如果有選擇，就加入本次的選項
-        setItems([...items, e.target.value]);
-      } else {
-        // 沒有，就移除該項目
-        setItems(items.filter((item) => item !== event.target.value));
-      }
-    }, [items]); // 注意，這裡如果沒有帶入值，或是空值，都會影響到 useCallback 的生命週期
+    // const handleSelectCheck = useCallback((e) => {
+    //   console.log('handleSelectCheck 已被觸發');
+    //   if (e.target.checked) { // 如果有選擇，就加入本次的選項
+    //     setItems([...state.items, e.target.value]);
+    //   } else {
+    //     // 沒有，就移除該項目
+    //     setItems(state.items.filter((item) => item !== event.target.value));
+    //   }
+    // }, [state.items]); // 注意，這裡如果沒有帶入值，或是空值，都會影響到 useCallback 的生命週期
 
     return (
       <>
@@ -112,21 +171,25 @@
         placeholder="額外新增的字串" />
         <br/>
         升降冪：
-        <input
+        <label htmlFor="checkbox">
+          <input
+          id="checkbox"
           type='checkbox'
-          checked={ascending}
-          onChange={(e) => setAscending(e.target.checked)}
+          checked={state.ascending}
+          // onChange={(e) => setAscending(e.target.checked)}
+          onChange={(e) => handleAscending(e.target.checked)}
         />{' '}
-        {ascending.toString()}
+        {state.ascending.toString()}
+        </label>
         <br />
         搜尋：
         <input
           type='search'
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={state.search}
+          onChange={(e) => handleSearch(e.target.value)}
         />
         <br />
-        已選擇：<span>{items.toString()}</span>
+        已選擇：<span>{state.items.toString()}</span>
         <DataTable
           filterProducts={filterProducts}
           handleSelectCheck={handleSelectCheck}>
@@ -271,7 +334,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
