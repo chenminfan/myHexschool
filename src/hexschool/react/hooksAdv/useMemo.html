@@ -5,25 +5,33 @@
 <!-- 🔥🔥練習開始🔥🔥 -->
 <div id="root"></div>
 <script type="text/babel">
-const { useState, useEffect } = React;
+const { useState, useEffect, useMemo } = React;
 
 let num = 0;
 const App = () => {
   const [price, setPrice] = useState(100);
   const [qty, setQty] = useState(1);
+  const [text, setText] = useState('');
+
 
   const total = price * qty;
   num++;
   console.log(`程式碼已經被計算 ${num} 次`);
+  console.log('total:', total );
 
+  const memoTotal = useMemo(()=>{
+    console.log('memo 被觸發了了了！')
+
+    return price * qty
+  },[price, qty])
 
   return (<>
     {price} {qty}
     <input type="number" value={price} onChange={(e) => setPrice(parseInt(e.target.value))} />
     <input type="number" value={qty} onChange={(e) => setQty(parseInt(e.target.value))} />
-    <div>
-      總價：{total}
-    </div>
+    <div>總價：{total}</div>
+    <div>memoTotal: {memoTotal}</div>
+    <input type="text" value={text} onChange={(e)=> setText(e.target.value)} />
   </>)
 }
 
@@ -164,7 +172,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>

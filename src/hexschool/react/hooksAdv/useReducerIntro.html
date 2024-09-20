@@ -9,19 +9,63 @@
   const { useState, useReducer } = React;
 
   const App = () => {
-    const [num, setNum] = useState(0)
+    // const [num, setNum] = useState(0)
+    const [state, dispatch] = useReducer(
+      // callback function, state,
+      function (state, action) {
+        console.log(state, action) // action 來自於 dispatch
+
+        switch (action.type) {
+          case 'INCREMENT':
+            return {
+              num: state.num + 1,
+            }
+            case 'DECREMENT':
+            return {
+              num: state.num - 1,
+            }
+            case 'SET_NUM':
+              return {
+                num: action.payload
+              }
+          default:
+            break;
+        }
+
+        return state;
+
+      },
+      {num: 100000},
+    );
+
+
+
     function increment() {
-      setNum( num + 1);
+      // setNum( num + 1);
+      dispatch({
+        type:'INCREMENT', //type, payload: type 用來判斷行為使用
+      })
     }
     function decrement() {
-      setNum( num - 1);
+      // setNum( num - 1);
+      dispatch({
+        type:'DECREMENT', //type, payload: type 用來判斷行為使用
+      })
+    }
+
+    function setNum(e) {
+      dispatch({
+        type: 'SET_NUM',
+        payload: parseInt(e.target.value)
+      })
     }
 
     return (
       <>
         <button type="button" onClick={() => decrement() }>-</button>
-        {num}
+        {state.num}
         <button type="button" onClick={() => increment() }>+</button>
+        <input type="number" value={state.num} onChange={(e) => setNum(e)} />
       </>
     );
   };
@@ -32,126 +76,111 @@
 <!-- 🙇🙇練習結束🙇🙇 -->
 </main>
   
-    <aside
-      class="col-md-3"><div class="sticky-top" style="top: 76px">
-  
-  <div class="list-group">
-  
-    <a href="../hooksAdv/lifeCycle.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      hook 的生命週期概念
-    </a>
-  
-    <a href="../hooksAdv/useMemo.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      useMemo
-    </a>
-  
-    <a href="../hooksAdv/useMemoSort.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      useMemo 過濾、排序
-    </a>
-  
-    <a href="../hooksAdv/memoComponent.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      memo 元件
-    </a>
-  
-    <a href="../hooksAdv/useCallback.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      useCallback
-    </a>
-  
-    <a href="../hooksAdv/useLayoutEffect.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      useLayoutEffect
-    </a>
-  
-    <a href="../hooksAdv/useCustomHook.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      自定義 Hook
-    </a>
-  
-    <a href="../hooksAdv/useDebugValue.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      useDebugValue
-    </a>
-  
-    <a href="../hooksAdv/useCustomHook2.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      自定義 Hook 2
-    </a>
-  
-    <a href="../hooksAdv/useCustomHook3.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      使用現成的 Hooks
-    </a>
-  
-    <a href="../hooksAdv/crossComponent.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      跨元件的狀態問題
-    </a>
-  
-    <a href="../hooksAdv/useContext.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      跨元件狀態
-    </a>
-  
-    <a href="../hooksAdv/useContext2.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      跨元件狀態 進階
-    </a>
-  
-    <a href="../hooksAdv/useReducerIntro.html"
-      class="list-group-item list-group-item-action
-        
-        active">
-      狀態管理 useReducer
-    </a>
-  
-    <a href="../hooksAdv/useReducer.html"
-      class="list-group-item list-group-item-action
-        
-        ">
-      useReducer 案例介紹
-    </a>
-  
-  </div>
-  <div class="mt-3 text-end p-2 bg-light rounded">
-    <small class="text-black-50 fw-light mb-0">文件版本：2022/10/31</small>
-  </div>
-</div>
-
-</aside>
+    <aside class="col-md-3">
+      <div class="sticky-top" style="top: 76px">
     
-  </div>
-</div>
+        <div class="list-group">
+    
+          <a href="../hooksAdv/lifeCycle.html" class="list-group-item list-group-item-action
+            
+            ">
+            hook 的生命週期概念
+          </a>
+    
+          <a href="../hooksAdv/useMemo.html" class="list-group-item list-group-item-action
+            
+            ">
+            useMemo
+          </a>
+    
+          <a href="../hooksAdv/useMemoSort.html" class="list-group-item list-group-item-action
+            
+            ">
+            useMemo 過濾、排序
+          </a>
+    
+          <a href="../hooksAdv/memoComponent.html" class="list-group-item list-group-item-action
+            
+            ">
+            memo 元件
+          </a>
+    
+          <a href="../hooksAdv/useCallback.html" class="list-group-item list-group-item-action
+            
+            ">
+            useCallback
+          </a>
+    
+          <a href="../hooksAdv/useLayoutEffect.html" class="list-group-item list-group-item-action
+            
+            ">
+            useLayoutEffect
+          </a>
+    
+          <a href="../hooksAdv/useCustomHook.html" class="list-group-item list-group-item-action
+            
+            ">
+            自定義 Hook
+          </a>
+    
+          <a href="../hooksAdv/useDebugValue.html" class="list-group-item list-group-item-action
+            
+            ">
+            useDebugValue
+          </a>
+    
+          <a href="../hooksAdv/useCustomHook2.html" class="list-group-item list-group-item-action
+            
+            ">
+            自定義 Hook 2
+          </a>
+    
+          <a href="../hooksAdv/useCustomHook3.html" class="list-group-item list-group-item-action
+            
+            ">
+            使用現成的 Hooks
+          </a>
+    
+          <a href="../hooksAdv/crossComponent.html" class="list-group-item list-group-item-action
+            
+            ">
+            跨元件的狀態問題
+          </a>
+    
+          <a href="../hooksAdv/useContext.html" class="list-group-item list-group-item-action
+            
+            ">
+            跨元件狀態
+          </a>
+    
+          <a href="../hooksAdv/useContext2.html" class="list-group-item list-group-item-action
+            
+            ">
+            跨元件狀態 進階
+          </a>
+    
+          <a href="../hooksAdv/useReducerIntro.html" class="list-group-item list-group-item-action
+            
+            active">
+            狀態管理 useReducer
+          </a>
+    
+          <a href="../hooksAdv/useReducer.html" class="list-group-item list-group-item-action
+            
+            ">
+            useReducer 案例介紹
+          </a>
+    
+        </div>
+        <div class="mt-3 text-end p-2 bg-light rounded">
+          <small class="text-black-50 fw-light mb-0">文件版本：2022/10/31</small>
+        </div>
+      </div>
+    
+    </aside>
+    
+    </div>
+    </div>
 
 <nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-secondary">
   <div class="container-fluid">
@@ -162,7 +191,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>

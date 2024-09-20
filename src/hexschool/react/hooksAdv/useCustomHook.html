@@ -7,10 +7,28 @@
 <script type="text/babel">
 const { useState, useEffect } = React;
 
+const useMousePosition = () =>{
+  const [mouse, setMouse] = useState({});
+  useEffect(()=>{
+    const getMouseEvent = (e) =>{
+      setMouse({
+        x:e.clientX,
+        y:e.clientY,
+      })
+    }
+    window.addEventListener('mousemove', getMouseEvent)
+    return ()=> window.addEventListener('mousemove', getMouseEvent)
+  },[])
+
+  return mouse;
+}
+
 const App = () => {
   const [text, setText] = useState('')
+  const mouse = useMousePosition();
 
   return (<>
+  {mouse.x} {mouse.y}
     <input type="text" onChange={e => {
       setText(e.target.value)
     }} />
@@ -161,7 +179,7 @@ ReactDOM.createRoot(document.querySelector('#root'))
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
