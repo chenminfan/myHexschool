@@ -51,15 +51,36 @@
     const [ascending, setAscending] = useState(true);
     const [search, setSearch] = useState('');
 
+    // const filterProd = useMemo(() =>{
+    //   const filter = [... products.filter((prod) => prod.title.match(search))]
+
+    //   return filter.sort((a,b) => {
+    //     return ascending ? a.price - b.price : b.price - a.price
+    //   });
+    // }, [ascending, search])
+
+    const filterProd = useMemo(() =>{
+      return [... products
+      .filter((prod) => prod.title.match(search))]
+      .sort((a,b) => ascending ? a.price - b.price : b.price - a.price);
+
+    }, [ascending, search])
+
+    
     return (
       <>
         升降冪：
-        <input
+        <label htmlFor="checkbox">
+          <input
+          id="checkbox"
           type='checkbox'
           checked={ascending}
           onChange={(e) => setAscending(e.target.checked)}
         /> 
-        {ascending.toString()}
+          {ascending.toString()}
+        </label>
+        
+        
         <br />
         搜尋：
         <input
@@ -67,6 +88,17 @@
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />
+        <table className="table table-striped-columns">
+          <tbody>
+            {filterProd.map((prod) => (
+              <tr key={prod.id}>
+                <th>{prod.title}</th>
+                {/*<th><img src={prod.imageUrl} className="rounded img-thumbnail" alt="" /></th>*/}
+                <th>{prod.price}</th>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </>
     );
   };
@@ -207,7 +239,7 @@
           <a class="nav-link " href="../intro/createApp.html">認識 React</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="/es6/shorthand.html">JS 必備觀念</a>
+          <a class="nav-link " href="../es6/shorthand.html">JS 必備觀念</a>
         </li>
         <li class="nav-item">
           <a class="nav-link " href="../components/intro.html">元件基礎</a>
