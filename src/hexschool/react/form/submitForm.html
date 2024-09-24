@@ -13,8 +13,8 @@
     // }
 
     const [formData, setFormData] = useState({
-      username: 'min',
-      password: '12345',
+      username: '',
+      password: '',
       isCheck: false,
     })
 
@@ -30,7 +30,7 @@
     }
 
     const handleSubmit = (e) =>{
-      e.preventDefault();
+      e.preventDefault(); //取消html預設行為
       console.log(
         // {userName}
         {formData}
@@ -40,20 +40,16 @@
     return (<div>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label htmlFor="username" className="form-label">使用者名稱</label
-          ><input id="username" type="text" className="form-control" name="username" onChange={handleInputChange} value={formData.userName}
-          />
+          <label htmlFor="username" className="form-label">使用者名稱</label>
+          <input id="username" type="text" className="form-control" name="username" onChange={handleInputChange} value={formData.userName} />
         </div>
         <div className="mb-3">
-          <label htmlFor="password" className="form-label">密碼</label
-          ><input id="password" type="password" className="form-control" name="password" onChange={handleInputChange} value={formData.password}
-          />
+          <label htmlFor="password" className="form-label">密碼</label>
+          <input id="password" type="password" className="form-control" name="password" onChange={handleInputChange} value={formData.password} />
         </div>
         <div className="mb-3">
           <label htmlFor="isCheck">確認狀態</label>
-          <input id="isCheck" type="checkbox" name="isCheck"
-          onChange={handleInputChange} value={formData.isCheck}
-          />
+          <input id="isCheck" type="checkbox" name="isCheck" onChange={handleInputChange} value={formData.isCheck} />
         </div>
         <button type="submit" className="btn btn-primary">送出</button>
         { /*button無法使用 <button type="button" className="btn btn-primary">送出</button>*/}
