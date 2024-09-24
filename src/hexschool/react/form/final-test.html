@@ -72,7 +72,7 @@
   
   const Option = ({optionText}) =>{
     return(
-      <option value={optionText} key={optionText} >{optionText}</option>
+      <option value={optionText}>{optionText}</option>
     )
   }
   const Textarea = ({textareaTitle, id, rows, placeholder, rules, register, errors}) =>{
@@ -188,7 +188,7 @@
               }
             }} >
               {data.map((city) => {
-                return <Option optionText={city.CityName} />
+                return <Option optionText={city.CityName} key={city.CityName} />
               })}
             </Select>
 
@@ -199,7 +199,7 @@
               },
             }} disabled={!areaData[0]?.AreaList}>
               {city.length !== 0 && areaData[0]?.AreaList.map((area) => {
-                return <Option optionText={area.AreaName} />
+                return <Option optionText={area.AreaName} key={area.AreaName} />
               })}
             </Select>
 
