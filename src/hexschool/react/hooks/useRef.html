@@ -15,17 +15,25 @@
 <script type="text/babel">
 const { useState, useEffect, useRef } = React;
 
-// let myModal;
+  // let myModal;
 const App = () => {
   // #2 使用 useRef
   // const btnRef= useRef(null);
   // console.log(btnRef)
+  // const myModal = useRef(null)
+  // const modalRef= useRef(null);
+  // const openModal = () =>{
+  //   myModal.show();
+  // }
+  // useEffect(() =>{
+  //   myModal.current = new bootstrap.Modal(modalRef.current);
+  // })
 
   // 3 操作 Bootstrap 改為使用 ref
   const myModal = useRef(null)
   const modalRef= useRef(null);
   const openModal = () =>{
-    myModal.current.show();
+    myModal.modalRef.show();
   }
   useEffect(() =>{
     myModal.current = new bootstrap.Modal(modalRef.current);

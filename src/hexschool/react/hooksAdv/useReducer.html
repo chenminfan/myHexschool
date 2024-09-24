@@ -72,31 +72,30 @@
     </table>)
   })
 
-  let num = 0;
   function reducer(state, action){
-        switch (action.type) {
-          case "UPDATE_ASCENDING":
-            return {
-              ...state, //包含預設狀態
-              ascending: action.payload
-            };
+    switch (action.type) {
+      case "UPDATE_ASCENDING":
+        return {
+          ...state, //包含預設狀態
+          ascending: action.payload
+        };
 
-          case "UPDATE_SEARCH":
-            return {
-              ...state,
-              search: action.payload
-            }
-          case "UPDATE_ITEMS":
-            return {
-              ...state,
-              items: action.payload
-            }
-        
-          default:
-            return;
+      case "UPDATE_SEARCH":
+        return {
+          ...state,
+          search: action.payload
         }
+      case "UPDATE_ITEMS":
+        return {
+          ...state,
+          items: action.payload
+        }
+    
+      default:
+        return;
+    }
 
-      }
+  }
   const App = () => {
     // const [products, setProducts] = useState(sampleData);
     // const [ascending, setAscending] = useState(true);
