@@ -1,0 +1,10 @@
+@import 'bootstrap/scss/functions';
+
+@import './variables';
+@import 'bootstrap/scss/bootstrap';
+
+$body-color: #ddd;
+
+.App-header {
+  background-color: $body-color;
+}
