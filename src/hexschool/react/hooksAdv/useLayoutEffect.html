@@ -94,11 +94,16 @@
     useLayoutEffect(()=>{
       console.log('useLayoutEffect 被觸發了')
       console.timeEnd('useLayoutEffect')
+      // const array = [];
+      // for (let index = 0; index < 100000000; index++){
+      //   array.push('hi')
+      // }
     },[])
 
     useEffect(()=>{
       console.log('useEffect 被觸發了')
       console.timeEnd('useEffect')
+      
     },[])
     
     // ======

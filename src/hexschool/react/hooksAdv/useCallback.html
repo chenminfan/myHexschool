@@ -90,9 +90,7 @@
       } else{
         setItems([items.filter((item)=> item !== e.target.value)])
       }
-    }, [items])
-    //初始值
-
+    }, [items]) //若空值為初始值狀態，隨著狀態更新需給items條件
 
     return (
       <>
