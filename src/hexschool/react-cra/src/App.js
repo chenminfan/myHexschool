@@ -9,7 +9,8 @@ function App() {
   const [text, setText] = useState('')
   useEffect(() => {
     (async () => {
-      const result = await axios.get('https://randomuser.me/api/')
+      const path = process.env.REACT_APP_PATH
+      const result = await axios.get(path)
       console.log(result)
     })()
   }, [])
