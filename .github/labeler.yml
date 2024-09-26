@@ -1,0 +1,18 @@
+workflows:
+  - changed-files:
+      - any-glob-to-any-file: '.github/workflows/**/*'
+  bugfix🐞:
+    - head-branch:  fix/*
+  configuration:
+    - head-branch:  [ 'build', 'ci' ]
+  documentation: 
+    - changed-files:
+      - any-glob-to-any-file: ['*.md', 'docs/*', 'guides/*']
+  feature✨: 
+    - head-branch: ['feature/*', 'feat/*']
+  chore🛠:
+    - head-branch:  chore/*
+  misc📚: 
+    - head-branch: [ 'performance/*','refactor/*','style/*' ]
+  test🏁: 
+    - head-branch: [ 'test/*' ]
