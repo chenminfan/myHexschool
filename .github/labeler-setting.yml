@@ -1,0 +1,15 @@
+feature:
+- head-branch: ['^feature:' ,'feature:*', 'feat:*', '^feat:']
+bug :
+- head-branch: [ fix:*, bug:*]
+configuration:
+  - head-branch:  [ 'build', 'ci' ]
+doc:
+  - changed-files:
+    - any-glob-to-any-file: ['*.md', 'docs:*', 'guides:*']
+chore :
+  - head-branch:  chore:*
+misc: 
+  - head-branch: [ 'performance:*','refactor:*','style:*' ]
+test: 
+  - head-branch: [ 'test:*' ]

@@ -1,0 +1,17 @@
+name: Add label to PR
+on: [pull_request]
+
+jobs:
+  pr-labeler:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Add label to PR
+        uses: actions/labeler@v5
+        with:
+          repo-token: '${{ secrets.DEPLOY_SECRET }}'
+          configuration-path: .github/labeler-setting.yml
+          sync-labels: true # 當 PR 恢復或不再更改匹配文件時是否刪除標籤
