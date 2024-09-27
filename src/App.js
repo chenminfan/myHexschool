@@ -1,10 +1,11 @@
+import React from 'react';
 import ReactCraApp from './hexschool/react-cra/React-cra-App';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
+    <>
       <ReactCraApp />
-    </div>
+    </>
   );
 }
 

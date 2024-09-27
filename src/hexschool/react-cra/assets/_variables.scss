@@ -298,7 +298,7 @@ $cyans: (
 // fusv-enable
 
 // scss-docs-start theme-color-variables
-$primary: red; //$blue !default;
+$primary: rgb(162, 0, 255); //$blue !default;
 $secondary: $gray-600 !default;
 $success: $green !default;
 $info: $cyan !default;
@@ -355,7 +355,13 @@ $dark-border-subtle: $gray-500 !default;
 // scss-docs-end theme-border-subtle-variables
 
 // Characters which are escaped by the escape-svg function
-$escaped-characters: (('<', '%3c'), ('>', '%3e'), ('#', '%23'), ('(', '%28'), (')', '%29')) !default;
+$escaped-characters: (
+  ('<', '%3c'),
+  ('>', '%3e'),
+  ('#', '%23'),
+  ('(', '%28'),
+  (')', '%29')
+) !default;
 
 // Options
 //
@@ -593,9 +599,22 @@ $aspect-ratios: (
 
 // scss-docs-start font-variables
 // stylelint-disable value-keyword-case
-$font-family-sans-serif: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+$font-family-sans-serif:
+  system-ui,
+  -apple-system,
+  'Segoe UI',
+  Roboto,
+  'Helvetica Neue',
+  'Noto Sans',
+  'Liberation Sans',
+  Arial,
+  sans-serif,
+  'Apple Color Emoji',
+  'Segoe UI Emoji',
+  'Segoe UI Symbol',
   'Noto Color Emoji' !default;
-$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace !default;
+$font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+  monospace !default;
 // stylelint-enable value-keyword-case
 $font-family-base: var(--#{$prefix}font-sans-serif) !default;
 $font-family-code: var(--#{$prefix}font-monospace) !default;
@@ -822,7 +841,9 @@ $btn-font-size-lg: $input-btn-font-size-lg !default;
 $btn-border-width: $input-btn-border-width !default;
 
 $btn-font-weight: $font-weight-normal !default;
-$btn-box-shadow: inset 0 1px 0 rgba($white, 0.15), 0 1px 1px rgba($black, 0.075) !default;
+$btn-box-shadow:
+  inset 0 1px 0 rgba($white, 0.15),
+  0 1px 1px rgba($black, 0.075) !default;
 $btn-focus-width: $input-btn-focus-width !default;
 $btn-focus-box-shadow: $input-btn-focus-box-shadow !default;
 $btn-disabled-opacity: 0.65 !default;
@@ -838,7 +859,11 @@ $btn-border-radius: var(--#{$prefix}border-radius) !default;
 $btn-border-radius-sm: var(--#{$prefix}border-radius-sm) !default;
 $btn-border-radius-lg: var(--#{$prefix}border-radius-lg) !default;
 
-$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+$btn-transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out !default;
 
 $btn-hover-bg-shade-amount: 15% !default;
 $btn-hover-bg-tint-amount: 15% !default;
@@ -907,17 +932,30 @@ $input-focus-box-shadow: $input-btn-focus-box-shadow !default;
 $input-placeholder-color: var(--#{$prefix}secondary-color) !default;
 $input-plaintext-color: var(--#{$prefix}body-color) !default;
 
-$input-height-border: calc(#{$input-border-width} * 2) !default; // stylelint-disable-line function-disallowed-list
+$input-height-border: calc(
+  #{$input-border-width} * 2
+) !default; // stylelint-disable-line function-disallowed-list
 
 $input-height-inner: add($input-line-height * 1em, $input-padding-y * 2) !default;
 $input-height-inner-half: add($input-line-height * 0.5em, $input-padding-y) !default;
 $input-height-inner-quarter: add($input-line-height * 0.25em, $input-padding-y * 0.5) !default;
 
-$input-height: add($input-line-height * 1em, add($input-padding-y * 2, $input-height-border, false)) !default;
-$input-height-sm: add($input-line-height * 1em, add($input-padding-y-sm * 2, $input-height-border, false)) !default;
-$input-height-lg: add($input-line-height * 1em, add($input-padding-y-lg * 2, $input-height-border, false)) !default;
+$input-height: add(
+  $input-line-height * 1em,
+  add($input-padding-y * 2, $input-height-border, false)
+) !default;
+$input-height-sm: add(
+  $input-line-height * 1em,
+  add($input-padding-y-sm * 2, $input-height-border, false)
+) !default;
+$input-height-lg: add(
+  $input-line-height * 1em,
+  add($input-padding-y-lg * 2, $input-height-border, false)
+) !default;
 
-$input-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+$input-transition:
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out !default;
 
 $form-color-width: 3rem !default;
 // scss-docs-end form-input-variables
@@ -1001,7 +1039,8 @@ $form-select-bg-size: 16px 12px !default; // In pixels because image dimensions
 $form-select-indicator-color: $gray-800 !default;
 $form-select-indicator: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='#{$form-select-indicator-color}' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/></svg>") !default;
 
-$form-select-feedback-icon-padding-end: $form-select-padding-x * 2.5 + $form-select-indicator-padding !default;
+$form-select-feedback-icon-padding-end: $form-select-padding-x * 2.5 +
+  $form-select-indicator-padding !default;
 $form-select-feedback-icon-position: center right $form-select-indicator-padding !default;
 $form-select-feedback-icon-size: $input-height-inner-half $input-height-inner-half !default;
 
@@ -1041,11 +1080,16 @@ $form-range-thumb-bg: $component-active-bg !default;
 $form-range-thumb-border: 0 !default;
 $form-range-thumb-border-radius: 1rem !default;
 $form-range-thumb-box-shadow: 0 0.1rem 0.25rem rgba($black, 0.1) !default;
-$form-range-thumb-focus-box-shadow: 0 0 0 1px $body-bg, $input-focus-box-shadow !default;
+$form-range-thumb-focus-box-shadow:
+  0 0 0 1px $body-bg,
+  $input-focus-box-shadow !default;
 $form-range-thumb-focus-box-shadow-width: $input-focus-width !default; // For focus box shadow issue in Edge
 $form-range-thumb-active-bg: tint-color($component-active-bg, 70%) !default;
 $form-range-thumb-disabled-bg: var(--#{$prefix}secondary-color) !default;
-$form-range-thumb-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+$form-range-thumb-transition:
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out !default;
 // scss-docs-end form-range-variables
 
 // scss-docs-start form-file-variables
@@ -1065,7 +1109,9 @@ $form-floating-label-height: 1.5em !default;
 $form-floating-label-opacity: 0.65 !default;
 $form-floating-label-transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem) !default;
 $form-floating-label-disabled-color: $gray-600 !default;
-$form-floating-transition: opacity 0.1s ease-in-out, transform 0.1s ease-in-out !default;
+$form-floating-transition:
+  opacity 0.1s ease-in-out,
+  transform 0.1s ease-in-out !default;
 // scss-docs-end form-floating-variables
 
 // Form validation
@@ -1097,7 +1143,8 @@ $form-validation-states: (
     'icon': $form-feedback-icon-valid,
     'tooltip-color': #fff,
     'tooltip-bg-color': var(--#{$prefix}success),
-    'focus-box-shadow': 0 0 $input-btn-focus-blur $input-focus-width rgba(var(--#{$prefix}success-rgb), $input-btn-focus-color-opacity),
+    'focus-box-shadow': 0 0 $input-btn-focus-blur $input-focus-width
+      rgba(var(--#{$prefix}success-rgb), $input-btn-focus-color-opacity),
     'border-color': var(--#{$prefix}form-valid-border-color),
   ),
   'invalid': (
@@ -1105,7 +1152,8 @@ $form-validation-states: (
     'icon': $form-feedback-icon-invalid,
     'tooltip-color': #fff,
     'tooltip-bg-color': var(--#{$prefix}danger),
-    'focus-box-shadow': 0 0 $input-btn-focus-blur $input-focus-width rgba(var(--#{$prefix}danger-rgb), $input-btn-focus-color-opacity),
+    'focus-box-shadow': 0 0 $input-btn-focus-blur $input-focus-width
+      rgba(var(--#{$prefix}danger-rgb), $input-btn-focus-color-opacity),
     'border-color': var(--#{$prefix}form-invalid-border-color),
   ),
 ) !default;
@@ -1148,17 +1196,22 @@ $nav-link-font-size: null !default;
 $nav-link-font-weight: null !default;
 $nav-link-color: var(--#{$prefix}link-color) !default;
 $nav-link-hover-color: var(--#{$prefix}link-hover-color) !default;
-$nav-link-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out !default;
+$nav-link-transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out !default;
 $nav-link-disabled-color: var(--#{$prefix}secondary-color) !default;
 $nav-link-focus-box-shadow: $focus-ring-box-shadow !default;
 
 $nav-tabs-border-color: var(--#{$prefix}border-color) !default;
 $nav-tabs-border-width: var(--#{$prefix}border-width) !default;
 $nav-tabs-border-radius: var(--#{$prefix}border-radius) !default;
-$nav-tabs-link-hover-border-color: var(--#{$prefix}secondary-bg) var(--#{$prefix}secondary-bg) $nav-tabs-border-color !default;
+$nav-tabs-link-hover-border-color: var(--#{$prefix}secondary-bg) var(--#{$prefix}secondary-bg)
+  $nav-tabs-border-color !default;
 $nav-tabs-link-active-color: var(--#{$prefix}emphasis-color) !default;
 $nav-tabs-link-active-bg: var(--#{$prefix}body-bg) !default;
-$nav-tabs-link-active-border-color: var(--#{$prefix}border-color) var(--#{$prefix}border-color) $nav-tabs-link-active-bg !default;
+$nav-tabs-link-active-border-color: var(--#{$prefix}border-color) var(--#{$prefix}border-color)
+  $nav-tabs-link-active-bg !default;
 
 $nav-pills-border-radius: var(--#{$prefix}border-radius) !default;
 $nav-pills-link-active-color: $component-active-color !default;
@@ -1229,7 +1282,9 @@ $dropdown-bg: var(--#{$prefix}body-bg) !default;
 $dropdown-border-color: var(--#{$prefix}border-color-translucent) !default;
 $dropdown-border-radius: var(--#{$prefix}border-radius) !default;
 $dropdown-border-width: var(--#{$prefix}border-width) !default;
-$dropdown-inner-border-radius: calc(#{$dropdown-border-radius} - #{$dropdown-border-width}) !default; // stylelint-disable-line function-disallowed-list
+$dropdown-inner-border-radius: calc(
+  #{$dropdown-border-radius} - #{$dropdown-border-width}
+) !default; // stylelint-disable-line function-disallowed-list
 $dropdown-divider-bg: $dropdown-border-color !default;
 $dropdown-divider-margin-y: $spacer * 0.5 !default;
 $dropdown-box-shadow: var(--#{$prefix}box-shadow) !default;
@@ -1285,7 +1340,9 @@ $pagination-color: var(--#{$prefix}link-color) !default;
 $pagination-bg: var(--#{$prefix}body-bg) !default;
 $pagination-border-radius: var(--#{$prefix}border-radius) !default;
 $pagination-border-width: var(--#{$prefix}border-width) !default;
-$pagination-margin-start: calc(#{$pagination-border-width} * -1) !default; // stylelint-disable-line function-disallowed-list
+$pagination-margin-start: calc(
+  #{$pagination-border-width} * -1
+) !default; // stylelint-disable-line function-disallowed-list
 $pagination-border-color: var(--#{$prefix}border-color) !default;
 
 $pagination-focus-color: var(--#{$prefix}link-hover-color) !default;
@@ -1305,7 +1362,11 @@ $pagination-disabled-color: var(--#{$prefix}secondary-color) !default;
 $pagination-disabled-bg: var(--#{$prefix}secondary-bg) !default;
 $pagination-disabled-border-color: var(--#{$prefix}border-color) !default;
 
-$pagination-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out !default;
+$pagination-transition:
+  color 0.15s ease-in-out,
+  background-color 0.15s ease-in-out,
+  border-color 0.15s ease-in-out,
+  box-shadow 0.15s ease-in-out !default;
 
 $pagination-border-radius-sm: var(--#{$prefix}border-radius-sm) !default;
 $pagination-border-radius-lg: var(--#{$prefix}border-radius-lg) !default;
@@ -1352,7 +1413,10 @@ $accordion-bg: var(--#{$prefix}body-bg) !default;
 $accordion-border-width: var(--#{$prefix}border-width) !default;
 $accordion-border-color: var(--#{$prefix}border-color) !default;
 $accordion-border-radius: var(--#{$prefix}border-radius) !default;
-$accordion-inner-border-radius: subtract($accordion-border-radius, $accordion-border-width) !default;
+$accordion-inner-border-radius: subtract(
+  $accordion-border-radius,
+  $accordion-border-width
+) !default;
 
 $accordion-body-padding-y: $accordion-padding-y !default;
 $accordion-body-padding-x: $accordion-padding-x !default;
@@ -1361,7 +1425,9 @@ $accordion-button-padding-y: $accordion-padding-y !default;
 $accordion-button-padding-x: $accordion-padding-x !default;
 $accordion-button-color: var(--#{$prefix}body-color) !default;
 $accordion-button-bg: var(--#{$prefix}accordion-bg) !default;
-$accordion-transition: $btn-transition, border-radius 0.15s ease !default;
+$accordion-transition:
+  $btn-transition,
+  border-radius 0.15s ease !default;
 $accordion-button-active-bg: var(--#{$prefix}primary-bg-subtle) !default;
 $accordion-button-active-color: var(--#{$prefix}primary-text-emphasis) !default;
 
@@ -1419,7 +1485,9 @@ $popover-max-width: 276px !default;
 $popover-border-width: var(--#{$prefix}border-width) !default;
 $popover-border-color: var(--#{$prefix}border-color-translucent) !default;
 $popover-border-radius: var(--#{$prefix}border-radius-lg) !default;
-$popover-inner-border-radius: calc(#{$popover-border-radius} - #{$popover-border-width}) !default; // stylelint-disable-line function-disallowed-list
+$popover-inner-border-radius: calc(
+  #{$popover-border-radius} - #{$popover-border-width}
+) !default; // stylelint-disable-line function-disallowed-list
 $popover-box-shadow: var(--#{$prefix}box-shadow) !default;
 
 $popover-header-font-size: $font-size-base !default;
@@ -1490,7 +1558,10 @@ $modal-content-bg: var(--#{$prefix}body-bg) !default;
 $modal-content-border-color: var(--#{$prefix}border-color-translucent) !default;
 $modal-content-border-width: var(--#{$prefix}border-width) !default;
 $modal-content-border-radius: var(--#{$prefix}border-radius-lg) !default;
-$modal-content-inner-border-radius: subtract($modal-content-border-radius, $modal-content-border-width) !default;
+$modal-content-inner-border-radius: subtract(
+  $modal-content-border-radius,
+  $modal-content-border-width
+) !default;
 $modal-content-box-shadow-xs: var(--#{$prefix}box-shadow-sm) !default;
 $modal-content-box-shadow-sm-up: var(--#{$prefix}box-shadow) !default;
 
