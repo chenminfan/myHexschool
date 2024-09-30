@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 const ProdCard = (props) => {
   const { item, handleChange, prodCardButton } = props;
@@ -18,7 +18,7 @@ const ProdCard = (props) => {
           </h5>
         </div>
         <div className='d-grid'>
-          <button type='button' className="btn btn-primary btn-sm" onClick={(e) => handleChange(item)}>{prodCardButton}</button>
+          <button type='button' className="btn btn-primary btn-sm" onClick={(e) => handleChange(item)}> {prodCardButton}</button>
         </div>
       </div>
     </div >

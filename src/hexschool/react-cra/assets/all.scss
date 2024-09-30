@@ -22,12 +22,18 @@ img{
 }
 
 .listGroup{
-  &Cart
-  {
+  &Cart{
+    --#{$prefix}list-group-bg: #{$gray-100};
+    &-item
+    {
+      padding: 8px;
+      
+    }
     &-box{
       width: 100%;
     }
-    &-text{}
+    &-title{
+    }
     &-price{
       font-size: $font-size-sm;
       color: $gray-600;
@@ -35,12 +41,12 @@ img{
     &-img{
         display: flex;
         justify-content: center;
-        height: 100px;
-        width: 100px;
+        height: 70px;
+        width: 70px;
         overflow: hidden;
       }
     .form-select{
-      max-width: 80px;
+      max-width: 60px;
     }
   }
 }

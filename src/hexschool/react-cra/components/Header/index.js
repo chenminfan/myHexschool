@@ -11,8 +11,8 @@ const Header = (props) => {
           <button type="button" className="btn btn-outline-dark btn-sm position-relative">
             購物車
             <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-              {badgeCart > 99 ? '99+' : badgeCart}
-              <span className="visually-hidden">unread messages</span>
+              {badgeCart > 0 && (<>{badgeCart > 99 ? '99+' : badgeCart}</>)}
+              <span className={badgeCart === 0 ? '' : "visually-hidden"}>請加入商品</span>
             </span>
           </button>
         </div>
