@@ -1,23 +1,68 @@
 @import 'bootstrap/scss/functions';
 @import './variables';
+@import 'bootstrap/scss/mixins';
 @import 'bootstrap/scss/bootstrap';
 @import './button';
-
+$grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px) !default;
 $body-color: #ddd;
 img{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
+
 .card{
   &.cardProd{
-  height: 300px;
-}
+    margin: 4px;
+    padding: 4px;
+    width: 100%;
+    height: 300px;
+    max-width: calc((100%/3) - 8px);
+    @include media-breakpoint-down(sm) { 
+      height: 100%;
+      max-width: calc((100%/3) - 4px);
+      margin:  4px 2px;
+      padding: 2px;
+    }
+  }
   &-img-top{
+    position: relative;
     height: 100%;
-    max-height: 180px;
+    max-height: 220px;
     overflow: hidden;
+    @include media-breakpoint-down(md) { 
+      min-height: 180px;
+      max-height: 100%;
+    }
+    @include media-breakpoint-down(sm) { 
+      min-height: auto;
+      max-height: 100px;
+    }
+    &:after{
+      content: '';
+      display: block;
+      padding-bottom: 100%;
+    }
     
+  }
+  &-body{
+    --#{$prefix}card-spacer-y: #{8px};
+    --#{$prefix}card-spacer-x: #{4px};
+  }
+  &-title{
+    @include media-breakpoint-down(md) { 
+      flex-direction: column;
+      flex-wrap: wrap;
+      font-size: $font-size-sm;
+    }
+  }
+  .btn{
+    font-size: $font-size-sm;
   }
 }
 
@@ -32,8 +77,7 @@ img{
     &-box{
       width: 100%;
     }
-    &-title{
-    }
+    
     &-price{
       font-size: $font-size-sm;
       color: $gray-600;
@@ -41,6 +85,7 @@ img{
     &-img{
         display: flex;
         justify-content: center;
+        position: relative;
         height: 70px;
         width: 70px;
         overflow: hidden;

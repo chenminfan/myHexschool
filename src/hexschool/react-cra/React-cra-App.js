@@ -22,9 +22,9 @@ const ReactCraApp = () => {
       <Header headerTitle="react購物車" badgeCart={add.length}></Header>
       <main className="App">
         <ShoppingCartProvider>
-          <div className="container-fluid py-2">
+          <div className="container py-2">
             <div className='row'>
-              <div className="col">
+              <div className="col-lg-9 col-md-12">
                 <div className='d-flex flex-wrap justify-content-start'>
                   {data.map((prod) => {
                     return (
@@ -33,7 +33,7 @@ const ReactCraApp = () => {
                   })}
                 </div>
               </div>
-              <div className="col col-lg-5">
+              <div className="col-lg-3 col-md">
                 <Cart cartData={add} setAdd={setAdd} prodQty={prodQty} setProdQty={setProdQty}></Cart>
               </div>
             </div>
