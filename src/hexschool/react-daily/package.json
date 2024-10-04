@@ -1,6 +1,5 @@
 {
   "name": "react-daily-sample",
-  "homepage": "https://hexschool.github.io/react-daily-task-router",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
