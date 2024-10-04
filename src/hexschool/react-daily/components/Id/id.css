@@ -1,0 +1,12 @@
+.idPage_head{font-weight: bold;}
+.idPage_body{    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;padding: 16px;}
+.idPage_body .item{padding: 4px;width: calc(100%/2 - 16px);}
+.idPage_body .item:hover{background: #ddd;}
+.idPage_body .item>a{text-decoration: none;}
+.idPage_title{    display: flex;
+    justify-content: space-between;
+    align-items: center;border-bottom: 1px solid #ddd;margin-bottom: 16px;}
+.idPage_title button{border: none;background: #cc5079;color: white;font-weight: bold;border-radius: 4px;padding: 4px 8px;cursor: pointer;}
+.idPage_title button:hover{opacity: .5;}
