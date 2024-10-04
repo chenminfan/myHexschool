@@ -1,13 +1,10 @@
-import React from 'react';
+
 
 const ListGroup = (props) => {
-  const { children, checkoutPrice } = props
+  const { children, cx } = props
   return (
-    <ul className="list-group list-group-flush listGroupCart rounded">
+    <ul className={`list-group list-group-flush ${cx ? `list-group-${cx}` : ''} rounded`}>
       {children}
-      {<li className="list-group-item d-flex justify-content-end">
-        <strong>總金額 NT$ {checkoutPrice}</strong>
-      </li>}
     </ul>
   )
 }

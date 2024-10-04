@@ -1,10 +1,11 @@
 import React from 'react'
 
 const Select = (props) => {
-  const { children, handleSelect, selectState = '' } = props
+  const { children, handleSelect, selectState, optionDefault = '無商品', } = props
+
   return (
-    <select className="form-select form-select-sm" value={selectState} onChange={handleSelect}>
-      <option disabled={selectState.length !== 0} value=''>0</option>
+    <select className="form-select form-select-sm" value={selectState === 0 ? 0 : selectState} onChange={handleSelect}>
+      {selectState === 0 && <option disabled={selectState !== 0} value=''>{optionDefault}</option>}
       {children}
     </select>
   )

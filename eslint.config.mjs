@@ -1,36 +1,13 @@
-import globals from "globals"
-import stylisticJs from '@stylistic/eslint-plugin-js'
-import stylisticJsx from '@stylistic/eslint-plugin-jsx'
+import globals from "globals";
+import pluginJs from "@eslint/js";
+import pluginReact from "eslint-plugin-react";
+
 
 export default [
-  {
-    files: ["**/*.{js,mjs,cjs,ts,vue}"],
-    languageOptions: {
-      globals: globals.node,
-    },
-  },
+  { files: ["**/*.{js,mjs,cjs,jsx}"] },
+  { languageOptions: { globals: globals.browser } },
   {
     rules: {
-      'jsx-first-prop-new-line': 'multiline',
-      'jsx-function-call-newline': ["error", "multiline"],
-      'jsx-newline': [{ "prevent": true, "allowMultilines": true }],
-      'jsx-wrap-multilines': [
-        {
-          "declaration": "parens",
-          "assignment": "parens",
-          "return": "parens",
-          "arrow": "parens",
-          "condition": "ignore",
-          "logical": "ignore",
-          "prop": "ignore",
-          "propertyValue": "ignore"
-        }
-      ],
-      'no-extra-semi': "error",
-      'semi-style': ["error", "last"],
-      'jsx-quotes': ["error", "prefer-single"],
-      'jsx-indent': [2, 2],
-      'jsx-indent-props': [2, 2],
       'jsx-curly-newline': [
         { multiline: "consistent", singleline: "consistent" },
       ],
@@ -59,20 +36,6 @@ export default [
       "react/require-default-props": "off",
     },
   },
-  {
-    plugins: {
-      '@stylistic/js': stylisticJs,
-      '@stylistic/jsx': stylisticJsx,
-
-    },
-    rules: {
-      '@stylistic/jsx/jsx-indent': ['error', 2],
-      '@stylistic/js/indent': ['error', 2],
-    }
-  },
-  {
-    rules: {
-      '@typescript-eslint/no-explicit-any': 'warn'
-    }
-  },
-]
+  pluginJs.configs.recommended,
+  pluginReact.configs.flat.recommended,
+];
