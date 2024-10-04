@@ -1,22 +1,20 @@
 {
-  "name": "port-folio",
+  "name": "min-portfolio",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://chenminfan.github.io/MINPortfolio",
-  "files": [
-    "eslint-preset.js"
-  ],
+  "homepage": "https://chenminfan.github.io/myHexschool",
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "bootstrap-icons": "^1.11.3",
     "gh-pages": "^6.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "sass": "^1.79.3",
+    "sass": "1.77.6",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -47,16 +45,12 @@
     ]
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.25.4",
     "@eslint/js": "^9.11.1",
-    "@stylistic/eslint-plugin": "^2.8.0",
-    "@stylistic/eslint-plugin-js": "^2.8.0",
-    "@stylistic/eslint-plugin-jsx": "^2.8.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.30.0",
-    "eslint-plugin-react": "^7.36.1",
-    "prettier": "3.3.3",
-    "typescript-eslint": "^8.7.0"
+    "eslint-plugin-react": "^7.37.1",
+    "globals": "^15.10.0",
+    "prettier": "3.3.3"
   }
 }
