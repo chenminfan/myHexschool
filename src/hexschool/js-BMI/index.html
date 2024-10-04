@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>BMI</title>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet" href="./css/all.css" />
+</head>
+<body>
+	<!-- TODO:0516假資料拉除 -->
+	<div class="container">
+		<section class="bem">
+			<div class="c-card l-bem__c-card">
+				<div class="c-card__header">
+					<div class="c-card__inner">
+						
+						<h1><a class="c-logo c-logo--primary">BEN</a></h1>
+						<div class="c-input">
+							<div class="c-input__panel">
+								<div class="c-input__item c-input__item--height">
+									<label class="c-label">身高cm
+										<input type="number" class="c-input__text c-input__text--height" placeholder="請輸入身高" onkeyup="value=value.replace(/[^\0-9\.]/g,'')" onpaste="value=value.replace(/[^\0-9\.]/g,'')" oncontextmenu = "value=value.replace(/[^\0-9\.]/g,'')" />
+									</label>
+								</div>
+								<div class="c-input__item c-input__item--weight">
+									<label class="c-label">體重kg
+										<input type="number" class="c-input__text c-input__text--weight" placeholder="請輸入體重" onkeyup="value=value.replace(/[^\0-9\.]/g,'')" onpaste="value=value.replace(/[^\0-9\.]/g,'')" oncontextmenu = "value=value.replace(/[^\0-9\.]/g,'')" />
+									</label>
+								</div>
+							</div>
+							<div class="o-btn o-btn--primary o-btn--submit">看結果</div>
+							<div class="o-result">
+								<div class="o-result__item">
+									<div class="o-result__item__average">
+										<span class="o-result__item__average--value"></span>
+										BMI
+									</div>
+									<span class="o-result__item__text"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="c-card__content">
+					<div class="c-title">BMI紀錄</div>
+					<div class="o-list-group">
+					</div>
+				</div>
+				<div class="c-card__footer">
+					<div class="c-logo c-logo--secondary"></div>
+				</div>
+			</div>
+		</section>
+	</div>
+	<script src="js/BMI.js"></script>
+</body>
+</html>
