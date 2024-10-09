@@ -1,35 +1,29 @@
 
+import { Routes, Route } from 'react-router-dom';
 import Header from './components/module/Header';
-import ProdCard from './components/module/ProdCard';
-import Cart from './components/module/Cart';
 import ShoppingCartProvider from './components/module/ShoppingCart/ShoppingCartProvider';
-import { data } from './data/prodCart';
+import { Cart, Album, AlbumIndex, AlbumPhoto, AlbumSearch, Home, NotFund, } from './page'
+
 import './assets/App.css';
 import './assets/all.scss'
 
 const App = () => {
   return (
     <ShoppingCartProvider>
-      <Header headerTitle="react cart"></Header>
+      <Header headerTitle="react cart" >
+      </Header>
       <main className="App">
-        <div className="container-fluid py-2">
-          <div className='row'>
-            <div className="col-lg-7 col-md-12 col-prodCard">
-              <div className='d-flex flex-wrap justify-content-start'>
-                <ProdCard prodData={data} />
-              </div>
-            </div>
-            <div className="col-lg-5 col-md col-cart">
-              {/* {state.cartList.length > 0 && }  */}
-              <Cart />
-            </div>
-          </div>
-          <div className="col-sm-5">
-
-
-          </div>
-        </div>
-      </main>
+        <Routes>
+          <Route path='/' element={<Home />}></Route>
+          <Route path='/cart' element={<Cart />}></Route>
+          <Route path='/album' element={<Album />}>
+            <Route index element={<AlbumIndex />} />
+            <Route path="search" element={<AlbumSearch />} />
+            <Route path="photo/:id" element={<AlbumPhoto />} />
+          </Route>
+          <Route path='*' element={<NotFund />}></Route>
+        </Routes>
+      </main >
     </ShoppingCartProvider >
   );
 }
