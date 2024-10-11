@@ -11,7 +11,6 @@ const CartProd = (props) => {
     return item.price * item.prodQty;
   }, [state])
   const handleSelect = (e) => {
-    e.preventDefault();
     const prodQty = parseInt(e.target.value);
     dispatch({
       type: 'CHANGE_CART_ITEM',
@@ -58,14 +57,14 @@ const CartProd = (props) => {
         </div>
         <div className="cartProd-tool">
           <button type='button' className='btn btn-sm rounded'><i className="bi bi-plus-lg" onClick={(e) => handleAddCart(item)}></i></button>
-          <Select selectState={item.prodQty === 0 ? 0 : item.prodQty} handleSelect={handleSelect}>
+          <Select selectState={item.prodQty} handleSelect={handleSelect}>
             {[...Array(item.prodQty)].map((value, index) => {
               return (
                 <Option key={`${item.id}_${index + 1}`} optionText={index + 1} />
               )
             })}
           </Select>
-          <button type='button' className='btn btn-sm rounded'><i className="bi bi-dash" onClick={(e) => handleMinusCart(item)}></i></button>
+          <button type='button' className='btn btn-sm rounded' onClick={(e) => handleMinusCart(item)}><i className="bi bi-dash"></i></button>
           {memoTotal > 0 && <div className='cartProd-total'><strong>NT$ {memoTotal}</strong></div>}
 
         </div>

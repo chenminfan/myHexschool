@@ -40,7 +40,7 @@ export default function Prods(props) {
           <span>NT$ {card.price}</span>
         </h5>
         <div className='d-grid'>
-          <Select selectState={select === 0 ? 0 : select} handleSelect={(e) => handleSelect(e)}>
+          <Select selectState={select} handleSelect={(e) => handleSelect(e)}>
             {[...Array(10)].map((value, index) => {
               return (
                 <Option key={`_${index + 1}`} optionText={index + 1} />
