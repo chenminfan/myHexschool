@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import AlbumPhoto from './AlbumPhoto'
+import React from 'react'
 
 export default function AlbumCard(props) {
   const { item } = props;

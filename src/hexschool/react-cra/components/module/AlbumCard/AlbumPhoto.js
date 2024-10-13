@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-const api = 'https://api.unsplash.com/photos/';
+const api = process.env.REACT_APP_REACT_APP_UNSPLASH_PHOTO_PATH;
 const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS;
 export default function AlbumPhoto(props) {
   const { id } = useParams();

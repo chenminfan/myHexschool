@@ -1,5 +1,4 @@
 {
-  "files.autoSaveWorkspaceFilesOnly": true,
-  "editor.formatOnSave": true,
-  "eslint.experimental.useFlatConfig": true
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true
 }

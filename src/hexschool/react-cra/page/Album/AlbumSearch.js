@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 
 import axios from 'axios'
-const api = 'https://api.unsplash.com/search/photos/';
+const api = process.env.REACT_APP_REACT_APP_UNSPLASH_PATH;
 const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS;
 
 export default function AlbumSearch() {

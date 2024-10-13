@@ -2,7 +2,7 @@ import { Outlet, Link } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-const api = 'https://api.unsplash.com/search/photos/';
+const api = process.env.REACT_APP_REACT_APP_UNSPLASH_PATH;
 const accessKey = process.env.REACT_APP_UNSPLASH_ACCESS;
 export default function Album() {
   const [listData, setListData] = useState([])
