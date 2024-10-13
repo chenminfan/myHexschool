@@ -1,4 +1,3 @@
-
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/module/Header';
 import ShoppingCartProvider from './components/module/ShoppingCart/ShoppingCartProvider';
@@ -29,5 +28,3 @@ const App = () => {
 }
 
 export default App;
-
-

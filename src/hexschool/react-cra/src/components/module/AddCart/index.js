@@ -2,11 +2,11 @@
 import { useContext } from 'react'
 import ListGroup from '../../ListGroup';
 import ListGroupItem from '../../ListGroup/ListGroupItem';
-import CartProd from './CartProd';
+import CartProd from '../CartProd';
 import { ShoppingContent } from '../ShoppingCart/ShoppingContent'
 
 
-const CartGroup = () => {
+const AddCart = () => {
   const [state] = useContext(ShoppingContent);
 
   return (
@@ -33,4 +33,4 @@ const CartGroup = () => {
     </ListGroup>
   )
 }
-export default CartGroup;
+export default AddCart;
