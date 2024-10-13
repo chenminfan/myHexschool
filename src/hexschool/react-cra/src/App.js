@@ -7,7 +7,7 @@ import { data } from './data/prodCart';
 import './assets/App.css';
 import './assets/all.scss'
 
-const ReactCraApp = () => {
+const App = () => {
   return (
     <ShoppingCartProvider>
       <Header headerTitle="react cart"></Header>
@@ -34,6 +34,6 @@ const ReactCraApp = () => {
   );
 }
 
-export default ReactCraApp;
+export default App;
 
 
