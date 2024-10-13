@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 import Header from './components/module/Header';
 import ShoppingCartProvider from './components/module/ShoppingCart/ShoppingCartProvider';
-import { Cart, Album, AlbumIndex, AlbumPhoto, AlbumSearch, Home, NotFund, } from './page'
+// import { Cart, Album, AlbumIndex, AlbumPhoto, AlbumSearch, Home, NotFund, } from './page'
 
 import './assets/App.css';
 import './assets/all.scss'
