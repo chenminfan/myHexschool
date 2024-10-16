@@ -1,0 +1,256 @@
+@import 'bootstrap/scss/functions';
+@import './variables';
+
+@import 'bootstrap/scss/mixins';
+@import 'bootstrap/scss/bootstrap';
+@import "bootstrap-icons/font/bootstrap-icons";
+
+// 自定義
+@import 'mixins/text-line-truncate';
+// $grid-breakpoints: (xs: 0, sm: 576px, md: 768px, lg: 992px, xl: 1200px) !default;
+
+// 自定義調整文件
+@import './button';
+
+img{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+select{
+  cursor: pointer;
+}
+.col{
+  &-prodCard{
+    @include media-breakpoint-down(lg) { 
+      order: 2;
+    }
+    
+  }
+  &-cart{
+    @include media-breakpoint-down(lg) { 
+      order: 1;
+      margin-bottom: 8px;
+    }
+  }
+}
+header{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  border-bottom: 1px solid $gray-400;
+  .btn{
+    border-radius: 100%;
+    i{
+      font-size: 20px;
+    }
+  }
+}
+main{
+  margin-top: 65px;
+  color: $main-color;
+}
+.navbar{
+  padding: 0.75rem 1.5rem;
+  @include media-breakpoint-down(sm) { 
+    padding: 0.75rem 0.25rem;
+  }
+  .cart-check{
+    &-number{
+      top: 0;
+      left: 50%;
+      @include media-breakpoint-down(md) { 
+
+      }
+    }
+  }
+}
+.card{
+  &.cardProd{
+    margin: 4px;
+    padding: 4px;
+    width: 100%;
+    height: 300px;
+    max-width: calc((100%/3) - 8px);
+    @include media-breakpoint-down(sm) { 
+      height: 100%;
+      max-width: calc((100%/3) - 4px);
+      margin:  4px 2px;
+      padding: 2px;
+    }
+    
+  }
+  &.cardProd & {
+    &-body{
+      >div{
+        margin-top: 8px;
+      }
+    }
+  }
+  &.cardAlbum &{
+    &-img{
+      max-height: 400px;
+    }
+  }
+  &-img-top,&-img{
+    position: relative;
+    height: 100%;
+    max-height: 180px;
+    overflow: hidden;
+    @include media-breakpoint-down(md) { 
+      min-height: 180px;
+      max-height: 100%;
+    }
+    @include media-breakpoint-down(sm) { 
+      min-height: auto;
+      max-height: 100px;
+    }
+    &:after{
+      content: '';
+      display: block;
+      padding-bottom: 100%;
+    }
+    
+  }
+  &-body{
+    --#{$prefix}card-spacer-y: #{8px};
+    --#{$prefix}card-spacer-x: #{4px};
+  }
+  &-text{
+    flex-direction: column;
+    min-height: 60px;
+    @include media-breakpoint-down(md) { 
+      flex-direction: column;
+      font-size: $font-size-sm;
+    }
+  }
+  &-title{
+    @include text-line-truncate(2,100%,$font-size-base*1.25,$font-size-base*1.25);
+  }
+  
+  .btn{
+    font-size: $font-size-sm;
+  }
+}
+.list-group{
+  &-cart{
+    --#{$prefix}list-group-bg: #{$gray-100};
+  }
+  &-cart &{
+    &-item{
+      padding: 8px;
+      @include media-breakpoint-down(md) { 
+        padding: 4px;
+      }
+      &:last-child{
+        justify-content: flex-end;
+        padding-right: 16px;
+        color: rgb(162, 0, 255);
+      }
+      &:only-child{
+        flex-direction: column;
+        justify-content: center;
+        height: 300px;
+        color: $gray-600;
+        @include media-breakpoint-down(lg) { 
+          height: 120px;
+        }
+        >span{
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          font-size: 20px;
+          color: $gray-600;
+          margin-bottom: 16px;
+          background-color: white;
+          border-radius: 100%;
+          box-shadow: 1px 1px 10px #ddd;
+        }
+        @include media-breakpoint-down(md) { 
+          justify-content: center;
+          font-size: $font-size-sm;
+          
+        }
+      }
+    }
+  }
+}
+.cartProd{
+  width: 100%;
+  .btn{
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  &-item{
+    padding: 8px;
+  }
+  > div{
+    margin-left: 0.5rem;
+  }
+  &-text{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    @include media-breakpoint-down(md) { 
+      font-size: $font-size-sm;
+      text-align: left;
+    }
+  }
+  &-title{
+    @include text-line-truncate(2,100%,$font-size-base*1.25,$font-size-base*1.25);
+  }
+  &-price{
+    font-size: $font-size-sm;
+    color: $gray-600;
+  }
+  &-total{
+    font-size: $font-size-sm;
+  }
+  &-info{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    max-width: calc(100% - 155px);
+  }
+  &-tool{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 4px;
+  }
+  &-img{
+      display: flex;
+      justify-content: center;
+      position: relative;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      @include media-breakpoint-down(md) { 
+        width: 50px;
+        height: 50px;
+      }
+    }
+    .btn-close{
+      font-size: 12px;
+    }
+  .form-select{
+    max-width: 80px;
+    @include media-breakpoint-down(md) { 
+      font-size: $font-size-sm;
+      max-width: 60px;
+      padding-left:4px;
+    }
+  }
+}
