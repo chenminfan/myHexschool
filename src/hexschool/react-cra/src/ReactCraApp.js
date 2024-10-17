@@ -1,11 +1,11 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom';
-import { Cart, Album, AlbumIndex, AlbumPhoto, AlbumSearch, Home, NotFund, } from './hexschool/react-cra/src/page'
+import { Cart, Album, AlbumIndex, AlbumPhoto, AlbumSearch, Home, NotFund, } from './page'
 // import ReactDailyApp from './hexschool/react-daily/App';
 
 
 
-export default function App() {
+export default function ReactCraApp() {
   return (
     <Routes>
       <Route path='/' element={<Home />}>
@@ -15,7 +15,7 @@ export default function App() {
           <Route path="search" element={<AlbumSearch />} />
           <Route path="photo/:id" element={<AlbumPhoto />} />
         </Route>
-        <Route path='/reactCra*' element={<NotFund />}></Route>
+        <Route path='/*' element={<NotFund />}></Route>
       </Route>
       {/* 暫放 */}
       {/* <Route path='/reactDaily' element={<ReactDailyApp />}></Route> */}
