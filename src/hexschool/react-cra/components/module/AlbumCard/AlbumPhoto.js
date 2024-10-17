@@ -20,7 +20,7 @@ export default function AlbumPhoto(props) {
       <div className="card-img">
         <img src={photo?.urls?.regular} alt="" />
       </div>
-      <buuton type="button" className="btn btn-primary" onClick={() => { navigate(-1) }}>回上一頁</buuton>
+      <button type="button" className="btn btn-primary" onClick={() => { navigate(-1) }}>回上一頁</button>
     </div>
   )
 }
