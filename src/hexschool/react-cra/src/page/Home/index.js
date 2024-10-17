@@ -1,3 +1,4 @@
+import React from 'react';
 import { Outlet } from 'react-router-dom'
 import Header from '../../components/module/Header';
 import ShoppingCartProvider from '../../components/module/ShoppingCart/ShoppingCartProvider';
