@@ -31,7 +31,7 @@ export default function Album() {
           <ul>
             {listData.map((item) => {
               return (
-                <li className="" key={item.id}><Link to={`/album/photo/${item.id}`}>{item.id}</Link></li>
+                <li className="" key={item.id}><Link to={`/reactCra/album/photo/${item.id}`}>{item.id}</Link></li>
               )
             })}
           </ul>
