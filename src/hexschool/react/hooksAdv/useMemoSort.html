@@ -61,7 +61,8 @@
 
     const filterProd = useMemo(() =>{
       return [... products
-      .filter((prod) => prod.title.match(search))]
+      .filter((prod) => prod.title.match(search))
+    ]
       .sort((a,b) => ascending ? a.price - b.price : b.price - a.price);
 
     }, [ascending, search])

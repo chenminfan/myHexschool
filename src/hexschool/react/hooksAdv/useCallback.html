@@ -88,7 +88,7 @@
       if(e.target.checked){
         setItems([...items, e.target.value])
       } else{
-        setItems([items.filter((item)=> item !== e.target.value)])
+        setItems(items.filter((item)=> item !== e.target.value))
       }
     }, [items]) //若空值為初始值狀態，隨著狀態更新需給items條件
 

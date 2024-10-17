@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
   const [state] = useContext(ShoppingContent);
-  const { headerLink = '/reactCra', headerTitle } = props;
+  const { headerLink = '/#', headerTitle } = props;
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -16,10 +16,10 @@ const Header = (props) => {
                 <NavLink className={({ isActive }) => {
                   console.log(isActive)
                   return `nav-link ${isActive ? 'newActive' : 'isActive'}`
-                }} to="/reactCra/cart">購物車</NavLink>
+                }} to="/cart">購物車</NavLink>
               </li>
               <li className="nav-item">
-                <NavLink className="nav-link" to="/reactCra/album">相簿</NavLink>
+                <NavLink className="nav-link" to="/album">相簿</NavLink>
               </li>
             </ul>
           </div>
