@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createTodo } from './slice/todosSlice';
+import { createTodo, removeTodo, saveEditTodo } from './slice/todosSlice';
 const initState = {
   id: '',
   text: '',
@@ -21,7 +21,7 @@ function TodoList() {
   const [editState, setEditState] = useState(initState)
   const dispatch = useDispatch()
 
-  function addTodo() {
+  const addTodo = () => {
     dispatch(
       createTodo({
         id: todos.length + 1,
@@ -31,40 +31,37 @@ function TodoList() {
     );
     setNewTodoText('');
   }
+  const deleteTodo = (id) => {
+    dispatch(
+      removeTodo(id),
+    );
+  }
 
-  // function addTodo() {
-  //   const newTodo = {
-  //     id: todos.length + 1,
-  //     text: newTodoText,
-  //   };
-  //   setTodos([...todos, newTodo]);
-  //   setNewTodoText('');
-  // }
+  const editTodo = (e) => {
+    setEditState({
+      ...editState,
+      text: e.target.value,
+    })
+  }
 
-  // const editTodo = (e) => {
-  //   setEditState({
-  //     ...editState,
-  //     text: e.target.value,
-  //   });
-  // }
+  const saveEdit = (id) => {
+    const newTodo = [...todos];
+    newTodo[id] = editState
+    setEditState(newTodo)
+    console.log(editState)
+    console.log(newTodo)
+    dispatch(
+      saveEditTodo(
+        {
+          id: id,
+          text: editState.text,
+        })
+    )
+  }
 
-  // const saveEdit = (id) => {
-  //   const index = todos.findIndex((todo) => todo.id === id);
-  //   const newTodo = [...todos];
-  //   newTodo[index] = editState;
-  //   setTodos(newTodo);
-  //   setEditState(initState);
-  // }
-  // const cancelEdit = () => {
-  //   setEditState(initState);
-  // }
-
-  // const deleteTodo = (id) => {
-  //   const index = tosdos.findIndex((todo) => todo.id === id);
-  //   const newTodo = [...todos];
-  //   newTodo.splice(index, 1);
-  //   setTodos(newTodo);
-  // }
+  const cancelEdit = () => {
+    setEditState(initState);
+  }
 
   return (
     <div>
@@ -86,20 +83,20 @@ function TodoList() {
                 {todo.text}
                 <button
                   type='button'
-                // onClick={() => {
-                //   setEditState({
-                //     text: todo.text,
-                //     id: todo.id,
-                //   });
-                // }}
+                  onClick={(e) => {
+                    setEditState({
+                      id: todo.id,
+                      text: todo.text,
+                    });
+                  }}
                 >
                   編輯
                 </button>
                 <button
                   type='button'
-                // onClick={() => {
-                //   deleteTodo(todo.id);
-                // }}
+                  onClick={() => {
+                    deleteTodo(todo.id);
+                  }}
                 >
                   刪除
                 </button>
@@ -110,15 +107,15 @@ function TodoList() {
                 <input
                   type='text'
                   value={editState.text}
-                // onChange={(e) => editTodo(e)}
+                  onChange={(e) => editTodo(e)}
                 />
                 <button type='button'
-                // onClick={() => saveEdit(todo.id)}
+                  onClick={() => saveEdit(todo.id)}
                 >
                   確認
                 </button>
                 <button type='button'
-                // onClick={() => cancelEdit()}
+                  onClick={() => cancelEdit()}
                 >
                   取消
                 </button>
