@@ -10,20 +10,27 @@ export const todosSlice = createSlice({
   initialState: [
     {
       id: 1,
-      text: 'action.payload'
+      text: '這是初始值的todo'
     }
   ],
   reducers: {
+
     // 狀態管理器
     createTodo(state, action) {
-      console.log(state)
-      console.log(action)
       state.push(action.payload)
+    },
+    removeTodo(state, action) {
+      const index = state.findIndex((todo) => todo.id === action.payload);
+      state.splice(index, 1)
+    },
+    saveEditTodo(state, action) {
+      const index = state.findIndex((todo) => todo.id === action.payload.id);
+      state[index] = action.payload;
     }
   }
 })
 
 // 定義 reducers 可以使用actions來匯出（具名匯出）
-export const { createTodo } = todosSlice.actions
+export const { createTodo, removeTodo, saveEditTodo } = todosSlice.actions
 
 export default todosSlice.reducer
