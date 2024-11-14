@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { createTodo } from './slice/todosSlice';
 const initState = {
   id: '',
   text: '',
@@ -16,9 +17,20 @@ function TodoList() {
     return state.todos
   });
 
-  console.log(todos)
   const [newTodoText, setNewTodoText] = useState('');
   const [editState, setEditState] = useState(initState)
+  const dispatch = useDispatch()
+
+  function addTodo() {
+    dispatch(
+      createTodo({
+        id: todos.length + 1,
+        text: newTodoText,
+      }),
+
+    );
+    setNewTodoText('');
+  }
 
   // function addTodo() {
   //   const newTodo = {
@@ -48,7 +60,7 @@ function TodoList() {
   // }
 
   // const deleteTodo = (id) => {
-  //   const index = todos.findIndex((todo) => todo.id === id);
+  //   const index = tosdos.findIndex((todo) => todo.id === id);
   //   const newTodo = [...todos];
   //   newTodo.splice(index, 1);
   //   setTodos(newTodo);
@@ -56,13 +68,13 @@ function TodoList() {
 
   return (
     <div>
-      <input type='text' defaultValue={newTodoText}
-      // onChange={(e) =>
-      //   setNewTodoText(e.target.value)
-      // }
+      <input type='text' value={newTodoText}
+        onChange={(e) =>
+          setNewTodoText(e.target.value)
+        }
       />
       <button type='button'
-      // onClick={() => addTodo()}
+        onClick={() => addTodo()}
       >
         Add Todo
       </button>
