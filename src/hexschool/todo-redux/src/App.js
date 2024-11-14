@@ -26,7 +26,8 @@ function TodoList() {
   const addTodo = () => {
     dispatch(
       createTodo({
-        id: todos.length + 1,
+        // id: todos.length + 1, 會造成重複key
+        id: new Date().getTime(),
         text: newTodoText,
       }),
 
@@ -64,7 +65,7 @@ function TodoList() {
   const cancelEdit = () => {
     setEditState(initState);
   }
-
+  console.log(todos)
   return (
     <div className='todoList'>
       <div className="todo-input">
@@ -80,53 +81,56 @@ function TodoList() {
         </button>
       </div>
       <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.id !== editState.id && (
-              <div>
-                <span>{todo.text}</span>
-                <button
-                  type='button'
-                  onClick={(e) => {
-                    setEditState({
-                      id: todo.id,
-                      text: todo.text,
-                    });
-                  }}
-                >
-                  編輯
-                </button>
-                <button
-                  type='button'
-                  onClick={() => {
-                    deleteTodo(todo.id);
-                  }}
-                >
-                  刪除
-                </button>
-              </div>
-            )}
-            {todo.id === editState.id && (
-              <div>
-                <input
-                  type='text'
-                  value={editState.text}
-                  onChange={(e) => editTodo(e)}
-                />
-                <button type='button'
-                  onClick={() => saveEdit(todo.id)}
-                >
-                  確認
-                </button>
-                <button type='button'
-                  onClick={() => cancelEdit()}
-                >
-                  取消
-                </button>
-              </div>
-            )}
-          </li>
-        ))}
+        {todos.map((todo, index) => {
+          console.log(`todo_${todo.id}_${index}`)
+          return (
+            <li key={`todo_${todo.id}_${index}`}>
+              {todo.id !== editState.id && (
+                <div>
+                  <span>{todo.text}</span>
+                  <button
+                    type='button'
+                    onClick={(e) => {
+                      setEditState({
+                        id: todo.id,
+                        text: todo.text,
+                      });
+                    }}
+                  >
+                    編輯
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => {
+                      deleteTodo(todo.id);
+                    }}
+                  >
+                    刪除
+                  </button>
+                </div>
+              )}
+              {todo.id === editState.id && (
+                <div>
+                  <input
+                    type='text'
+                    value={editState.text}
+                    onChange={(e) => editTodo(e)}
+                  />
+                  <button type='button'
+                    onClick={() => saveEdit(todo.id)}
+                  >
+                    確認
+                  </button>
+                  <button type='button'
+                    onClick={() => cancelEdit()}
+                  >
+                    取消
+                  </button>
+                </div>
+              )}
+            </li>
+          )
+        })}
       </ul>
     </div>
   );
