@@ -36,3 +36,75 @@
     transform: rotate(360deg);
   }
 }
+
+.todoList{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5rem;
+  box-sizing: border-box;
+}
+.todoList button{
+  color: #282c34;
+  border: 0;
+  line-height: 1.5;
+  outline: none;
+  padding: 8px;
+  background-color: #61dafb;
+}
+.todoList ul{
+  margin: 2rem 0;
+  width: 100%;
+  max-width: 500px;
+}
+.todoList ul button:first-child::before{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -1.5rem;
+  content: '';
+  width: 1px;
+  height: 100%;
+  background: #61dafb;  
+}
+.todoList ul li>div{
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  margin: 8px;
+}
+.todoList ul span{
+  flex: 1;
+}
+.todoList ul li+li{
+  border-top: 1px solid #61dafb;
+}
+.todoList ul button:first-child{
+  position: relative;
+  margin-left: 3rem;
+}
+.todoList ul button{
+  margin-left: 8px;
+}
+.todoList ul button+button{
+  background-color: #ddd;
+}
+.todoList ul input{
+  border: 1px solid #61dafb;
+  border-radius: 8px;
+}
+.todoList input{
+  appearance: none;
+  flex: 1;
+  padding: 8px;
+  height: 100%;
+  border: 0;
+  font-size: 1rem;
+  outline: none;
+  line-height: 1.5;
+}
+.todoList .todo-input{
+  display: flex;
+  align-items: center;
+  border: 1px solid #61dafb;
+}
