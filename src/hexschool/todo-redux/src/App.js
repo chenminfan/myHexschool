@@ -48,11 +48,6 @@ function TodoList() {
   }
 
   const saveEdit = (id) => {
-    const newTodo = [...todos];
-    newTodo[id] = editState
-    setEditState(newTodo)
-    console.log(editState)
-    console.log(newTodo)
     dispatch(
       saveEditTodo(
         {
@@ -60,12 +55,12 @@ function TodoList() {
           text: editState.text,
         })
     )
+    setEditState(initState)
   }
 
   const cancelEdit = () => {
     setEditState(initState);
   }
-  console.log(todos)
   return (
     <div className='todoList'>
       <div className="todo-input">
@@ -82,7 +77,7 @@ function TodoList() {
       </div>
       <ul>
         {todos.map((todo, index) => {
-          console.log(`todo_${todo.id}_${index}`)
+          // console.log(`todo_${todo.id}_${index}`)
           return (
             <li key={`todo_${todo.id}_${index}`}>
               {todo.id !== editState.id && (
