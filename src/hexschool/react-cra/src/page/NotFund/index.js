@@ -5,7 +5,7 @@ export default function NotFund() {
   const navigate = useNavigate();
   useEffect(() => {
     setTimeout(() => {
-      navigate('/reactCra')
+      navigate('/')
     }, 3000)
   }, [])
   return (
