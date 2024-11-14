@@ -20,8 +20,12 @@ export const todosSlice = createSlice({
       state.push(action.payload)
     },
     removeTodo(state, action) {
-      const index = state.findIndex((todo) => todo.id === action.payload);
-      state.splice(index, 1)
+      // 相同id移除
+      // const index = state.findIndex((todo) => todo.id === action.payload);
+      // state.splice(index, 1)
+
+      return state.filter((todo) => todo.id !== action.payload)
+      // state = newTodo // 覆蓋 state
     },
     saveEditTodo(state, action) {
       const index = state.findIndex((todo) => todo.id === action.payload.id);
