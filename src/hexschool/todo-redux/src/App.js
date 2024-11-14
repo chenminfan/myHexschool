@@ -1,60 +1,69 @@
 import { useState } from 'react';
-
+import { useSelector } from 'react-redux';
 const initState = {
   id: '',
   text: '',
 };
 
 function TodoList() {
-  const [todos, setTodos] = useState([
-    {
-      id: 1,
-      text: '這是一段話'
-    }
-  ]);
-  const [newTodoText, setNewTodoText] = useState(''); 
+  // const [todos, setTodos] = useState([
+  //   {
+  //     id: 1,
+  //     text: '這是一段話'
+  //   }
+  // ]);
+  const todos = useSelector((state) => {
+    return state.todos
+  });
+
+  console.log(todos)
+  const [newTodoText, setNewTodoText] = useState('');
   const [editState, setEditState] = useState(initState)
 
-  function addTodo() {
-    const newTodo = {
-      id: todos.length + 1,
-      text: newTodoText,
-    };
-    setTodos([...todos, newTodo]);
-    setNewTodoText('');
-  }
+  // function addTodo() {
+  //   const newTodo = {
+  //     id: todos.length + 1,
+  //     text: newTodoText,
+  //   };
+  //   setTodos([...todos, newTodo]);
+  //   setNewTodoText('');
+  // }
 
-  const editTodo = (e) => {
-    setEditState({
-      ...editState,
-      text: e.target.value,
-    });
-  }
+  // const editTodo = (e) => {
+  //   setEditState({
+  //     ...editState,
+  //     text: e.target.value,
+  //   });
+  // }
 
-  const saveEdit = (id) => {
-    const index = todos.findIndex((todo) => todo.id === id);
-    const newTodo = [...todos];
-    newTodo[index] = editState;
-    setTodos(newTodo);
-    setEditState(initState);
-  }
-  const cancelEdit = () => {
-    setEditState(initState);
-  }
+  // const saveEdit = (id) => {
+  //   const index = todos.findIndex((todo) => todo.id === id);
+  //   const newTodo = [...todos];
+  //   newTodo[index] = editState;
+  //   setTodos(newTodo);
+  //   setEditState(initState);
+  // }
+  // const cancelEdit = () => {
+  //   setEditState(initState);
+  // }
 
-  const deleteTodo = (id) => {
-    const index = todos.findIndex((todo) => todo.id === id);
-    const newTodo = [...todos];
-    newTodo.splice(index, 1);
-    setTodos(newTodo);
-  }
+  // const deleteTodo = (id) => {
+  //   const index = todos.findIndex((todo) => todo.id === id);
+  //   const newTodo = [...todos];
+  //   newTodo.splice(index, 1);
+  //   setTodos(newTodo);
+  // }
 
   return (
     <div>
-      <input type='text' value={newTodoText} onChange={(e) => 
-        setNewTodoText(e.target.value)
-      }/>
-      <button type='button' onClick={() => addTodo()}>
+      <input type='text' defaultValue={newTodoText}
+      // onChange={(e) =>
+      //   setNewTodoText(e.target.value)
+      // }
+      />
+      <button type='button'
+      // onClick={() => addTodo()}
+      >
         Add Todo
       </button>
       <ul>
@@ -65,20 +74,20 @@ function TodoList() {
                 {todo.text}
                 <button
                   type='button'
-                  onClick={() => {
-                    setEditState({
-                      text: todo.text,
-                      id: todo.id,
-                    });
-                  }}
+                // onClick={() => {
+                //   setEditState({
+                //     text: todo.text,
+                //     id: todo.id,
+                //   });
+                // }}
                 >
                   編輯
                 </button>
                 <button
                   type='button'
-                  onClick={() => {
-                    deleteTodo(todo.id);
-                  }}
+                // onClick={() => {
+                //   deleteTodo(todo.id);
+                // }}
                 >
                   刪除
                 </button>
@@ -89,12 +98,16 @@ function TodoList() {
                 <input
                   type='text'
                   value={editState.text}
-                  onChange={(e) => editTodo(e)}
+                // onChange={(e) => editTodo(e)}
                 />
-                <button type='button' onClick={() => saveEdit(todo.id)}>
+                <button type='button'
+                // onClick={() => saveEdit(todo.id)}
+                >
                   確認
                 </button>
-                <button type='button' onClick={() => cancelEdit()}>
+                <button type='button'
+                // onClick={() => cancelEdit()}
+                >
                   取消
                 </button>
               </div>
