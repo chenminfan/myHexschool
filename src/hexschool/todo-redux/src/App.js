@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { createTodo, removeTodo, saveEditTodo } from './slice/todosSlice';
+import './App.css'
+
 const initState = {
   id: '',
   text: '',
@@ -64,23 +66,25 @@ function TodoList() {
   }
 
   return (
-    <div>
-      <input type='text' value={newTodoText}
-        onChange={(e) =>
-          setNewTodoText(e.target.value)
-        }
-      />
-      <button type='button'
-        onClick={() => addTodo()}
-      >
-        Add Todo
-      </button>
+    <div className='todoList'>
+      <div className="todo-input">
+        <input type='text' value={newTodoText}
+          onChange={(e) =>
+            setNewTodoText(e.target.value)
+          }
+        />
+        <button type='button'
+          onClick={() => addTodo()}
+        >
+          Add Todo
+        </button>
+      </div>
       <ul>
         {todos.map((todo) => (
           <li key={todo.id}>
             {todo.id !== editState.id && (
               <div>
-                {todo.text}
+                <span>{todo.text}</span>
                 <button
                   type='button'
                   onClick={(e) => {
