@@ -6,15 +6,14 @@
     margin: auto;
     width: 180px;
     height: 55px;
-    background: url("https://khh.travel/Content/images/global/main-logo-white.png")
-      no-repeat;
+    background: url('https://khh.travel/Content/images/global/main-logo-white.png') no-repeat;
     background-size: auto 100%;
     text-indent: -9999px;
     overflow: hidden;
   }
 
   &::before {
-    content: "";
+    content: '';
     display: inline-flex;
     clear: both;
   }
@@ -29,6 +28,30 @@
   > .item {
     border: 1px solid transparent;
     border-radius: 10px;
+    &:not(.newItem) {
+      &.active {
+        > a {
+          &::after {
+            content: '\f0d8';
+            font-family: 'Font Awesome 5 Pro';
+            font-weight: 900;
+            font-size: 30px;
+            display: inline-flex;
+            position: absolute;
+            top: 33px;
+            left: 50%;
+            color: $color_black;
+            transform: translateX(-50%);
+          }
+        }
+        .navArea {
+          visibility: visible;
+          transition: 1.5s;
+          z-index: 2;
+          filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+        }
+      }
+    }
   }
 
   .item > a {
@@ -39,36 +62,6 @@
     color: $color_white;
     font-size: $font-20;
     text-align: center;
-  }
-  .actived > .navArea.expand {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    position: absolute;
-    top: 144px;
-    left: 0;
-    right: 0;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background: $color_black;
-
-    z-index: 2;
-    filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
-
-    &::after {
-      content: "\f0d8";
-      font-family: "Font Awesome 5 Pro";
-      font-weight: 900;
-      font-size: 30px;
-      margin-left: 80px;
-      display: inline-flex;
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      color: $color_black;
-
-      transform: translateX(-50%);
-    }
   }
 }
 
@@ -169,7 +162,7 @@
   }
 }
 
-.boxcontainer {
+.boxContainer {
   position: relative;
   margin-bottom: 44px;
   > .head {
@@ -184,7 +177,7 @@
     text-align: center;
 
     &::after {
-      content: "";
+      content: '';
       position: absolute;
       display: inline-flex;
       left: 0;
@@ -209,7 +202,7 @@
 
   &::after,
   &::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 50%;
@@ -229,9 +222,9 @@
   }
 
   &::after {
-    content: "\f0d7";
+    content: '\f0d7';
     margin-top: -18px;
-    font-family: "Font Awesome 5 Pro";
+    font-family: 'Font Awesome 5 Pro';
     font-size: $font-26;
     font-weight: 900;
     display: inline-flex;
@@ -247,7 +240,7 @@
 }
 
 .areaBox {
-  .boxcontainer {
+  .boxContainer {
     > .body {
       margin-bottom: 40px;
     }
@@ -292,15 +285,23 @@
   }
 }
 
-.pagebox {
-  text-align: center;
+.pageBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .scenic_warp {
   > .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px 20px;
     border-radius: 5px;
     text-align: left;
+    width: 100%;
+    height: 100%;
+    margin: auto;
   }
   figure {
     position: relative;
@@ -446,7 +447,7 @@
     z-index: 1;
 
     .title::after {
-      content: "";
+      content: '';
       position: absolute;
       left: 50%;
       bottom: 0;
@@ -482,7 +483,7 @@
 }
 
 .scenicBox {
-  .boxcontainer {
+  .boxContainer {
     > .body {
       position: relative;
       min-height: calc(100vh - 220px);
@@ -503,8 +504,8 @@
   }
 }
 
-.scenicBox .boxcontainer img,
-.scenicBox .boxcontainer figcaption {
+.scenicBox .boxContainer img,
+.scenicBox .boxContainer figcaption {
   position: static;
 }
 .form:not(.newBox) {
@@ -521,9 +522,12 @@
     > .body {
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
     }
   }
+}
+.scenic_area {
+  justify-content: space-between;
+  width: 100%;
 }
 .img_box {
   flex-direction: column;
@@ -554,7 +558,8 @@
     }
 
     a {
-      display: inline-flex;
+      display: flex;
+      align-items: center;
       padding: 3px 5px;
       border: 1px solid $color_lightgrey;
       border-radius: 5px;
@@ -648,7 +653,7 @@
     width: 100%;
   }
 
-  .areaBox .boxcontainer .scenic .scenic_item {
+  .areaBox .boxContainer .scenic .scenic_item {
     background: $color_white;
   }
 
