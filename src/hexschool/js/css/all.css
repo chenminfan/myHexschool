@@ -129,21 +129,18 @@ p {
   color: #e12f72;
 }
 
-.page, [class*=page_] > a, [class*=page_], .page_num li,
+.page, [class*=page_] > a, .page_num li,
 .page_num li a {
-  display: inline-block;
-  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 [class*=page_] > a {
   margin: 0 5px;
   font-size: 14px;
 }
-[class*=page_]:hover a {
-  color: #d48787;
-  border-color: #d48787;
-}
-[class*=page_]:hover a.disabled {
+[class*=page_] > a a.disabled {
   border: 1px solid #ddd;
 }
 [class*=page_] > a.disabled {
@@ -155,8 +152,7 @@ p {
   margin: 0 5px;
   font-size: 14px;
 }
-.page_num li a,
-.page_num li .page_num---a {
+.page_num li a {
   padding: 4px 2px;
   width: 30px;
   height: 30px;
@@ -169,9 +165,10 @@ p {
 }
 .page_num li a:hover {
   color: #d48787;
+  border-color: #d48787;
 }
-.page_num li:hover a,
-.page_num li.now a {
+.page_num .now a {
+  color: #d48787;
   border-color: #d48787;
 }
 
@@ -210,13 +207,13 @@ p {
   margin-right: auto;
 }
 
-.wticons {
+.weatherIcons {
   display: inline-block;
   width: 40px;
   height: 40px;
 }
 
-.wticons::before {
+.weatherIcons::before {
   content: "";
   display: inline-block;
   width: 100%;
@@ -397,12 +394,29 @@ p {
 }
 
 .item .box {
-  display: none;
+  visibility: hidden;
 }
 .item .box > li.nodata {
   display: block;
   padding: 10px;
   color: #fff;
+}
+
+.item:not(.newItem) a {
+  position: relative;
+}
+.item:not(.newItem) .box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 144px;
+  left: 0;
+  right: 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: #000;
+  overflow: hidden;
 }
 
 .foot {
@@ -443,6 +457,24 @@ p {
   border: 1px solid transparent;
   border-radius: 10px;
 }
+.nav > .item:not(.newItem).active > a::after {
+  content: "\f0d8";
+  font-family: "Font Awesome 5 Pro";
+  font-weight: 900;
+  font-size: 30px;
+  display: inline-flex;
+  position: absolute;
+  top: 33px;
+  left: 50%;
+  color: #000;
+  transform: translateX(-50%);
+}
+.nav > .item:not(.newItem).active .navArea {
+  visibility: visible;
+  transition: 1.5s;
+  z-index: 2;
+  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
+}
 .nav .item > a {
   display: inline-flex;
   justify-content: center;
@@ -451,33 +483,6 @@ p {
   color: #fff;
   font-size: 20px;
   text-align: center;
-}
-.nav .actived > .navArea.expand {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  position: absolute;
-  top: 144px;
-  left: 0;
-  right: 0;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background: #000;
-  z-index: 2;
-  filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.2));
-}
-.nav .actived > .navArea.expand::after {
-  content: "\f0d8";
-  font-family: "Font Awesome 5 Pro";
-  font-weight: 900;
-  font-size: 30px;
-  margin-left: 80px;
-  display: inline-flex;
-  position: absolute;
-  top: -25px;
-  left: 50%;
-  color: #000;
-  transform: translateX(-50%);
 }
 
 .navArea .areaItem {
@@ -570,11 +575,11 @@ p {
   text-align: left;
 }
 
-.boxcontainer {
+.boxContainer {
   position: relative;
   margin-bottom: 44px;
 }
-.boxcontainer > .head {
+.boxContainer > .head {
   display: inline-flex;
   position: relative;
   left: 50%;
@@ -585,7 +590,7 @@ p {
   font-weight: bold;
   text-align: center;
 }
-.boxcontainer > .head::after {
+.boxContainer > .head::after {
   content: "";
   position: absolute;
   display: inline-flex;
@@ -596,7 +601,7 @@ p {
   background: #ddd;
   z-index: -1;
 }
-.boxcontainer .scenic {
+.boxContainer .scenic {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -639,10 +644,10 @@ p {
   font-weight: bold;
 }
 
-.areaBox .boxcontainer > .body {
+.areaBox .boxContainer > .body {
   margin-bottom: 40px;
 }
-.areaBox .boxcontainer .img_box {
+.areaBox .boxContainer .img_box {
   height: 300px;
   border-radius: 10px;
   background: linear-gradient(to top, #000 0, rgba(0, 0, 0, 0.738) 19%, rgba(0, 0, 0, 0.541) 34%, rgba(0, 0, 0, 0.382) 47%, rgba(0, 0, 0, 0.278) 56.5%, rgba(0, 0, 0, 0.194) 65%, rgba(0, 0, 0, 0.126) 73%, rgba(0, 0, 0, 0.075) 80.2%, rgba(0, 0, 0, 0.042) 86.1%, rgba(0, 0, 0, 0.021) 91%, rgba(0, 0, 0, 0.008) 95.2%, rgba(0, 0, 0, 0.002) 98.2%, rgba(0, 0, 0, 0) 100%);
@@ -663,14 +668,22 @@ p {
   right: 22px;
 }
 
-.pagebox {
-  text-align: center;
+.pageBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .scenic_warp > .box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 10px 20px;
   border-radius: 5px;
   text-align: left;
+  width: 100%;
+  height: 100%;
+  margin: auto;
 }
 .scenic_warp figure {
   position: relative;
@@ -835,7 +848,7 @@ p {
   vertical-align: middle;
 }
 
-.scenicBox .boxcontainer > .body {
+.scenicBox .boxContainer > .body {
   position: relative;
   min-height: calc(100vh - 220px);
   margin: 0 20px;
@@ -843,16 +856,16 @@ p {
   background: #fafafa;
   border-radius: 20px;
 }
-.scenicBox .boxcontainer img {
+.scenicBox .boxContainer img {
   border-radius: 10px;
 }
-.scenicBox .boxcontainer .body > .img_box figcaption {
+.scenicBox .boxContainer .body > .img_box figcaption {
   color: #333;
   font-size: 16px;
 }
 
-.scenicBox .boxcontainer img,
-.scenicBox .boxcontainer figcaption {
+.scenicBox .boxContainer img,
+.scenicBox .boxContainer figcaption {
   position: static;
 }
 
@@ -866,7 +879,11 @@ p {
 .form:not(.newBox) .box_area > .body {
   display: flex;
   flex-direction: row;
+}
+
+.scenic_area {
   justify-content: space-between;
+  width: 100%;
 }
 
 .img_box {
@@ -896,7 +913,8 @@ p {
   margin-bottom: 10px;
 }
 .info_box > .body a {
-  display: inline-flex;
+  display: flex;
+  align-items: center;
   padding: 3px 5px;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -945,29 +963,23 @@ p {
   .form .header {
     max-width: 800px;
   }
-
   .scenic > li {
     width: calc(50% - 20px);
   }
-
   .weather {
     max-width: 800px;
   }
-
   .weather ul + dl {
     max-width: 320px;
     height: auto;
   }
-
   .item .box > li {
     width: 130px;
   }
-
   .KH_travel,
-.form .nav {
+  .form .nav {
     display: flex;
   }
-
   .form .header {
     max-width: 700px;
   }
@@ -976,15 +988,12 @@ p {
     padding: 0;
     text-align: center;
   }
-
   .scenic_warp > .box {
     width: 100%;
   }
-
-  .areaBox .boxcontainer .scenic .scenic_item {
+  .areaBox .boxContainer .scenic .scenic_item {
     background: #fff;
   }
-
   .weather .container {
     flex-direction: column;
     align-items: center;
@@ -993,33 +1002,26 @@ p {
     margin-left: 0;
     margin-top: 6px;
   }
-
   .weather ul > li dl {
     padding: 0;
   }
-
   .weather ul + dl {
     max-width: 100%;
     margin: 0;
   }
-
   .weather ul > li dl {
     padding: 0;
     font-size: 14px;
   }
-
   .weather ul > li dl dt > span:nth-child(2) {
     display: none;
   }
-
   .weather ul > li dl {
     margin: 0 10px;
   }
-
   .item .box > li {
     width: 106px;
   }
-
   .scenic .randomKh_item .scenic_warp figure {
     width: 200px;
   }
@@ -1031,39 +1033,32 @@ p {
   .form .nav .item > a {
     width: auto;
   }
-
   .weather {
     margin: 10px;
   }
-
   .weather ul,
-.weather ul li,
-.weather ul li + li > dl,
-.weather ul + dl {
+  .weather ul li,
+  .weather ul li + li > dl,
+  .weather ul + dl {
     display: flex;
     text-align: center;
   }
-
   .weather dl {
     text-align: center;
   }
-
   .scenic .scenic_item {
     display: flex;
     width: auto;
   }
-
   .weather ul li + li,
-.weather ul + dl {
+  .weather ul + dl {
     padding: 10px 0;
     border-top: 1px solid #ddd;
   }
-
   .weather ul + dl {
     max-width: none;
     margin: 0;
   }
-
   .scenic .randomKh_item .scenic_warp figure {
     width: 100%;
   }
