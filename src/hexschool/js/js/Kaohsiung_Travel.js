@@ -1,41 +1,46 @@
 // TODO:出現許多重複宣告的變數，調整宣告變數，建議使用 let、const 來取代 var，雙等號改成三等號。
-let khTravelDataArray = khTravelData.data.XML_Head.Infos.Info;
-let weatherLocation = weatherData.cwbopendata.dataset.locations.location;
-let weatherLocationLen = weatherLocation.length;
-let khDataLen = khTravelDataArray.length;
+const khTravelDataArray = khTravelData.data.XML_Head.Infos.Info;
+const weatherLocation = weatherData.cwbopendata.dataset.locations.location;
+const weatherLocationLen = weatherLocation.length;
+const khDataLen = khTravelDataArray.length;
 let areaTemp = [];
-let randomAreaTemp = [];
-let formBox = document.querySelector(".form");
-let formBoxContent = document.querySelector(".form .content");
-let boxContainer = document.querySelector(".boxcontainer");
-let boxContainerBody = document.querySelector(".boxcontainer .body");
-let boxContainerFoot = document.querySelector(".boxcontainer .foot");
-let scenicItem = document.querySelector(".scenic");
-let newItem = document.querySelector(".newItem");
-let navArea = document.querySelector(".navArea");
-let hotArea = document.querySelector(".hotAreaBox");
-let pageBox = document.querySelector(".pagebox");
-let pagePre = document.querySelector(".page_pre");
-let pageNext = document.querySelector(".page_next");
-let pageBoxNum = document.querySelector(".page_num");
-let pageItem = document.querySelectorAll(".page_num li");
-let KHtravel = document.querySelector(".KH_travel");
+const formBox = document.querySelector(".form");
+let boxContainer = document.querySelector(".boxContainer");
+const boxContainerBody = document.querySelector(".boxContainer .body");
+const boxContainerFoot = document.querySelector(".boxContainer .foot");
+const scenicItem = document.querySelector(".scenic");
+const newItem = document.querySelector(".newItem");
+const navArea = document.querySelector(".navArea");
+const hotArea = document.querySelector(".hotAreaBox");
+const pageBox = document.querySelector(".pageBox");
+const pagePre = document.querySelector(".page_pre");
+const pageNext = document.querySelector(".page_next");
+const pageBoxNum = document.querySelector(".page_num");
+const pageItem = document.querySelectorAll(".page_num li");
+const KH_Travel = document.querySelector(".KH_travel");
+const scenicArea = document.querySelector(".scenic_area");
 let pagesAll = [];
-let weatherBox = document.querySelector(".weather");
+const weatherBox = document.querySelector(".weather");
 // [變數]顯示的筆數
-let pageitem = 8;
+let pageNumber = 8;
 // [變數]顯示頁
-let pagnum = 1;
+let pagNum = 1;
 // [變數]前後頁暫存的顯示頁
 let currentPage = 1;
 let popularAreaArray = [];
 
 // nav展開
-let navExpand = document.querySelectorAll(".nav .item");
+const body = document.querySelector("body");
+body.addEventListener('click', function (e) {
+	navExpand[1].classList.remove("active");
+	navExpand[1].children[1].classList.remove("expand");
+})
+const navExpand = document.querySelectorAll(".nav .item");
 let navExpandLen = navExpand.length;
 toggleExpand(navExpand[0]);
 for (let i = 0; i < navExpandLen; i++) {
-	navExpand[i].addEventListener('click', function (e) {
+	navExpand[i].addEventListener('mouseover', function (e) {
+		console.log(this)
 		e.preventDefault();
 		toggleExpand(this);
 	});
@@ -44,21 +49,21 @@ for (let i = 0; i < navExpandLen; i++) {
 function toggleExpand(activePanel) {
 	for (let i = 0; i < navExpandLen; i++) {
 		// 當資料點擊A回傳的時候
-		if (navExpand[i] == activePanel) {
-			navExpand[i].classList.toggle("actived");
+		if (navExpand[i] === activePanel) {
+			navExpand[i].classList.add("active");
 			if (navExpand[i].children.length >= 2) {
-			navExpand[i].children[1].classList.toggle("expand");
+				navExpand[i].children[1].classList.add("expand");
 			}
-		}else if (
+		} else if (
 			// 當非資料本身 及 有收合box的時候
 			navExpand[i] !== activePanel &&
 			navExpand[i].childNodes.length > 3
 		) {
 			navExpand[i].children[1].classList.remove("expand");
-			navExpand[i].classList.remove("actived");
-		}else {
+			navExpand[i].classList.remove("active");
+		} else {
 			// 當非資料A本身
-			navExpand[i].classList.remove("actived");
+			navExpand[i].classList.remove("active");
 		}
 	}
 }
@@ -69,7 +74,7 @@ function areaFilter() {
 	// areaTemp = khTravelDataArray;
 
 	// 區域篩選
-	let areafilterArray = [];
+	let areaFilterArray = [];
 	for (let i = 0; i < khDataLen; i++) {
 		// console.log(area)
 		let area = khTravelDataArray[i].Add.substr(6, 3);
@@ -77,15 +82,15 @@ function areaFilter() {
 			area = area + "區";
 		}
 		// 將篩選的資料推上陣列
-		areafilterArray.push(area);
+		areaFilterArray.push(area);
 		// 新增資料回陣列
 		khTravelDataArray[i]["Area"] = area;
 	}
 	// TODO:拉出for迴圈
-	// [ES6刪除重複項目]，let areaArray = [...new Set(areafilterArray)];
+	// [ES6刪除重複項目]，let areaArray = [...new Set(areaFilterArray)];
 	// [js Array.filter() 陣列中刪除重複的內容]
-	let areaArray = areafilterArray.filter(function (ele, pos) {
-		return areafilterArray.indexOf(ele) === pos;
+	let areaArray = areaFilterArray.filter(function (ele, pos) {
+		return areaFilterArray.indexOf(ele) === pos;
 	});
 	let printArea = "";
 	for (let i = 0; i < areaArray.length; i++) {
@@ -96,24 +101,23 @@ function areaFilter() {
 
 }
 areaFilter();
-
 newItem.addEventListener('click', newKH);
 
 //公告
-// TODO:已調整，變數 boxContainer 等同於變數 newbox_area
+// TODO:已調整，變數 boxContainer 等同於變數 newBox_area
 function newKH() {
 	// 在表頭的部分印出
 	formBox.classList.add("newBox");
 	formBox.classList.remove("areaBox", "scenicBox");
 	// 區域
-	boxContainer .children[0].textContent = "區域觀光遊高雄";
+	boxContainer.children[0].textContent = "區域觀光遊高雄";
 	weatherBox.style.display = "block";
 
 	if (boxContainerFoot.style.display !== "none") {
 		boxContainerFoot.style.display = "none";
 	}
 	if (boxContainerBody.children[0].nodeName !== "UL") {
-		return reBoxprint();
+		return reBoxPrint();
 	}
 
 	if (scenicItem === scenicItem) {
@@ -131,7 +135,7 @@ function newKH() {
 		// 不重複區域
 		let set = new Set();
 		let randomKhResult = randomKh.filter((item) =>
-		!set.has(item.Area) ? set.add(item.Area) : false
+			!set.has(item.Area) ? set.add(item.Area) : false
 		);
 
 		// 印出
@@ -148,38 +152,36 @@ function newKH() {
 					</div>
 				</a>
 			</li>`;
-			// TODO:拉出for迴圈
-			scenicItem.innerHTML = print;
 		}
+		// TODO:拉出for迴圈
+		scenicItem.innerHTML = print;
 		onScenicItem();
-
 	}
 }
 newKH();
 
 //區域切換class
-function areaKH(randomarea) {
+function areaKH(randomArea) {
 	areaTemp = [];
 	// 點擊完判斷區域回傳
 	for (let i = 0; i < khDataLen; i++) {
 		let area = khTravelDataArray[i].Area;
-		if (area === randomarea) {
+		if (area === randomArea) {
 			areaTemp.push(khTravelDataArray[i]);
 		}
 	}
-	boxContainer.children[0].textContent = randomarea;
+	boxContainer.children[0].textContent = randomArea;
 	formBox.classList.add("areaBox");
 	formBox.classList.remove("newBox");
 	// // 點擊區域渲染
 	changePage(1);
 	pageAverage(areaTemp);
-
 }
 
 //點擊區域累加次數
-function popularHotArea(popo) {
+function popularHotArea(popular) {
 	// 假設點擊率
-	// console.log(popo)
+	// console.log(popular)
 	// popularAreaArray[1].frequency = 15;
 	// popularAreaArray[2].frequency = 10;
 	// popularAreaArray[3].frequency = 830;
@@ -200,9 +202,9 @@ function popularHotArea(popo) {
 	frequencyAdd++;
 	// console.log(popularAreaArray)
 	for (let i = 0; i < popularAreaArray.length; i++) {
-		// console.log(popo === popularAreaArray[i].area)
+		// console.log(popular === popularAreaArray[i].area)
 		// console.log(popularAreaArray)
-		if (popo === popularAreaArray[i].area) {
+		if (popular === popularAreaArray[i].area) {
 			popularAreaArray[i]["frequency"] += frequencyAdd;
 		}
 
@@ -212,8 +214,8 @@ function popularHotArea(popo) {
 // 熱門行政區，點擊率高的區域印出
 function hotPrint() {
 	popularHotArea();
-	// console.log(popularAreaArray)
-	let hotprintArea = "";
+	console.log(popularAreaArray)
+	let hotPrintArea = "";
 	for (let i = 0; i < popularAreaArray.length && i < 5; i++) {
 		popularAreaArray = popularAreaArray.sort(function (a, b) {
 			// 針對顯示前八筆的點擊數，依名字排序
@@ -232,31 +234,34 @@ function hotPrint() {
 			return b.frequency - a.frequency;
 		});
 
-		hotprintArea += `<div class="areaItem hotAreaItem"><a class="btn btn-hot" href="#">${popularAreaArray[i].area}</a></div>`;
+		hotPrintArea += `<div class="areaItem hotAreaItem"><a class="btn btn-hot" href="#">${popularAreaArray[i].area}</a></div>`;
 	}
-	hotArea.innerHTML = hotprintArea;
+	hotArea.innerHTML = hotPrintArea;
 }
 hotPrint();
-
 // 點擊區域
 function areaAlinkClick() {
 	// 針對每一個區域宣告
 	let areaLiAlink = document.querySelectorAll(".areaItem");
 	// console.log(areaLiAlink)
+	scenicArea.style.display = "none";
+	scenicItem.style.display = "flex";
 	for (let i = 0; i < areaLiAlink.length; i++) {
 		areaLiAlink[i].addEventListener('click', function (e) {
+			scenicArea.style.display = "none";
+			scenicItem.style.display = "flex";
 			// 判斷DOM的結構
 			if (e.target.nodeName !== "A") {
-				return;
+				return currentPage;
 			}
+
 			e.preventDefault();
-
-
 			// 在表頭的部分印出
 			formBox.classList.add("areaBox");
-			formBox.classList.remove("newBox");
+			formBox.classList.remove("newBox", "scenicBox");
 
-			boxContainer = document.querySelector(".areaBox .boxcontainer");
+
+			boxContainer = document.querySelector(".areaBox .boxContainer");
 			boxContainer.children[0].textContent = e.target.textContent;
 			areaTemp = [];
 			// 點擊完判斷區域回傳
@@ -264,10 +269,15 @@ function areaAlinkClick() {
 				let area = khTravelDataArray[i].Area;
 				if (area === e.target.textContent) {
 					areaTemp.push(khTravelDataArray[i]);
+
 				}
 			}
-			let popo = e.target.textContent;
-			popularHotArea(popo);
+			let popular = e.target.textContent;
+			navExpand[1].classList.remove("active");
+			navExpand[1].children[1].classList.remove("expand");
+			console.log(navExpand)
+			console.log(popular)
+			popularHotArea(popular);
 			// 點擊區域渲染
 			changePage(1);
 
@@ -280,38 +290,36 @@ function areaAlinkClick() {
 areaAlinkClick();
 
 // 判斷結構
-function reBoxprint() {
+function reBoxPrint() {
 	// 判斷結構回傳function
 	// if (boxContainerBody.children[0].nodeName !== "UL"){
 	// 	boxContainerBody.innerHTML = `<ul class="scenic"></ul>`;
 	// }else
-	if (boxContainer.classList[1] === "newbox") {
+	if (boxContainer.classList[1] === "newBox") {
 		newKH();
 	} else if (scenicItem.nodeName === "UL") {
 		changePage(1);
 	} else if (pageBox.nodeName === "DIV") {
 		pageAverage(areaTemp);
 	}
-	boxContainerFoot.innerHTML = `<div class="pagebox">
+	boxContainerFoot.innerHTML = `<div class="pageBox">
 		<div class="page_pre"><a href="#"><i class="fas fa-angle-left"></i></a></div>
 		<ul class="page_num"></ul>
 		<div class="page_next"><a href="#"><i class="fas fa-angle-right"></i></a></div>
 	</div>`;
-
-
 }
 
 // 點擊區域
 // TODO:不建議函式、變數、參數使用相同名稱，導致增加維護上的困難度。
-function onScenicItem(){
+function onScenicItem() {
 
 	let scenicKHItem = document.querySelectorAll(".scenic .scenic_item");
-	scenicKHItem.forEach(scenicKHItem => scenicKHItem.addEventListener('click',function(e){
+	scenicKHItem.forEach(scenicKHItem => scenicKHItem.addEventListener('click', function (e) {
 		e.preventDefault();
-		if(this.classList[1] === 'randomKh_item'){
-			let randomarea = this.innerText;
-			areaKH(randomarea);
-		}else{
+		if (this.classList[1] === 'randomKh_item') {
+			let randomArea = this.innerText;
+			areaKH(randomArea);
+		} else {
 			// console.log(this.children[0].dataset.name);
 			let scenicName = this.children[0].dataset.name;
 			scenicKH(scenicName);
@@ -320,43 +328,44 @@ function onScenicItem(){
 }
 
 // 印出區域資料
-function printData(pageitemPint) {
+function printData(pageItemPint) {
 	if (boxContainerBody.children[0].nodeName !== "UL") {
-		reBoxprint();
+		reBoxPrint();
+
 	}
 	let print = "";
-	for (let i = 0; i < pageitemPint.length; i++) {
-		let ketwordTimg = pageitemPint[i].Opentime;
+	for (let i = 0; i < pageItemPint.length; i++) {
+		let ketWordTime = pageItemPint[i].Opentime;
 		// 關鍵字取代
-		let ketword1 = ["全天候開放"];
+		let ketWord1 = ["全天候開放"];
 		for (let j = 0; j < 10; j++) {
-			if (ketwordTimg.indexOf(ketword1[j]) !== -1) {
-				ketwordTimg = ketword1[0];
-			} else if (ketwordTimg.length > 40) {
-				ketwordTimg = "詳請景點內介紹";
+			if (ketWordTime.indexOf(ketWord1[j]) !== -1) {
+				ketWordTime = ketWord1[0];
+			} else if (ketWordTime.length > 40) {
+				ketWordTime = "詳請景點內介紹";
 			}
 		}
-		let ketwordName = pageitemPint[i].Name;
-		// console.log(ketwordName)
-		ketwordName = ketwordName.replace(
+		let ketWordName = pageItemPint[i].Name;
+		// console.log(ketWordName)
+		ketWordName = ketWordName.replace(
 			/[\ |\~|\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\ |\=|\||\\|\[|\]|\{|\}|\;|\:|\”|\’|\,|\<|\.|\>|\/|\?]/g,
 			""
 		);
 		// 點擊回傳
 		print +=
-		`<li class="scenic_item">
-			<a href="#" data-name='${pageitemPint[i].Name}'>
+			`<li class="scenic_item">
+			<a href="#" data-name='${pageItemPint[i].Name}'>
 				<div class="scenic_warp">
 					<figure>
-						<figcaption><div class="scenic_title">${ketwordName}</div><span class="scenic_area">${pageitemPint[i].Area}</span></figcaption>
-						<img src="${pageitemPint[i].Picture1}" alt="${pageitemPint[i].Picdescribe1}" title="${pageitemPint[i].Name}">
+						<figcaption><div class="scenic_title">${ketWordName}</div><span class="scenic_area">${pageItemPint[i].Area}</span></figcaption>
+						<img src="${pageItemPint[i].Picture1}" alt="${pageItemPint[i].Picdescribe1}" title="${pageItemPint[i].Name}">
 					</figure>
 					<div class="box">
-						<div class="head"><i class="fas fa-crosshairs"></i>${pageitemPint[i].Name}</div>
+						<div class="head"><i class="fas fa-crosshairs"></i>${pageItemPint[i].Name}</div>
 						<div class="body">
 							<ul>
-								<li>${ketwordTimg}</li>
-								<li class="toldescribe">${pageitemPint[i].Toldescribe}</li>
+								<li>${ketWordTime}</li>
+								<li class="toldescribe">${pageItemPint[i].Toldescribe}</li>
 							</ul>
 						</div>
 					</div>
@@ -369,11 +378,14 @@ function printData(pageitemPint) {
 	onScenicItem();
 }
 
+
 // 印出景點資料
 function scenicKH(scenicName) {
 	formBox.classList.add("scenicBox");
 	formBox.classList.remove("areaBox", "scenicBox");
 	formBox.classList.remove("foot");
+	scenicArea.style.display = "flex";
+	scenicItem.style.display = "none";
 	boxContainerFoot.style.display = "none";
 	let print = "";
 	for (let i = 0; i < khDataLen; i++) {
@@ -428,13 +440,14 @@ function scenicKH(scenicName) {
 			</div>`;
 		}
 	}
-	boxContainerBody.innerHTML = print;
+	scenicArea.innerHTML = print;
 	// areaAlinkClick()
 	// onScenicItem();
 }
+
 // 天氣資料
 function weather() {
-	let weatherprint = "";
+	let weatherPrint = "";
 	//夏至時間：以2021/7/21為今天
 	let date = new Date(2021, 6, 21, 23, 59);
 	let monthDate = date.getMonth() + 1;
@@ -443,112 +456,112 @@ function weather() {
 		return monthDate < 10 ? "0" + monthDate : monthDate;
 	}
 	let getdateDate = date.getDate();
-	let daystr = ["日", "一", "二", "三", "四", "五", "六"];
-	let todayDate = "星期" + daystr[date.getDay()];
-	let tomorrowDate = "星期" + daystr[date.getDay() + 1];
-	let acquiredDate = "星期" + daystr[date.getDay() + 2];
+	let dayList = ["日", "一", "二", "三", "四", "五", "六"];
+	let todayDate = "星期" + dayList[date.getDay()];
+	let tomorrowDate = "星期" + dayList[date.getDay() + 1];
+	let acquiredDate = "星期" + dayList[date.getDay() + 2];
 	let today = monthDateLen(monthDate) + "-" + getdateDate;
 	let tomorrow = monthDateLen(monthDate) + "-" + (getdateDate + 1);
 	let acquired = monthDateLen(monthDate) + "-" + (getdateDate + 2);
 
 	for (let i = 0; i < weatherLocationLen; i++) {
 		// let khWeather =
-		let MinTodayTprint = "";
-		let MinTomorrowTprint = "";
-		let MinAcquiredTprint = "";
-		let MaxTodayTprint = "";
-		let MaxTomorrowTprint = "";
-		let MaxAcquiredTprint = "";
-		let UVITodayTprint = "";
-		let ExposureTodayTprint = "";
-		let ComplexTitleprint = "";
-		let ComplexTodayTprint = "";
-		let IconTodayprint = "";
-		let IconTomorrowprint = "";
-		let IconAcquiredprint = "";
+		let MinTodayPrint = "";
+		let MinTomorrowPrint = "";
+		let MinAcquiredPrint = "";
+		let MaxTodayPrint = "";
+		let MaxTomorrowPrint = "";
+		let MaxAcquiredPrint = "";
+		let UVITodayPrint = "";
+		let ExposureTodayPrint = "";
+		let ComplexTitlePrint = "";
+		let ComplexTodayPrint = "";
+		let IconTodayPrint = "";
+		let IconTomorrowPrint = "";
+		let IconAcquiredPrint = "";
 		let ElementValueToday = "";
 
 		// 天氣條件
 		if (weatherLocation[i].locationName === "高雄市") {
-			weatherBox.innerHTML = weatherprint;
-			let weatkh = weatherLocation[i].weatherElement;
-			let weatkhLen = weatkh.length;
+			weatherBox.innerHTML = weatherPrint;
+			let weatherKH = weatherLocation[i].weatherElement;
+			let weatherLen = weatherKH.length;
 
-			for (let j = 0; j < weatkhLen; j++) {
-				if (weatkh[j].elementName === "MinT") {
-					let weatDay = weatkh[j].time;
-					let weatDayTLen = weatDay.length;
+			for (let j = 0; j < weatherLen; j++) {
+				if (weatherKH[j].elementName === "MinT") {
+					let weatherDay = weatherKH[j].time;
+					let weatherDayTLen = weatherDay.length;
 
 
-					for (let k = 0; k < weatDayTLen; k++) {
-						let weatDayTime = weatDay[k].endTime.substr(5, 5);
-						if (weatDayTime === today) {
-							let MinTToday = weatDay[k];
-							MinTodayTprint += `${MinTToday.elementValue.value}`;
+					for (let k = 0; k < weatherDayTLen; k++) {
+						let weatherDayTime = weatherDay[k].endTime.substr(5, 5);
+						if (weatherDayTime === today) {
+							let MinTToday = weatherDay[k];
+							MinTodayPrint += `${MinTToday.elementValue.value}`;
 						}
-						if (weatDayTime === tomorrow) {
-							let MinTTomorrow = weatDay[k];
-							MinTomorrowTprint += `${MinTTomorrow.elementValue.value}`;
+						if (weatherDayTime === tomorrow) {
+							let MinTTomorrow = weatherDay[k];
+							MinTomorrowPrint += `${MinTTomorrow.elementValue.value}`;
 						}
-						if (weatDayTime === acquired) {
-							let MinTAcquired = weatDay[k];
-							MinAcquiredTprint += `${MinTAcquired.elementValue.value}`;
-						}
-					}
-				}
-
-				if (weatkh[j].elementName === "MaxT") {
-					let weatDay = weatkh[j].time;
-					let weatDayTLen = weatDay.length;
-
-
-					for (let k = 0; k < weatDayTLen; k++) {
-						// let weatDayTime = weatDay[k].endTime<weatDay[k].endTime  ? + weatDay[k].endTime :weatDay[k].endTime
-
-						let weatDayTime = weatDay[k].endTime.substr(5, 5);
-						if (weatDayTime === today) {
-							let MaxTToday = weatDay[k];
-							MaxTodayTprint += `${MaxTToday.elementValue.value}`;
-						}
-						if (weatDayTime === tomorrow) {
-							let MaxTTomorrow = weatDay[k];
-							MaxTomorrowTprint += `${MaxTTomorrow.elementValue.value}`;
-						}
-						if (weatDayTime === acquired) {
-							let MaxTAcquired = weatDay[k];
-							MaxAcquiredTprint += `${MaxTAcquired.elementValue.value}`;
+						if (weatherDayTime === acquired) {
+							let MinTAcquired = weatherDay[k];
+							MinAcquiredPrint += `${MinTAcquired.elementValue.value}`;
 						}
 					}
 				}
 
-				if (weatkh[j].elementName === "UVI") {
-					let weatDay = weatkh[j].time;
-					let weatDayTLen = weatDay.length;
+				if (weatherKH[j].elementName === "MaxT") {
+					let weatherDay = weatherKH[j].time;
+					let weatherDayTLen = weatherDay.length;
+
+
+					for (let k = 0; k < weatherDayTLen; k++) {
+						// let weatherDayTime = weatherDay[k].endTime<weatherDay[k].endTime  ? + weatherDay[k].endTime :weatherDay[k].endTime
+
+						let weatherDayTime = weatherDay[k].endTime.substr(5, 5);
+						if (weatherDayTime === today) {
+							let MaxTToday = weatherDay[k];
+							MaxTodayPrint += `${MaxTToday.elementValue.value}`;
+						}
+						if (weatherDayTime === tomorrow) {
+							let MaxTTomorrow = weatherDay[k];
+							MaxTomorrowPrint += `${MaxTTomorrow.elementValue.value}`;
+						}
+						if (weatherDayTime === acquired) {
+							let MaxTAcquired = weatherDay[k];
+							MaxAcquiredPrint += `${MaxTAcquired.elementValue.value}`;
+						}
+					}
+				}
+
+				if (weatherKH[j].elementName === "UVI") {
+					let weatherDay = weatherKH[j].time;
+					let weatherDayTLen = weatherDay.length;
 
 
 
-					for (let k = 0; k < weatDayTLen; k++) {
-						let weatDayTime = weatDay[k].endTime.substr(5, 5);
-						if (weatDayTime === today) {
-							let UVIValue = weatDay[k].elementValue;
-							UVITodayTprint += `${UVIValue[0].measures}`;
-							ExposureTodayTprint += `${UVIValue[1].value}`;
+					for (let k = 0; k < weatherDayTLen; k++) {
+						let weatherDayTime = weatherDay[k].endTime.substr(5, 5);
+						if (weatherDayTime === today) {
+							let UVIValue = weatherDay[k].elementValue;
+							UVITodayPrint += `${UVIValue[0].measures}`;
+							ExposureTodayPrint += `${UVIValue[1].value}`;
 						}
 					}
 
 				}
 
-				if (weatkh[j].elementName === "WeatherDescription") {
-					let weatDay = weatkh[j].time;
-					let weatDayTLen = weatDay.length;
+				if (weatherKH[j].elementName === "WeatherDescription") {
+					let weatherDay = weatherKH[j].time;
+					let weatherDayTLen = weatherDay.length;
 
 
-					ComplexTitleprint += `${weatkh[j].description}`;
+					ComplexTitlePrint += `${weatherKH[j].description}`;
 
-					for (let k = 0; k < weatDayTLen; k++) {
-						let complexValue = weatDay[k].elementValue;
-						let weatDayTime = weatDay[k].endTime.substr(5, 5);
-						let complex = weatDay[k];
+					for (let k = 0; k < weatherDayTLen; k++) {
+						let complexValue = weatherDay[k].elementValue;
+						let weatherDayTime = weatherDay[k].endTime.substr(5, 5);
+						let complex = weatherDay[k];
 						let weatherIcon = complex;
 						// (es7)includes 則不需要 判斷 !==-1
 
@@ -607,99 +620,99 @@ function weather() {
 						for (b = 0; b < 10; b++) {
 							// console.log(keyword.indexOf(status[b]) !== -1)
 							if (keyword.indexOf(weather34[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_34";
+								pushKeyWord["weatherIcons"] = "wt_34";
 							} else if (keyword.indexOf(weather33[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_33";
+								pushKeyWord["weatherIcons"] = "wt_33";
 							} else if (keyword.indexOf(weather24[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_24";
+								pushKeyWord["weatherIcons"] = "wt_24";
 							} else if (keyword.indexOf(weather20[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_20";
+								pushKeyWord["weatherIcons"] = "wt_20";
 							} else if (keyword.indexOf(weather19[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_19";
+								pushKeyWord["weatherIcons"] = "wt_19";
 							} else if (keyword.indexOf(weather17[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_17";
+								pushKeyWord["weatherIcons"] = "wt_17";
 							} else if (keyword.indexOf(weather14[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_14";
+								pushKeyWord["weatherIcons"] = "wt_14";
 							} else if (keyword.indexOf(weather12[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_12";
+								pushKeyWord["weatherIcons"] = "wt_12";
 							} else if (keyword.indexOf(weather11[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_11";
+								pushKeyWord["weatherIcons"] = "wt_11";
 							} else if (keyword.indexOf(weather10[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_10";
+								pushKeyWord["weatherIcons"] = "wt_10";
 							} else if (keyword.indexOf(weather7[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_7";
+								pushKeyWord["weatherIcons"] = "wt_7";
 							} else if (keyword.indexOf(weather5[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_5";
+								pushKeyWord["weatherIcons"] = "wt_5";
 							} else if (keyword.indexOf(weather3[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_3";
+								pushKeyWord["weatherIcons"] = "wt_3";
 							} else if (keyword.indexOf(weather2[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_2";
+								pushKeyWord["weatherIcons"] = "wt_2";
 							} else if (keyword.indexOf(weather1[b]) !== -1) {
-								pushKeyWord["wticons"] = "wt_1";
+								pushKeyWord["weatherIcons"] = "wt_1";
 							}
 						}
-						if (weatDayTime === today) {
-							IconTodayprint = complexValue.wticons;
+						if (weatherDayTime === today) {
+							IconTodayPrint = complexValue.weatherIcons;
 							ElementValueToday = complexValue.value
 							// console.log(complexValue.value.length)
-							let lenstr = 40;
-							if (complexValue.value.length > lenstr) {
-								ComplexTodayTprint =`${complexValue.value.substring(0, lenstr)} ...<a class="alink" href="#">more</a>`;
+							let lenStr = 40;
+							if (complexValue.value.length > lenStr) {
+								ComplexTodayPrint = complexValue.value.substring(0, lenStr);
 							}
-							// TODO:ComplexTodayTprint 建議使用樣板字面值的寫法。
+							// TODO:ComplexTodayPrint 建議使用樣板字面值的寫法。
 							// console.log(ElementValueToday)
 						}
-						if (weatDayTime === tomorrow) {
-							IconTomorrowprint = complexValue.wticons;
+						if (weatherDayTime === tomorrow) {
+							IconTomorrowPrint = complexValue.weatherIcons;
 						}
-						if (weatDayTime === acquired) {
-							IconAcquiredprint = complexValue.wticons;
+						if (weatherDayTime === acquired) {
+							IconAcquiredPrint = complexValue.weatherIcons;
 						}
 
-						weatherprint = `
+						weatherPrint = `
 							<div class="title">${weatherLocation[i].locationName}天氣預報</div>
 							<div class="container">
 								<ul>
 									<li>
 										<dl>
 											<dt><span>${today}</span><span>${todayDate}</span></dt>
-											<dd>${MinTodayTprint}~${MaxTodayTprint}°C</dd>
-											<dd><span class="wticons ${IconTodayprint}"></span></dd>
+											<dd>${MinTodayPrint}~${MaxTodayPrint}°C</dd>
+											<dd><span class="weatherIcons ${IconTodayPrint}"></span></dd>
 										</dl>
 									</li>
 									<li>
 										<dl>
 											<dt><span>${tomorrow}</span><span>${tomorrowDate}</span></dt>
-											<dd>${MinTomorrowTprint}~${MaxTomorrowTprint}°C</dd>
-											<dd><span class="wticons ${IconTomorrowprint}"></span></dd>
+											<dd>${MinTomorrowPrint}~${MaxTomorrowPrint}°C</dd>
+											<dd><span class="weatherIcons ${IconTomorrowPrint}"></span></dd>
 										</dl>
 									</li>
 									<li>
 										<dl>
 											<dt><span>${acquired}</span><span>${acquiredDate}</span></dt>
-											<dd>${MinAcquiredTprint}~${MaxAcquiredTprint}°C</dd>
-											<dd><span class="wticons ${IconAcquiredprint}"></span></dd>
+											<dd>${MinAcquiredPrint}~${MaxAcquiredPrint}°C</dd>
+											<dd><span class="weatherIcons ${IconAcquiredPrint}"></span></dd>
 										</dl>
 									</li>
 								</ul>
 								<dl class="Exposure">
-									<dt><i class="fas fa-umbrella-beach"></i>今日${UVITodayTprint}</dt>
-									<dd>${ExposureTodayTprint}</dd>
+									<dt><i class="fas fa-umbrella-beach"></i>今日${UVITodayPrint}</dt>
+									<dd>${ExposureTodayPrint}</dd>
 								</dl>
 								<dl class="Complex">
-									<dt><i class="fas fa-temperature-low"></i>今日${ComplexTitleprint}</dt>
-									<dd>${ComplexTodayTprint}</dd>
+									<dt><i class="fas fa-temperature-low"></i>今日${ComplexTitlePrint}</dt>
+									<dd>${ComplexTodayPrint}...<a class="alink" href="#">more</a></dd>
 								</dl>
 							</div>`;
-							weatherBox.innerHTML = weatherprint;
-							// console.log(ElementValueToday)
-							let alinkMore = document.querySelector(".weather .alink");
-							let ComplexTodayTtext = document.querySelector(".weather .Complex dd");
-							alinkMore.addEventListener('click', function(){
-								ComplexTodayTtext.innerHTML = ElementValueToday;
-								ComplexTodayTtext.parentNode.classList.remove("Complex");
-								ComplexTodayTtext.parentNode.style.cssText = "height:auto";
-							}, false);
+						weatherBox.innerHTML = weatherPrint;
+						// console.log(ElementValueToday)
+						let alinkMore = document.querySelector(".weather .alink");
+						let ComplexTodayText = document.querySelector(".weather .Complex dd");
+						alinkMore.addEventListener('click', function () {
+							ComplexTodayText.innerHTML = ElementValueToday;
+							ComplexTodayText.parentNode.classList.remove("Complex");
+							ComplexTodayText.parentNode.style.cssText = "height:auto";
+						}, false);
 					}
 				}
 			}
@@ -711,13 +724,13 @@ function weather() {
 weather();
 
 // [操作]頁數
-function numPage(pagnum) {
+function numPage(pagNum) {
 	let pageItem = document.querySelectorAll(".page_num li");
 	// [頁數]樣式
 	for (let i = 0; i < pageItem.length; i++) {
-		if (pagnum === parseFloat(pageItem[i].childNodes[0].innerHTML)) {
+		if (pagNum === parseFloat(pageItem[i].childNodes[0].innerHTML)) {
 			pageItem[i].classList.add("now");
-		} else if (pagnum === parseFloat(pageItem[i].childNodes[0].innerHTML)) {
+		} else if (pagNum === parseFloat(pageItem[i].childNodes[0].innerHTML)) {
 			pageItem[i].classList.add("now");
 		} else {
 			pageItem[i].classList.remove("now");
@@ -727,20 +740,20 @@ function numPage(pagnum) {
 				return;
 			}
 			e.preventDefault();
-			let pagnum = parseInt(e.target.innerHTML);
+			let pagNum = parseInt(e.target.innerHTML);
 			// if(e.target.nodeName === 'A')
 
-			changePage(pagnum);
+			changePage(pagNum);
 		});
 	}
 }
 
 // 總數／頁數
 function pageAverage() {
-	return Math.ceil(areaTemp.length / pageitem);
+	return Math.ceil(areaTemp.length / pageNumber);
 }
 // [操作]首頁
-KHtravel.addEventListener('click', indexHome, false);
+KH_Travel.addEventListener('click', indexHome, false);
 function indexHome() {
 	boxContainer.classList.remove("box_area");
 	areaTemp = khTravelDataArray;
@@ -750,7 +763,7 @@ function indexHome() {
 	formBox.classList.remove("newBox", "scenicBox");
 
 	if (boxContainerBody.children[0].nodeName !== "UL") {
-		reBoxprint();
+		reBoxPrint();
 	}
 	changePage(1);
 }
@@ -772,36 +785,32 @@ function nextPage() {
 	changePage(currentPage);
 }
 // 頁面顯示
-function changePage(pagnum) {
-	let pagePre = document.querySelector(".page_pre");
-	let pageNext = document.querySelector(".page_next");
-	let pageBoxNum = document.querySelector(".page_num");
+function changePage(pagNum) {
 
 	if (boxContainerFoot.style.display === "none") {
 		boxContainerFoot.style.display = "block";
 	}
-	weatherBox.style.display = "none";
 	boxContainer.children[0].style.display = "inline-block";
-	currentPage = pagnum;
+	currentPage = pagNum;
 
-	// pageitem列出
-	let pageitemPint = [];
+	// pageItem列出
+	let pageItemPint = [];
 	for (
-		let i = (pagnum - 1) * pageitem;
-		i < pagnum * pageitem && i < areaTemp.length;
+		let i = (pagNum - 1) * pageNumber;
+		i < pagNum * pageNumber && i < areaTemp.length;
 		i++
 	) {
-		pageitemPint.push(areaTemp[i]);
+		pageItemPint.push(areaTemp[i]);
 	}
-	printData(pageitemPint);
+	printData(pageItemPint);
 	// pagePre disabled樣式
-	if (pagnum === 1) {
+	if (pagNum === 1) {
 		pagePre.childNodes[0].classList.add("disabled");
 	} else {
 		pagePre.childNodes[0].classList.remove("disabled");
 	}
 	// pageNext disabled樣式
-	if (pagnum === pageAverage()) {
+	if (pagNum === pageAverage()) {
 		pageNext.childNodes[0].classList.add("disabled");
 	} else {
 		pageNext.childNodes[0].classList.remove("disabled");
@@ -809,51 +818,55 @@ function changePage(pagnum) {
 
 	//頁數
 	let stepPage = 3;
-	let stempPage = pageAverage();
+	let indexPage = pageAverage();
 	let pageNumAll = areaTemp.length;
-	pageNumTotal = stempPage > pageNumAll ? pageNumAll : stempPage;
+	pageNumTotal = indexPage > pageNumAll ? pageNumAll : indexPage;
 
-	if (stempPage < stepPage * 2 + 6) {
+	if (indexPage < stepPage * 2 + 6) {
 		pageAdd(1, pageNumTotal + 1);
 		pageBoxNum.innerHTML = pagesAll.pageAdd;
-	} else if (pagnum < stepPage * 2 + 1) {
+	} else if (pagNum < stepPage * 2 + 1) {
 		pageAdd(1, stepPage * 2 + 4);
 		pageAddLast();
 		pageBoxNum.innerHTML = pagesAll.pageAdd + pagesAll.pageAddLast;
-	} else if (pagnum >= stempPage - stepPage * 2) {
-		pageAdd(stempPage - stepPage * 2 - 2, stempPage + 1);
+	} else if (pagNum >= indexPage - stepPage * 2) {
+		pageAdd(indexPage - stepPage * 2 - 2, indexPage + 1);
 		pageAddFirst();
 		pageBoxNum.innerHTML = pagesAll.pageAddFirst + pagesAll.pageAdd;
 	} else {
 		pageAddFirst();
-		pageAdd(pagnum - stepPage * 2 + 3, pagnum + stepPage * 2 - 2);
+		pageAdd(pagNum - stepPage * 2 + 3, pagNum + stepPage * 2 - 2);
 		pageAddLast();
 		pageBoxNum.innerHTML =
 			pagesAll.pageAddFirst + pagesAll.pageAdd + pagesAll.pageAddLast;
 	}
-	numPage(pagnum);
+	numPage(pagNum);
 	pagePre.addEventListener('click', prevPage, false);
 	pageNext.addEventListener('click', nextPage, false);
 }
-// TODO:函式 pageAdd、pageAddFirst、pageAddLast 的變數 pagetabs 建議使用樣板字面值的寫法。
+// TODO:函式 pageAdd、pageAddFirst、pageAddLast 的變數 pageTabs 建議使用樣板字面值的寫法。
 function pageAdd(startPage, endPage) {
-	let pagetabs = "";
+	let pageTabs = ``;
 	for (let i = startPage; i < endPage; i++) {
-		pagetabs += `<li><a href="#">${i}</a></li>`;
+		pageTabs += `<li><a href="#">${i}</a></li>`;
 	}
-	pagesAll["pageAdd"] = pagetabs;
+	pagesAll["pageAdd"] = pageTabs;
 }
+
 function pageAddFirst() {
-	let pagetabs = "";
-	pagetabs += `<li><a href="#">1</a></li><li>...</li>`;
-	pagesAll["pageAddFirst"] = pagetabs;
+	let pageTabs = ``;
+	pageTabs += `<li><a href="#">1</a></li><li>...</li>`;
+	pagesAll["pageAddFirst"] = pageTabs;
 }
+
 function pageAddLast() {
-	let pagetabs = "";
-	pagetabs += `<li>...</li><li><a href="#">${pageAverage()}</a></li>`;
-	pagesAll["pageAddLast"] = pagetabs;
+	let pageTabs = ``;
+	pageTabs += `<li>...</li><li><a href="#">${pageAverage()}</a></li>`;
+	pagesAll["pageAddLast"] = pageTabs;
 }
-function pagefinish() {
+
+function pageFinish() {
 	pageBoxNum.innerHTML =
 		pagesAll.pageAddFirst + pagesAll.pageAdd + pagesAll.pageAddLast;
 }
+pageFinish()
