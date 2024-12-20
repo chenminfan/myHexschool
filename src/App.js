@@ -11,9 +11,9 @@ import HtmlPageIndex from './page/HtmlPageIndex';
 export default function App() {
   return (
     <Routes>
-      <Route path='/' element={<ReactCraApp />}></Route>
       <Route element={<PageIndex />}>
-        <Route path='/js' element={<HtmlPageIndex />}></Route>
+        <Route path='/' element={<HtmlPageIndex />}></Route>
+        <Route path='/reactCart' element={<ReactCraApp />}></Route>
       </Route>
       {/* <Route exact path="/js" render={() => { window.location.href = "./hexschool/js/index.html" }} /> */}
 
