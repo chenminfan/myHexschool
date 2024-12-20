@@ -69,6 +69,10 @@ body {
   min-height: 100%;
 }
 
+.bem {
+  height: 100vh;
+}
+
 .c-card {
   display: flex;
   flex-direction: column;
@@ -142,6 +146,9 @@ body {
 }
 .c-input__panel {
   margin-right: 50px;
+}
+.c-input__panel + .o-result {
+  margin-left: 8px;
 }
 .c-input__item + .c-input__item {
   margin-top: 23px;

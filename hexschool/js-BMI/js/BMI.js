@@ -4,66 +4,66 @@ let resultSubmit = document.querySelector('.o-btn--submit')
 // BMI-result
 let resultGroup = document.querySelector('.o-list-group')
 let resultReset = document.querySelector('.o-result')
-let noteJson = JSON.parse(localStorage.getItem("BMInote") ) || [];
+let noteJson = JSON.parse(localStorage.getItem("BMI_Note")) || [];
 updateNote(noteJson)
 
-resultSubmit.addEventListener('click',calculateBEM)
-resultReset.addEventListener('click',calculateBEM)
-function calculateBEM(){
+resultSubmit.addEventListener('click', calculateBEM)
+resultReset.addEventListener('click', calculateBEM)
+function calculateBEM() {
 	let inputHeight = inputItemHeight.value;
 	let inputWeight = inputItemWeight.value;
 	// 轉成整數
 	let BMIHeight = parseInt(inputHeight);
 	let BMIWeight = parseInt(inputWeight);
-	let HeightConvert = (BMIHeight/100);
+	let HeightConvert = (BMIHeight / 100);
 	// 換算單位
-	let BMIAverage = ((BMIWeight / (HeightConvert * HeightConvert) ))
+	let BMIAverage = ((BMIWeight / (HeightConvert * HeightConvert)))
 	// 平均值
 	let BMIAvg = BMIAverage.toFixed(2);
 	// 判斷輸入是否為空值
 
 	// TODO:0516條件回傳及變數重複
-	if(inputHeight === "" || inputWeight === ""){
+	if (inputHeight === "" || inputWeight === "") {
 		alert("請輸入資料！");
-	}else if(BMIAverage >= 35){
-		let BMIClass = 'morbidobesity';
+	} else if (BMIAverage >= 35) {
+		let BMIClass = 'morbid_obesity';
 		let BMIText = "重度肥胖";
-		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
-	}else if(30 <= BMIAvg && BMIAvg < 35){
-		let BMIClass = 'moderateobesity';
+		addNote(BMIClass, BMIText, BMIAvg, BMIWeight, BMIHeight)
+	} else if (30 <= BMIAvg && BMIAvg < 35) {
+		let BMIClass = 'moderate_obesity';
 		let BMIText = "中度肥胖";
-		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
-	}else if(27 <= BMIAvg && BMIAvg< 30 ){
-		let BMIClass = 'mildobesity';
+		addNote(BMIClass, BMIText, BMIAvg, BMIWeight, BMIHeight)
+	} else if (27 <= BMIAvg && BMIAvg < 30) {
+		let BMIClass = 'mild_obesity';
 		let BMIText = "輕度肥胖";
-		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
-	}else if(24 <= BMIAvg && BMIAvg < 27){
+		addNote(BMIClass, BMIText, BMIAvg, BMIWeight, BMIHeight)
+	} else if (24 <= BMIAvg && BMIAvg < 27) {
 		let BMIClass = 'overweight';
 		let BMIText = "過重";
-		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
-	}else if(18.5 <= BMIAvg && BMIAvg < 24){
-		let BMIClass = 'normalweight';
+		addNote(BMIClass, BMIText, BMIAvg, BMIWeight, BMIHeight)
+	} else if (18.5 <= BMIAvg && BMIAvg < 24) {
+		let BMIClass = 'normal_weight';
 		let BMIText = "理想";
-		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
-	}else if(BMIAvg < 18.5){
+		addNote(BMIClass, BMIText, BMIAvg, BMIWeight, BMIHeight)
+	} else if (BMIAvg < 18.5) {
 		let BMIClass = 'underweight';
 		let BMIText = "過輕";
-		addNote(BMIClass,BMIText,BMIAvg,BMIWeight,BMIHeight)
+		addNote(BMIClass, BMIText, BMIAvg, BMIWeight, BMIHeight)
 	}
 }
-function addNote(BMIClass,BMIText,BMIAvg,BMIHeight,BMIWeight){
+function addNote(BMIClass, BMIText, BMIAvg, BMIHeight, BMIWeight) {
 	// console.log(BMIClass,BMIText,BMIAvg,Height,Weight)
 	let time = new Date();
-	let BMItimeYYYY = time.getFullYear();
-	let BMItimeMM = time.getMonth();
-	let BMItimeDD = time.getDate();
-	let BMInoteArray = {
-		class:BMIClass,
-		title:BMIText,
-		avg:BMIAvg,
-		h:BMIHeight,
-		w:BMIWeight,
-		data:BMItimeDD + '-' + (BMItimeMM+1) + '-' + BMItimeYYYY
+	let BMI_TimeYYYY = time.getFullYear();
+	let BMI_TimeMM = time.getMonth();
+	let BMI_TimeDD = time.getDate();
+	let BMI_NoteArray = {
+		class: BMIClass,
+		title: BMIText,
+		avg: BMIAvg,
+		h: BMIHeight,
+		w: BMIWeight,
+		data: BMI_TimeDD + '-' + (BMI_TimeMM + 1) + '-' + BMI_TimeYYYY
 	}
 	resultReset.innerHTML = `
 		<div class="o-result__item o-result__item--${BMIClass}">
@@ -73,19 +73,19 @@ function addNote(BMIClass,BMIText,BMIAvg,BMIHeight,BMIWeight){
 			</div>
 			<span class="o-result__item__text">${BMIText}</span>
 		</div>`
-	resultSubmit.remove();
-	noteJson.push(BMInoteArray);
+	// resultSubmit.remove();
+	noteJson.push(BMI_NoteArray);
 	// 字串轉陣列
-	localStorage.setItem("BMInote", JSON.stringify(noteJson))
+	localStorage.setItem("BMI_Note", JSON.stringify(noteJson))
 
 
 	updateNote(noteJson)
 }
-function updateNote(noteJson){
+function updateNote(noteJson) {
 	let noteJsonLen = noteJson.length;
-	let print ="";
-	if(noteJsonLen === 0){
-		resultGroup.innerHTML=`
+	let print = "";
+	if (noteJsonLen === 0) {
+		resultGroup.innerHTML = `
 		<div class="o-list-group__item">
 				<div class="o-condition">
 					<div class="o-condition__item o-condition__item--text">
@@ -94,9 +94,9 @@ function updateNote(noteJson){
 				</div>
 			</div>
 		`
-	}else{
-		for(let i = 0;i<noteJsonLen;i++){
-			print +=`
+	} else {
+		for (let i = 0; i < noteJsonLen; i++) {
+			print += `
 			<div class="o-list-group__item o-list-group__item--${noteJson[i].class}" data-num="${i}">
 				<div class="o-condition">
 					<div class="o-condition__item o-condition__item--text">
@@ -123,14 +123,14 @@ function updateNote(noteJson){
 	}
 }
 
-function deleteNote(e){
+function deleteNote(e) {
 	e.preventDefault();
-	if(e.target.nodeName !== 'BUTTON'){
+	if (e.target.nodeName !== 'BUTTON') {
 		return;
 	}
 	let num = e.target.parentNode.parentNode.parentNode.dataset.num;
-	noteJson.splice(num,1);
-	localStorage.setItem("BMInote",JSON.stringify(noteJson));
+	noteJson.splice(num, 1);
+	localStorage.setItem("BMI_Note", JSON.stringify(noteJson));
 	updateNote(noteJson)
 }
-resultGroup.addEventListener('click',deleteNote)
+resultGroup.addEventListener('click', deleteNote)

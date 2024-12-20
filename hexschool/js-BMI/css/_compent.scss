@@ -1,3 +1,6 @@
+.bem {
+  height: 100vh;
+}
 .c {
   &-card {
     display: flex;
@@ -26,7 +29,7 @@
       height: 100%;
       text-align: center;
       &::after {
-        content: "";
+        content: '';
         display: block;
       }
       .c-title {
@@ -39,14 +42,13 @@
       display: inline-flex;
       width: 117px;
       height: 117px;
-      background: url("https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png")
-        no-repeat;
+      background: url('https://hexschool.github.io/JavaScript_HomeWork/assets/BMICLogo.png') no-repeat;
       background-size: contain;
       text-indent: -999px;
       overflow: hidden;
       &--primary {
         margin-right: 97px;
-        background: url("../images/BMILogo.png") no-repeat;
+        background: url('../images/BMILogo.png') no-repeat;
         background-size: contain;
       }
     }
@@ -67,7 +69,6 @@
     }
   }
 }
-
 .c-input {
   display: flex;
   flex-direction: row;
@@ -75,6 +76,9 @@
   padding: 74px 0 74px 0;
   &__panel {
     margin-right: 50px;
+    + .o-result {
+      margin-left: 8px;
+    }
   }
   &__item {
     & + & {
