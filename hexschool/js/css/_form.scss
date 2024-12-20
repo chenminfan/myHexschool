@@ -1,0 +1,54 @@
+.form {
+  margin: auto auto 20px;
+
+  .header {
+    position: relative;
+    max-width: 1024px;
+    height: 380px;
+    margin: auto;
+    text-align: center;
+  }
+
+  .content {
+    padding: 102px 40px 5px;
+    min-height: calc(100vh - 92px);
+    background: $color_white;
+  }
+}
+
+.item .box {
+  visibility: hidden;
+
+  > li.nodata {
+    display: block;
+    padding: 10px;
+    color: $color_white;
+  }
+}
+.item:not(.newItem) {
+  a {
+    position: relative;
+  }
+  .box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 144px;
+    left: 0;
+    right: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: $color_black;
+    overflow: hidden;
+  }
+}
+
+.foot {
+  position: absolute;
+  padding: 5px;
+  left: 0;
+  right: 0;
+  bottom: -40px;
+  text-align: center;
+}

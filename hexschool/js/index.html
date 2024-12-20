@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!--TODO:先引入第三方 plugin，最後再引入自己的檔案-->
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+	<link rel="stylesheet" href="css/all.css">
+	<title>高雄旅遊網資訊篩選</title>
+</head>
+<body>
+	<div class="form">
+		<div class="header">
+			<h1 class="KH_travel"><a href="#">高雄旅遊網資訊篩選</a></h1>
+			<nav class="nav">
+				<div class="item newItem">
+					<a href="#">公告</a>
+				</div>
+				<div class="item">
+					<a href="#">旅遊區域</a>
+					<div class="box navArea"></div>
+				</div>
+			</nav>
+			<div class="weather"></div>
+			<div class="hotArea">
+				<div class="title">熱門行政區</div>
+				<div class="hotAreaBox"></div>
+			</div>
+		</div>
+		<div class="content">
+
+			
+			<div class="line"></div>
+			<div class="boxContainer box_area">
+				<div class="head"></div>
+				<div class="body">
+					<ul class="scenic">
+					</ul>
+					<div class="scenic_area" style="display: none"></div>
+				</div>
+				<div class="foot">
+					<div class="pageBox">
+						<div class="page_pre"><a href="#"><i class="fas fa-angle-left"></i></a></div>
+						<ul class="page_num">
+						</ul>
+						<div class="page_next"><a href="#"><i class="fas fa-angle-right"></i></a></div>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<div class="footer">
+			<ul class="copyright">
+				<li>高雄旅遊網</li>
+			</ul>
+			<ul class="source">
+				<li>資料來源：高雄市政府 </li>
+			</ul>
+		</div>
+	</div>
+	
+	<!--js-->
+	<script src="js/Kaohsiung_Travel_JSON.js"></script>
+	<script src="js/weather_JSON.js"></script>
+	<!-- 當無資料的時候 -->
+	<!-- <script src="js/Kaohsiung_Travel_JSONnodata.js"></script> -->
+	<script src="js/Kaohsiung_Travel.js"></script>
+
+</body>
+</html>
