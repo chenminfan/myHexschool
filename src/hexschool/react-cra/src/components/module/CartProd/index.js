@@ -9,7 +9,7 @@ const CartProd = (props) => {
   const [state, dispatch] = useContext(ShoppingContent);
   const memoTotal = useMemo(() => {
     return item.price * item.prodQty;
-  }, [state])
+  }, [item])
   const handleSelect = (e) => {
     const prodQty = parseInt(e.target.value);
     dispatch({

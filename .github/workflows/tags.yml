@@ -8,6 +8,12 @@ jobs:
   # Build job
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_REACT_APP_UNSPLASH_PHOTO_PATH: ${{ secrets.REACT_APP_REACT_APP_UNSPLASH_PHOTO_PATH }}
+      REACT_APP_REACT_APP_UNSPLASH_PATH: ${{ secrets.REACT_APP_REACT_APP_UNSPLASH_PATH }}
+      REACT_APP_UNSPLASH_ACCESS: ${{ secrets.REACT_APP_UNSPLASH_ACCESS }}
+      DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
+
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3
@@ -19,8 +25,6 @@ jobs:
         run: |
           npm install
           npm run build
-        env:
-          DEPLOY_SECRET: ${{ secrets.DEPLOY_SECRET }}
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:

@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
   const [state] = useContext(ShoppingContent);
-  const { headerLink = '/', headerTitle } = props;
+  const { headerLink = '/#', headerTitle } = props;
   return (
     <header>
       <nav className="navbar navbar-expand-lg bg-body-tertiary">

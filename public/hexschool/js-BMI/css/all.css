@@ -383,9 +383,8 @@ body {
   .o-condition .o-condition__item {
     padding: 17px 5px;
   }
-
   .o-btn,
-.o-result__item__average {
+  .o-result__item__average {
     display: inline-flex;
     margin: 20px auto;
   }
