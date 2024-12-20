@@ -1,12 +1,17 @@
 {
   "files": {
-    "main.js": "/static/js/main.663c8e9a.js",
-    "static/js/453.7b3b4ed2.chunk.js": "/static/js/453.7b3b4ed2.chunk.js",
-    "index.html": "/index.html",
-    "main.663c8e9a.js.map": "/static/js/main.663c8e9a.js.map",
-    "453.7b3b4ed2.chunk.js.map": "/static/js/453.7b3b4ed2.chunk.js.map"
+    "main.css": "/myHexschool/static/css/main.c45facba.css",
+    "main.js": "/myHexschool/static/js/main.fa86d9ea.js",
+    "static/js/453.7b3b4ed2.chunk.js": "/myHexschool/static/js/453.7b3b4ed2.chunk.js",
+    "static/media/bootstrap-icons.woff?": "/myHexschool/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/myHexschool/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "index.html": "/myHexschool/index.html",
+    "main.c45facba.css.map": "/myHexschool/static/css/main.c45facba.css.map",
+    "main.fa86d9ea.js.map": "/myHexschool/static/js/main.fa86d9ea.js.map",
+    "453.7b3b4ed2.chunk.js.map": "/myHexschool/static/js/453.7b3b4ed2.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.663c8e9a.js"
+    "static/css/main.c45facba.css",
+    "static/js/main.fa86d9ea.js"
   ]
 }
