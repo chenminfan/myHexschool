@@ -756,6 +756,8 @@ function pageAverage() {
 KH_Travel.addEventListener('click', indexHome, false);
 function indexHome() {
 	boxContainer.classList.remove("box_area");
+	scenicArea.style.display = "none";
+	scenicItem.style.display = "flex";
 	areaTemp = khTravelDataArray;
 	pageAverage(areaTemp);
 	boxContainer.children[0].textContent = "高雄市";
