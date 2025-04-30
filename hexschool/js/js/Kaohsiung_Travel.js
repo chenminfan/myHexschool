@@ -1,4 +1,32 @@
 // TODO:出現許多重複宣告的變數，調整宣告變數，建議使用 let、const 來取代 var，雙等號改成三等號。
+const apiUrl = "https://api.kcg.gov.tw/api/service/Get/cb50902c-3681-43ec-89da-705f68eafb88";
+async function fetchTravelData(apiUrl) {
+	try {
+		// 發送 API 請求
+		const response = await fetch(apiUrl);
+		if (!response.ok) {
+			throw new Error(`HTTP 錯誤！狀態碼: ${response.status}`);
+		}
+
+		// 解析回應資料為 JSON
+		const data = await response.json();
+		console.log(data); // 確認資料結構
+
+		// 提取景點陣列
+		// const DataArray = data.data.AttractionList.Attractions.Attraction;
+		const DataArray = data.data;
+		// console.log(data)
+		// 返回陣列
+		return DataArray;
+
+	} catch (error) {
+		// 錯誤處理
+		console.error("錯誤:", error);
+		return []; // 如果出現錯誤，返回空陣列
+	}
+}
+fetchTravelData(apiUrl);
+let khTravelDataHotel = [];
 const khTravelDataArray = khTravelData.data.XML_Head.Infos.Info;
 const weatherLocation = weatherData.cwbopendata.dataset.locations.location;
 const weatherLocationLen = weatherLocation.length;
@@ -10,6 +38,7 @@ const boxContainerBody = document.querySelector(".boxContainer .body");
 const boxContainerFoot = document.querySelector(".boxContainer .foot");
 const scenicItem = document.querySelector(".scenic");
 const newItem = document.querySelector(".newItem");
+let navArea_test = document.querySelector(".navArea_test");
 const navArea = document.querySelector(".navArea");
 const hotArea = document.querySelector(".hotAreaBox");
 const pageBox = document.querySelector(".pageBox");
@@ -28,6 +57,7 @@ let pagNum = 1;
 // [變數]前後頁暫存的顯示頁
 let currentPage = 1;
 let popularAreaArray = [];
+
 
 // nav展開
 const body = document.querySelector("body");
@@ -68,6 +98,25 @@ function toggleExpand(activePanel) {
 	}
 }
 
+
+async function initializeData() {
+	khTravelDataHotel = await fetchTravelData(apiUrl);
+
+	if (khDataLen > 0) {
+		// 資料準備好後執行篩選
+		areaFilter();
+	} else {
+		console.log("沒有資料可供篩選！");
+	}
+}
+const obj = { name: 'MinFan' };
+
+function greet(greeting) {
+	console.log(`${greeting}, ${this.name}`);
+}
+
+greet.apply(obj, ['Hello', 'hi']); // 輸出: Hello, MinFan
+
 //區域篩選
 function areaFilter() {
 	// 回傳printData印出所有資料
@@ -93,16 +142,22 @@ function areaFilter() {
 		return areaFilterArray.indexOf(ele) === pos;
 	});
 	let printArea = "";
+	let popularHotel = [];
+	let printHotel = "";
 	for (let i = 0; i < areaArray.length; i++) {
 		printArea += `<div class="areaItem"><a class="btn btn-area" href="#">${areaArray[i]}</a></div>`;
 		popularAreaArray.push({ area: areaArray[i], frequency: 0 });
 	}
+	for (let i = 0; i < khTravelDataHotel.length; i++) {
+		printHotel += `<div class="areaItem" style="display:inline">${khTravelDataHotel[i].觀光旅館名稱}</div>`;
+	}
+	navArea_test.innerHTML = printHotel;
 	navArea.innerHTML = printArea;
 
 }
 areaFilter();
 newItem.addEventListener('click', newKH);
-
+initializeData();
 //公告
 // TODO:已調整，變數 boxContainer 等同於變數 newBox_area
 function newKH() {
@@ -214,7 +269,6 @@ function popularHotArea(popular) {
 // 熱門行政區，點擊率高的區域印出
 function hotPrint() {
 	popularHotArea();
-	console.log(popularAreaArray)
 	let hotPrintArea = "";
 	for (let i = 0; i < popularAreaArray.length && i < 5; i++) {
 		popularAreaArray = popularAreaArray.sort(function (a, b) {
@@ -756,6 +810,8 @@ function pageAverage() {
 KH_Travel.addEventListener('click', indexHome, false);
 function indexHome() {
 	boxContainer.classList.remove("box_area");
+	scenicArea.style.display = "none";
+	scenicItem.style.display = "flex";
 	areaTemp = khTravelDataArray;
 	pageAverage(areaTemp);
 	boxContainer.children[0].textContent = "高雄市";
