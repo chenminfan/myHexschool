@@ -5,6 +5,7 @@ import { useState } from 'react'
 const LinkProject = [
   { name: 'Javascript 高雄旅遊網', link: '/hexschool/js/index.html' },
   { name: 'Javascript BMI', link: '/hexschool/js-BMI/index.html' },
+  { name: 'Javascript 9x9 乘法表', link: '/hexschool/js-Multiplication/index.html' },
   { name: 'React Cart', link: '/reactCart' },
   { name: 'React Daily', link: '/reactDaily' }
 ]

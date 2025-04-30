@@ -1,0 +1,138 @@
+@import 'reset';
+body {
+  color: #2eb738;
+  background-color: #f0f0f0;
+  box-sizing: border-box;
+  line-height: 1;
+}
+.material {
+  font-family: 'Material Icons Outlined';
+}
+.multiplication {
+  max-width: 1280px;
+  margin: auto;
+  &-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 80px 85px;
+    margin: -20px -15px;
+  }
+}
+.icon {
+  &-line {
+    width: calc(100% - 48px);
+    margin: 0 22px;
+
+    &:before {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #2eb738;
+    }
+  }
+  &-list {
+    display: flex;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: calc(100% / 3);
+  min-height: 360px;
+  max-width: 350px;
+  height: 100%;
+  margin: 20px 15px;
+
+  &-number {
+    max-width: calc(350px - (40px * 2));
+    min-height: calc(360px - (34px + 64px));
+    padding: 34px 40px 64px;
+    box-shadow: 0px 3px 10px #d8d8d8;
+    border-radius: 100px 0px 30px 0px;
+    background-color: #ffffff;
+  }
+  &-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 100%;
+    max-height: calc(360px - 64px);
+  }
+  &-item {
+    display: flex;
+    align-items: center;
+    min-height: 33px;
+    font-size: 24px;
+    & + & {
+      margin-top: 8px;
+    }
+    &:nth-child(2),
+    &:nth-child(5),
+    &:last-child {
+      margin-top: 0;
+    }
+  }
+
+  &-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 128px;
+    width: 100%;
+    height: 154px;
+    text-shadow: 4px 3px 0px #f0f0f0;
+  }
+  &-index {
+    height: 154px;
+    box-shadow: none;
+    background-color: transparent;
+    h1 {
+      font-size: 56px;
+      height: 78px;
+    }
+    h2 {
+      font-size: 24px;
+    }
+    &-head {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+    }
+    &-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: calc(360px - 48px);
+    }
+  }
+  &-icon {
+    > span {
+      font-size: 20px;
+    }
+  }
+}
