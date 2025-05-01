@@ -218,6 +218,11 @@ body {
   .box h2 {
     font-size: 16px;
   }
+  .box-title {
+    font-size: 40px;
+    height: auto;
+    margin: 8px;
+  }
   .box-list {
     flex-wrap: nowrap;
     align-items: center;
