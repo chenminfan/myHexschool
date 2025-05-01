@@ -183,4 +183,50 @@ body {
 }
 .box-icon > span {
   font-size: 20px;
+}
+
+@media screen and (max-width: 1024px) {
+  .multiplication-list {
+    justify-content: space-between;
+  }
+  .box {
+    width: calc(100% - 64px);
+  }
+}
+@media screen and (max-width: 768px) {
+  .multiplication {
+    display: flex;
+    flex-direction: column;
+    max-width: inherit;
+    width: 100%;
+  }
+  .multiplication-list {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+  }
+  .box {
+    max-width: 100%;
+    margin: 8px 16px;
+    padding: 8px 16px 16px;
+    min-height: inherit;
+  }
+  .box h1 {
+    font-size: 32px;
+  }
+  .box h2 {
+    font-size: 16px;
+  }
+  .box-list {
+    flex-wrap: nowrap;
+    align-items: center;
+    max-height: 100%;
+  }
+  .box-item {
+    min-width: 132px;
+  }
+  .box-item:nth-child(2), .box-item:nth-child(5), .box-item:last-child {
+    margin-top: 8px;
+  }
 }/*# sourceMappingURL=all.css.map */
