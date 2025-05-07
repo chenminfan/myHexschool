@@ -54,7 +54,7 @@ table {
 
 body {
   color: #2eb738;
-  background-color: #f0f0f0;
+  background-color: #2e3b2c;
   box-sizing: border-box;
   line-height: 1;
 }
@@ -164,6 +164,7 @@ body {
   height: 350px;
   border-radius: 66px;
   background-color: #425846;
+  box-shadow: 0 0 20px 0px #191f18;
 }
 @media screen and (max-width: 320px) {
   .clock-app {
