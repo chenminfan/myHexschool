@@ -80,8 +80,8 @@ body {
 .clock-panel-hour-morning, .clock-panel-hour-afternoon {
   position: absolute;
   display: flex;
-  width: 130px;
-  height: 130px;
+  width: 100%;
+  height: 100%;
   align-items: center;
   justify-content: center;
 }
@@ -90,8 +90,8 @@ body {
   display: flex;
   justify-content: center;
   margin: auto;
-  height: 175px;
-  width: 175px;
+  height: 190px;
+  width: 190px;
 }
 .clock-panel-minute, .clock-panel-minute-start {
   position: absolute;
@@ -184,17 +184,17 @@ body {
 }
 .clockTime > div {
   position: absolute;
-  top: -16px;
+  top: 0;
   bottom: 0;
   left: 0;
   right: 0;
   width: 8px;
-  height: 45%;
   margin: auto;
 }
 .clockTime-minute {
   display: flex;
   justify-content: center;
+  height: 52%;
   z-index: 3;
 }
 .clockTime-minute::after {
@@ -210,8 +210,8 @@ body {
   content: "";
   position: absolute;
   width: 8px;
-  height: calc(60% + 8px);
-  border-radius: 8px;
+  height: calc(60% - 8px);
+  border-radius: 8px 8px 0 0;
   background: #e07932;
 }
 .clockTime-hour {
@@ -219,6 +219,7 @@ body {
   justify-content: center;
   border-radius: 0 0 20px 20px;
   transform: rotate(90deg);
+  height: 45%;
   z-index: 2;
 }
 .clockTime-hour::before {
@@ -234,7 +235,7 @@ body {
   content: "";
   position: absolute;
   width: 10px;
-  height: 50%;
+  height: 52%;
   background-color: #eff0ef;
 }
 .clockTime-second {
@@ -242,6 +243,7 @@ body {
   flex-direction: column;
   align-items: center;
   transform: rotate(180deg);
+  height: 66%;
   z-index: 1;
 }
 .clockTime-second-line {
