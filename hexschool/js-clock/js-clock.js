@@ -10,9 +10,9 @@ let clockTimeSecond = document.querySelector('.clockTime-second');
 
 function getClock() {
   for (let i = 1; i <= 12; i++) {
-    clockMorningItem.innerHTML += `<div class="hour-item hour-item-morning" style="transform: rotate(${i * 30}deg) translate(90px) rotate(${-i * 30}deg)">${i}</div>`;
+    clockMorningItem.innerHTML += `<div class="hour-item hour-item-morning" style="transform: rotate(${i * 30}deg) translate(0,-90px)  rotate(${-i * 30}deg)">${i}</div>`;
+    clockAfternoonItem.innerHTML += `<div class="hour-item hour-item-afternoon" style="transform: rotate(${i * 30}deg) translate(0, -130px) rotate(${-i * 30}deg)">${i + 12}</div>`;
     clockLine.innerHTML += `<div class="hour-item-line" style="transform: rotate(${i * 30}deg)"></div>`;
-    clockAfternoonItem.innerHTML += `<div class="hour-item hour-item-afternoon" style="transform: rotate(${i * 30}deg) translate(130px) rotate(${-i * 30}deg)">${i + 12}</div>`;
 
     minuteStart.innerHTML += `<div class="minute-item minute-item-start" style="transform: rotate(${(i * 30) - 15}deg)">✦</div>`;
   }
