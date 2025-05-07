@@ -1,0 +1,298 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  color: #2eb738;
+  background-color: #2e3b2c;
+  box-sizing: border-box;
+  line-height: 1;
+}
+
+.material {
+  font-family: "Material Icons Outlined";
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+.clock-panel-hour {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.clock-panel-hour-morning, .clock-panel-hour-afternoon {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.clock-panel-hour-line {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  height: 190px;
+  width: 190px;
+}
+.clock-panel-minute, .clock-panel-minute-start {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+.clock .hour-item {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 20px;
+  font-size: 10px;
+  color: #e9ecea;
+  z-index: 999;
+}
+.clock .hour-item-line {
+  display: flex;
+  width: 13px;
+  height: 50%;
+  transform-origin: bottom center;
+  position: absolute;
+  justify-content: center;
+}
+.clock .hour-item-line::before {
+  content: "";
+  position: absolute;
+  bottom: calc(100% + 8px);
+  width: 1px;
+  height: 18px;
+  background-color: #e07932;
+}
+.clock .minute-item {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: 50%;
+  left: calc(50% - 8px);
+  width: 12px;
+  height: 118px;
+  transform-origin: bottom center;
+  z-index: 1;
+}
+.clock .minute-item::before {
+  content: "";
+  display: flex;
+  width: 4px;
+  height: 4px;
+  border-radius: 100%;
+  background-color: #fff;
+}
+.clock .minute-item-start {
+  color: #e07932;
+  font-size: 10px;
+  width: auto;
+  height: 120px;
+}
+.clock .minute-item-start::before {
+  display: none;
+}
+.clock-app {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 350px;
+  height: 350px;
+  border-radius: 66px;
+  background-color: #425846;
+  box-shadow: 0 0 20px 0px #191f18;
+}
+@media screen and (max-width: 320px) {
+  .clock-app {
+    width: 100%;
+    height: 100%;
+    border-radius: unset;
+  }
+}
+.clock-panel {
+  width: 290px;
+  height: 290px;
+  border-radius: 100%;
+  border: 4px solid #29361a;
+  background-color: #2e3b2c;
+}
+.clockTime {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 290px;
+  height: 290px;
+  margin: auto;
+}
+.clockTime > div {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 8px;
+  margin: auto;
+}
+.clockTime-minute {
+  display: flex;
+  justify-content: center;
+  height: 52%;
+  z-index: 3;
+}
+.clockTime-minute::after {
+  content: "";
+  position: absolute;
+  margin-top: 4px;
+  width: 1px;
+  height: 32px;
+  background-color: #fff;
+  z-index: 1;
+}
+.clockTime-minute::before {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: calc(60% - 8px);
+  border-radius: 8px 8px 0 0;
+  background: #e07932;
+}
+.clockTime-hour {
+  display: flex;
+  justify-content: center;
+  border-radius: 0 0 20px 20px;
+  transform: rotate(90deg);
+  height: 45%;
+  z-index: 2;
+}
+.clockTime-hour::before {
+  content: "";
+  position: absolute;
+  margin: auto;
+  width: 2px;
+  height: 18px;
+  background-color: #434f41;
+  z-index: 5;
+}
+.clockTime-hour::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 52%;
+  background-color: #eff0ef;
+}
+.clockTime-second {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: rotate(180deg);
+  height: 66%;
+  z-index: 1;
+}
+.clockTime-second-line {
+  width: 2px;
+  height: 36.5px;
+  background: #b2e64b;
+  transform: rotate(180deg);
+  left: 0.5px;
+  position: relative;
+}
+.clockTime-second-line::before {
+  content: "";
+  position: absolute;
+  top: -7.5px;
+  left: -2px;
+  width: 2px;
+  height: 10px;
+  transform: rotate(-30deg);
+  border-radius: 5px;
+  background-color: #b2e64b;
+}
+.clockTime-second-line + .clockTime-second-line {
+  margin-top: 24px;
+  height: 33px;
+  transform: rotate(360deg);
+}
+.clockTime-second-diagonal::before {
+  content: "";
+  position: absolute;
+  top: 50px;
+  width: 2px;
+  height: 15px;
+  border-radius: 5px;
+  transform: rotate(-146deg);
+  background: #b2e64b;
+}
+.clockTime-second-point {
+  width: 7px;
+  height: 7px;
+  border: 1px solid #2e3c2c;
+  border-radius: 100%;
+  background: #b2e64b;
+  box-shadow: 0 0 0px 1px #b2e64b;
+}/*# sourceMappingURL=all.css.map */
