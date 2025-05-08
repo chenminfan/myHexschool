@@ -106,10 +106,10 @@ function updateNote(noteJson) {
 						BMI<span class="o-condition__item--value">${noteJson[i].avg}</span>
 					</div>
 					<div class="o-condition__item o-condition__item--weight">
-						weight<span class="o-condition__item--value">${noteJson[i].w}kg</span>
+						身高<span class="o-condition__item--value">${noteJson[i].w}cm</span>
 					</div>
 					<div class="o-condition__item o-condition__item--height">
-						height<span class="o-condition__item--value">${noteJson[i].h}cm</span>
+						體重<span class="o-condition__item--value">${noteJson[i].h}kg</span>
 					</div>
 					<div class="o-condition__item o-condition__item--data">
 						<span class="o-condition__item--value">${noteJson[i].data}</span>
