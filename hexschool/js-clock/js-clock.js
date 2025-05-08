@@ -57,4 +57,4 @@ function getClockSeconds() {
 getClock()
 setInterval(getClockSeconds, 1000)
 setInterval(getClockMinutes, 60 * 1000)
-setInterval(getClockHours, 60 * 60 * 1000)
+setInterval(getClockHours, 60 * 1000)
