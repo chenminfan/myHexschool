@@ -7,7 +7,8 @@ const LinkProject = [
   { name: 'Javascript BMI', link: '/hexschool/js-BMI/index.html', state: 'old', tool: 'JavaScript' },
   { name: 'Javascript 9x9 乘法表', link: '/hexschool/js-Multiplication/index.html', state: 'new', tool: 'JavaScript' },
   { name: 'Javascript 時鐘', link: '/hexschool/js-clock/index.html', state: 'new', tool: 'JavaScript' },
-  { name: 'Javascript 計算機', link: '/hexschool/js-clock/index.html', state: "pending", tool: 'JavaScript' },
+  { name: 'Javascript 計算機', link: '/hexschool/js-calculator/index.html', state: "new", tool: 'JavaScript' },
+  { name: 'Javascript 時區', link: '/hexschool/js-time/index.html', state: "pending", tool: 'JavaScript' },
   // { name: 'React Cart', link: '/reactCart' },
   // { name: 'React Daily', link: '/reactDaily' }
 ]
