@@ -17,7 +17,7 @@ function panelNumber() {
     { font: 'font', fontName: 'backspace' },
     { font: 'font', fontName: 'equal' }
   ];
-  for (let i = 9; i >= 1; i--) {
+  for (let i = 9; i > 0; i--) {
     let numItem = document.createElement('button');
     let iconItem = document.createElement('button');
     numItem.className = 'panel-item';
@@ -44,32 +44,32 @@ function panelNumber() {
       toolItem.innerHTML = `<span class="icon-divide material-symbols-outlined">${toolIcon[i].fontName}</span>`;
       toolItem.addEventListener("click", () => handleIconClick(toolIcon[i].fontIcon));
 
-      // 等於
     } else if (typeof toolIcon[i] === 'object' && toolIcon[i].fontName === 'equal') {
+      // 等於
       toolItem.className = 'panel-item panel-item-row';
       toolItem.innerHTML = `<span class="material-symbols-outlined">${toolIcon[i].fontName}</span>`;
       toolItem.addEventListener("click", calculate);
 
-      // 清除
     } else if (toolIcon[i] === 'AC') {
+      // 清除
       toolItem.className = 'panel-item';
       toolItem.innerHTML = toolIcon[i];
       toolItem.addEventListener("click", cleanCalculate);
 
-      // 刪除
     } else if (toolIcon[i].fontName === 'backspace') {
+      // 刪除
       toolItem.className = 'panel-item panel-item-icon';
       toolItem.innerHTML = `<span class="material-symbols-outlined">${toolIcon[i].fontName}</span>`;
       toolItem.addEventListener("click", delCalculate);
 
-      // 小數點
     } else if (toolIcon[i] === '.') {
+      // 小數點
       toolItem.className = 'panel-item';
       toolItem.innerHTML = toolIcon[i];
-      toolItem.addEventListener("click", () => handleIconClick(toolIcon[i]));
 
-      // 零
+      toolItem.addEventListener("click", () => handleIconClick(toolIcon[i]));
     } else {
+      // 零
       toolItem.className = 'panel-item';
       toolItem.textContent = toolIcon[i];
       toolItem.addEventListener('click', () => handleNumClick(toolIcon[i].toString()));
@@ -84,7 +84,7 @@ function delCalculate() {
   }
   result = result.slice(0, result.length - 1)
   calculatorOperation.innerHTML = result;
-  calculatorInput.value = result
+  calculatorInput.value = 0
 }
 
 function cleanCalculate() {
@@ -94,19 +94,12 @@ function cleanCalculate() {
 }
 
 function handleNumClick(num) {
-  if (eval(num) > 1) {
-    inputNumber += eval(num);
-    calculatorOperation.innerHTML += eval(num);
-    result += eval(num);
-    calculate()
-
-  } else {
-    inputNumber = "";
-    calculatorOperation.innerHTML = 0
-  }
-
+  console.log(num)
+  inputNumber += num;
+  calculatorOperation.innerHTML += num;
+  result += num;
+  calculate()
   console.log('result' + result)
-
 }
 
 function handleIconClick(iconText) {
@@ -114,7 +107,12 @@ function handleIconClick(iconText) {
   if (result.length >= 40) {
     calculate()
   }
-  if (!["+", "×", "-", "/", "."].includes(lastChar)) {
+
+  let NotRepeatingText = result.indexOf('.')
+  console.log(NotRepeatingText)
+  if (NotRepeatingText > -1) {
+    return
+  } else if (!["+", "×", "-", "/", "."].includes(lastChar)) {
     calculatorOperation.innerHTML += ` ${iconText} `;
     result += iconText;
     inputNumber = "";
@@ -122,29 +120,37 @@ function handleIconClick(iconText) {
 }
 
 function calculate() {
-  let lastChar = result.trim().slice(-1);
-  if (["+", "×", "-", "/", "."].includes(lastChar)) {
-    result = result.trim().slice(0, -1);
-    calculatorOperation.innerHTML = `${result}`;
-  }
+  // let lastChar = result.trim().slice(-1);
+  // if (["+", "×", "-", "/", "."].includes(lastChar)) {
+  //   result = result.trim().slice(0, -1);
+  //   calculatorOperation.innerHTML = `${result}`;
+  // }
   try {
     let sanitizedResult = result.replace(/×/g, "*").replace(/÷/g, "/"); //轉換原本的符號
     let calculatedResult = eval(sanitizedResult); //這是計算書出的結果
-    calculatorInput.value = numberWithCommas(calculatedResult);
+    calculatorInput.value = formatWithCommas(calculatedResult);
 
   } catch (error) {
     console.error('計算錯誤:', error);
-    calculatorInput.value = "錯誤";
   }
 }
 
-function numberWithCommas(x) {
-  console.log(x)
-  x = x.toString();
-  var pattern = /(-?\d+)(\d{3})/;
-  while (pattern.test(x))
-    x = x.replace(pattern, "$1,$2");
-  return x;
-}
+const numberFormatter = pattern => number => {
+  number = number.toString();
+  while (pattern.test(number)) {
+    number = number.replace(pattern, "$1,$2");
+  }
+  return number;
+};
+
+const formatWithCommas = numberFormatter(/(-?\d+)(\d{3})/);
+// function numberWithCommas(x) {
+//   console.log(x)
+//   x = x.toString();
+//   let pattern = /(-?\d+)(\d{3})/;
+//   while (pattern.test(x))
+//     x = x.replace(pattern, "$1,$2");
+//   return x;
+// }
 
 panelNumber()
